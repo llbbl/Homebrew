@@ -2,7 +2,7 @@
 include_once('DirectoryBrowser.php');
 include_once('DuplicateFinder.php');
 
-$start = '/home/cmack/Documents/ebay';
+$start = '/home/cmack/Pictures';
 
 $browser = new DirectoryBrowser();
 $files = $browser->Walk($start);
