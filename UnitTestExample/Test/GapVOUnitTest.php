@@ -62,6 +62,51 @@ class GapVOUnitTest extends PHPUnit_Framework_TestCase {
 		
 		$this->assertTrue($hasException, "An exception should have been thrown because the gap was less than zero");
 	}
-
+	
+	/**
+	 * Using annotations, expect an exception to be thrown. 
+	 * Disadvantage is that there is only one case in this function
+	 * 
+     * @expectedException Exception
+     */
+    public function testLengthException()
+    {
+    	$user1 = new stdClass();
+		$user1->LoginDate = 20;
+		
+		$user2 = new stdClass();
+		$user2->LoginDate = 10;
+		
+		$gap = new GapVO($user1, $user2);
+		$gap->getLength(); // should throw an error because it returns 0
+    }
+	
+    
+    /**
+     * How do you test Views?  How do you make it robust, and less brittle
+     */
+    public function testtoHtml()
+    {
+		// simple test
+		$user1 = new stdClass();
+		$user1->LoginDate = 10;
+		
+		$user2 = new stdClass();
+		$user2->LoginDate = 20;
+		
+		$gap = new GapVO($user1, $user2);
+		$html = $gap->toHTML();
+		
+		// test number of divs
+   		$query = new Zend_Dom_Query($html);
+        $divs = $query->query('div');
+        $this->assertEquals(count($divs), 3, "Regardless of text, there should always be 3 divs");
+        
+        
+        // test the css class used
+        $div = $divs[0];
+       	$class = $div->getAttribute('class');
+       	$this->assertEquals($class, 'user', "The css class in the gap length html should be 'user'"); 
+    }
 }
 
