@@ -1,8 +1,8 @@
 <?php
 
-require_once 'Test\GapFinderUnitTest.php';
+require_once 'Test/GapFinderUnitTest.php';
 
-require_once 'Test\GapVOUnitTest.php';
+require_once 'Test/GapVOUnitTest.php';
 
 /**
  * Static test suite.
