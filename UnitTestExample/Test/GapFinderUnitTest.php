@@ -1,7 +1,7 @@
 <?php
 
 require_once 'PHPUnit/Framework/TestCase.php';
-
+include_once 'Code/GapFinderUT.php';
 /**
  * test case.
  */
@@ -48,7 +48,7 @@ class GapFinderUnitTest extends PHPUnit_Framework_TestCase
 		$user3->LoginTime = 50;
 		$users[] = $user3;
 		
-		$gapAnalyzer = new GapFinderUnitTests();
+		$gapAnalyzer = new GapFinderUT();
 		$gaps = $gapAnalyzer->GapLogic($users);
 		$this->assertEquals(count($gaps), 2, "We expect 2 gaps");
 

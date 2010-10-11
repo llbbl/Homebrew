@@ -1,10 +1,11 @@
 <?php
 
+include_once 'Code/GapVO.php';
+
 class GapFinderUT 
 {
 	public function __construct()
 	{
-		
 	}
 	
 	/**

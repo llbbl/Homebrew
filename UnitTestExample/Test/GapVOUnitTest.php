@@ -1,6 +1,9 @@
 <?php
 
 require_once 'PHPUnit/Framework/TestCase.php';
+include_once 'Code/GapVO.php';
+include_once 'Zend/Dom/Query.php';
+
 
 /**
  * test case.
@@ -98,15 +101,24 @@ class GapVOUnitTest extends PHPUnit_Framework_TestCase {
 		$html = $gap->toHTML();
 		
 		// test number of divs
-   		$query = new Zend_Dom_Query($html);
+		$query = new Zend_Dom_Query($html);
+        
         $divs = $query->query('div');
         $this->assertEquals(count($divs), 3, "Regardless of text, there should always be 3 divs");
         
-        
-        // test the css class used
-        $div = $divs[0];
-       	$class = $div->getAttribute('class');
-       	$this->assertEquals($class, 'user', "The css class in the gap length html should be 'user'"); 
+        // test that the first div has a particular css class
+    	foreach ($divs as $div) 
+    	{
+        	$class = $div->getAttribute('class');
+       		$this->assertEquals($class, 'user', "The css class in the gap length html should be 'user'"); 
+    		break;
+        }
+    }
+    
+    public function testForceFail()
+    {
+    	// intentional failure
+    	$this->assertTrue(false, 'Forcing a failure');	
     }
 }
 

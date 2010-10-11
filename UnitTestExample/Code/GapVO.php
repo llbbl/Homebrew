@@ -22,7 +22,7 @@ class GapVO
 	 */
 	public function getLength()
 	{
-		$length = $this->secondUser->StartDate - ($this->firstUser->LoginDate + $this->firstUser->UserLength);
+		$length = $this->secondUser->LoginDate - $this->firstUser->LoginDate;
 		
 		if ($length < 0)
 		{
