@@ -1,11 +1,5 @@
-// Main.cs created with MonoDevelop
-// User: cmack at 7:24 PM 1/25/2009
-//
-// To change standard headers go to Edit->Preferences->Coding->Standard Headers
-//
 // Mono's Weak Configuration options make you manuall add the configuration file to the bin
 // Hence MainRunner.exe.config must be the location of all the configurations
-// -1.79769313486232E+308
 
 using System;
 using System.Configuration;
