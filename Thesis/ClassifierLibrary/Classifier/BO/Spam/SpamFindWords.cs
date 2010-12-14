@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 // SpamFindWords.cs created with MonoDevelop
 // User: cmack at 10:36 AM 5/30/2009
@@ -23,9 +24,14 @@ namespace cfm.NaiveBayes
 			";
 		}
 		
-		protected override string[] SplitWords(string article)
+		protected override WordObject[] SplitWords(string article)
         {
-            return article.Split(' ');
+            List<WordObject> words = new List<WordObject>();
+            foreach (string word in article.Split(' '))
+            {
+                words.Add(new WordObject(word));
+            }
+            return words.ToArray();
         }
 	}
 }

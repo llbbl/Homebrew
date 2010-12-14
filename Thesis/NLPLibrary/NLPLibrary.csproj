@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{45997EF4-64BD-43BF-A0E3-3EF56F63B216}</ProjectGuid>
+    <ProjectGuid>{E76ADA79-7409-4197-984B-E170088A2E8B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClassifierLibrary</RootNamespace>
-    <AssemblyName>ClassifierLibrary</AssemblyName>
+    <RootNamespace>NLPLibrary</RootNamespace>
+    <AssemblyName>NLPLibrary</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,10 +31,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OpenNLP, Version=1.0.2529.39671, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\OpenNLP.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpEntropy, Version=1.0.2529.39670, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharpEntropy.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpEntropySqlite, Version=1.0.2529.39671, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharpEntropySqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpWordNet, Version=1.0.2529.39512, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharpWordNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.33.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -46,29 +66,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classifier\VO\ClassifierObject.cs" />
-    <Compile Include="Classifier\BO\FindWords.cs" />
-    <Compile Include="Classifier\BO\NaiveClassifier.cs" />
-    <Compile Include="Classifier\BO\NaiveTester.cs" />
+    <Compile Include="POSLib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Classifier\VO\ResultClassifierObject.cs" />
-    <Compile Include="Classifier\BO\ResultRecorder\ResultRecorder.cs" />
-    <Compile Include="Classifier\VO\ResultsObject.cs" />
-    <Compile Include="Classifier\BO\Reuters\ReutersClassifier.cs" />
-    <Compile Include="Classifier\BO\Reuters\ReutersFindWords.cs" />
-    <Compile Include="Classifier\BO\Reuters\ReutersTester.cs" />
-    <Compile Include="Classifier\BO\Spam\SpamClassifier.cs" />
-    <Compile Include="Classifier\BO\Spam\SpamFindWords.cs" />
-    <Compile Include="Classifier\BO\Spam\SpamTester.cs" />
-    <Compile Include="SqlConnector\SqlConnector.cs" />
-    <Compile Include="Classifier\VO\TestObject.cs" />
-    <Compile Include="Classifier\VO\WordObject.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NLPLibrary\NLPLibrary.csproj">
-      <Project>{E76ADA79-7409-4197-984B-E170088A2E8B}</Project>
-      <Name>NLPLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

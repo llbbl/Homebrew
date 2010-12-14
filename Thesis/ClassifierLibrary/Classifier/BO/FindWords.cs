@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Collections.Generic;
 using System.Collections;
 using System.IO;
+using NLPLibrary;
 
 namespace cfm.NaiveBayes
 {
@@ -20,7 +21,9 @@ namespace cfm.NaiveBayes
         private static int minWordSize = -1;
         private static string savedFile = "";
         private static bool removeSuffix = false;
-        private Dictionary<string, int> wordHash;
+        private static string nlpModelPath = "";
+        private static string limitWordType = "";
+        private Dictionary<string, WordObject> wordHash;
         private ArrayList blacklist;
         private bool useBlacklist;
 
@@ -34,7 +37,7 @@ namespace cfm.NaiveBayes
             FindWords.removeSuffix = false;
             FindWords.removeSuffix = Convert.ToBoolean(ConfigurationManager.AppSettings["removeSuffix"]);
 
-            this.wordHash = new Dictionary<string, int>();
+            this.wordHash = new Dictionary<string, WordObject>();
         }
 
         /// <summary>
@@ -77,6 +80,44 @@ namespace cfm.NaiveBayes
                 }
                 return FindWords.maxCount;
             }
+        }
+
+        /// <summary>
+        /// Get the path of the NLP model
+        /// </summary>
+        /// <returns></returns>
+        public static string GetNLPModelPath()
+        {
+            if (FindWords.nlpModelPath != null)
+            {
+                try
+                {
+                    FindWords.nlpModelPath = ConfigurationManager.AppSettings["MaximumEntropyModelDirectory"];
+                    return FindWords.nlpModelPath;
+                }
+                catch { }
+            }
+            FindWords.nlpModelPath = "";
+            return FindWords.nlpModelPath;
+        }
+
+        /// <summary>
+        /// Get the path of the NLP model
+        /// </summary>
+        /// <returns></returns>
+        public static string GetLimitWordType()
+        {
+            if (FindWords.limitWordType != null)
+            {
+                try
+                {
+                    FindWords.limitWordType = ConfigurationManager.AppSettings["limitWordType"];
+                    return FindWords.limitWordType;
+                }
+                catch { }
+            }
+            FindWords.limitWordType = "";
+            return FindWords.limitWordType;
         }
 
         /// <summary>
@@ -207,20 +248,23 @@ namespace cfm.NaiveBayes
             //Console.WriteLine("Examining Article");
 
             article = FindWords.CleanArticle(article);
-            string[] words = this.SplitWords(article);
-            foreach (string word in words)
+            WordObject[] words = this.SplitWords(article);
+            foreach (WordObject word in words)
             {
-                string trim = word.Trim();
-                trim = this.HandleSuffix(trim);
-                if (this.CheckBlacklist(trim) == false)
+                string trim = word.GetWord().Trim();
+                if (
+                        FindWords.GetLimitWordType() == "" ||
+                        (FindWords.GetLimitWordType() == "noun" && word.PartOfSpeech == POSLib.NOUN)
+                    )
                 {
-                    if (this.wordHash.ContainsKey(trim).Equals(true))
+                    trim = this.HandleSuffix(trim);
+                    if (this.CheckBlacklist(trim) == false)
                     {
-                        this.wordHash[trim] = this.wordHash[trim] + 1;
-                    }
-                    else if (trim.Length > 0)
-                    {
-                        this.wordHash.Add(trim, 1);
+                        if (this.wordHash.ContainsKey(trim).Equals(false))
+                        {
+                            this.wordHash.Add(trim, word);
+                        }
+                        this.wordHash[trim].IncrementTimesInFindWords();
                     }
                 }
             }
@@ -231,7 +275,7 @@ namespace cfm.NaiveBayes
         /// </summary>
         /// <param name="article"></param>
         /// <returns></returns>
-        protected abstract string[] SplitWords(string article);
+        protected abstract WordObject[] SplitWords(string article);
 
         /// <summary>
         /// Inspired by http://footheory.com/blogs/aendenne/archive/2007/09/14/useful-string-functions-in-c.aspx
@@ -271,7 +315,7 @@ namespace cfm.NaiveBayes
             TextWriter tw = new StreamWriter(FindWords.GetFileName());
             foreach (string word in this.wordHash.Keys)
             {
-                int count = this.wordHash[word];
+                int count = this.wordHash[word].TimesInFindWords;
                 if (count >= minCount && count <= maxCount && word.Length >= minSize)
                 {
                     tw.WriteLine(String.Format("{0},{1}", word, count));

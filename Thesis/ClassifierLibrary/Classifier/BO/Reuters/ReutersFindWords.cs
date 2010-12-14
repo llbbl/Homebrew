@@ -5,6 +5,8 @@
 //
 
 using System;
+using System.Collections.Generic;
+using NLPLibrary;
 
 namespace cfm.NaiveBayes
 {
@@ -26,9 +28,37 @@ namespace cfm.NaiveBayes
 				        ";
 		}
 
-        protected override string[] SplitWords(string article)
+        protected override WordObject[] SplitWords(string article)
         {
-            return article.Split(' ');
+            List<WordObject> words = new List<WordObject>();
+            
+            POSLib pos = new POSLib(FindWords.GetNLPModelPath());
+            
+            string[] sentences = pos.SplitSentences(article);
+            foreach (string sentence in sentences)
+            {
+                string[] tokens = pos.TokenizeSentence(sentence);
+                string[] tags = pos.PosTagTokens(tokens);
+
+                for (int currentTag = 0; currentTag < tags.Length; currentTag++)
+                {
+                    words.Add(this.AddWordObj(tokens[currentTag], tags[currentTag]));
+                }
+            }
+
+            return words.ToArray();
+        }
+
+        private WordObject AddWordObj(string word, string POS)
+        {
+            WordObject w = new WordObject(word);
+
+            if (POSLib.IsNoun(POS) == true)
+            {
+                w.PartOfSpeech = POSLib.NOUN;
+            }
+
+            return w;
         }
 	}
 }
