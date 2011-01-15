@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<categories>
+	<category>
+		<name>Exchanges</name>
+		<p>1</p>
+	</category>
+	<category>
+		<name>Orgs</name>
+		<p>1.9765625</p>
+	</category>
+	<category>
+		<name>People</name>
+		<p>3.2421875</p>
+	</category>
+	<category>
+		<name>Places</name>
+		<p>43.296875</p>
+	</category>
+	<category>
+		<name>Topics</name>
+		<p>19.7578125</p>
+	</category>
+	<category>
+		<name>Companies</name>
+		<p>1</p>
+	</category>
+</categories>
