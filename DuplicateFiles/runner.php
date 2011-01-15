@@ -4,8 +4,8 @@ include_once('DuplicateFinder.php');
 include_once('FileMover.php');
 include_once('FileRenamer.php');
 
-$start = '/storage/Pictures/RecoveredPics/Large';
-$dupLoc = '/storage/Pictures/RecoveredPics/Dups';
+$start = '/storage/Pictures';
+$dupLoc = '/storage/DupPictures';
 
 echo 'Walking ' . $start . "\n";
 $browser = new DirectoryBrowser();
