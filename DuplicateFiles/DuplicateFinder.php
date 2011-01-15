@@ -44,6 +44,33 @@ class DuplicateFinder
 		$this->duplicates[$md5]->AddFile($file);
 	}
 
+	public function Move($dupLocation)
+	{
+		$movedDups = new FileCollection();
+		foreach($this->duplicates as $files)
+		{
+			/* @var $files FileCollection */
+			if (count($files->getFileVOs()) > 1)
+			{
+				$i = 0;
+				foreach($files->getFileVOs() as $file)
+				{	
+					/* @var $file FileVO */
+					// keep the first
+					if ($i != 0)
+					{
+						$movedDups->AddFile($file);
+						$fullPath = $dupLocation . '/' . $file->getFileName();
+						echo $file->FullPath() . "\n";
+						echo $fullPath . "\n";
+						rename($file->FullPath(), $fullPath);
+					}
+					
+					$i++;
+				}
+			}
+		}
+	}
 }
 
 ?>
