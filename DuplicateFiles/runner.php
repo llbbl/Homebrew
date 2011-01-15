@@ -4,7 +4,7 @@ include_once('DuplicateFinder.php');
 include_once('FileMover.php');
 include_once('FileRenamer.php');
 
-$start = '/storage/Pictures';
+$start = '/storage/Pictures'; 
 $dupLoc = '/storage/DupPictures';
 
 echo 'Walking ' . $start . "\n";
