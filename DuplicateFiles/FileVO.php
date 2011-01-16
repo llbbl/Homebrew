@@ -91,7 +91,7 @@ class FileVO
 		$parts = pathinfo($this->FullPath());
 		if (isset($parts['extension']))
 		{
-			$this->extension = strtolower();
+			$this->extension = strtolower($parts['extension']);
 		}
 		else
 		{
