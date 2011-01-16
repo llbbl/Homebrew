@@ -44,32 +44,78 @@ class DuplicateFinder
 		$this->duplicates[$md5]->AddFile($file);
 	}
 
-	public function Move($dupLocation)
+	/**
+	 * Move duplicates to the duplication location.  If $preferred is '', the first duplicate is keep and others are moved 
+	 * 
+	 * @param string $dupLocation
+	 * @param string $preferred
+	 */
+	public function Move($dupLocation, $preferred='')
 	{
-		$movedDups = new FileCollection();
 		foreach($this->duplicates as $files)
 		{
 			/* @var $files FileCollection */
 			if (count($files->getFileVOs()) > 1)
 			{
-				$i = 0;
-				foreach($files->getFileVOs() as $file)
-				{	
-					/* @var $file FileVO */
-					// keep the first
-					if ($i != 0)
-					{
-						$movedDups->AddFile($file);
-						$fullPath = $dupLocation . '/' . $file->getFileName();
-						echo $file->FullPath() . "\n";
-						echo $fullPath . "\n";
-						rename($file->FullPath(), $fullPath);
-					}
-					
-					$i++;
-				}
+				$this->Pick($files, $dupLocation, $preferred);
 			}
 		}
+	}
+	
+	
+	/**
+	 * If there is a preferred location to keep ( based on substring ), pick that one
+	 * Else, move the file
+	 * 
+	 * @param FileCollection $files
+	 * @param string $dupLocation
+	 * @param string $preferred
+	 */
+	public function Pick(FileCollection $files, $dupLocation, $preferred='')
+	{
+		$i = 0;
+		$keeper = $i;
+		
+		if ($preferred != '')
+		{
+			foreach($files->getFileVOs() as $file)
+			{	
+				/* @var $file FileVO */
+				if (stripos($file->FullPath(), $preferred) !== false)
+				{
+					$keeper = $i;
+					break;	
+				}
+				
+				$i++;
+			}
+		}
+		
+		$i = 0;
+		foreach($files->getFileVOs() as $file)
+		{	
+			/* @var $file FileVO */
+			if ($i != $keeper)
+			{
+				$this->MoveFile($file, $dupLocation);
+			}
+			
+			$i++;
+		}
+	}
+	
+	/**
+	 * Move the actual file
+	 * 
+	 * @param FileVO $file
+	 * @param string $dupLocation
+	 */
+	private function MoveFile(FileVO $file , $dupLocation)
+	{
+		$fullPath = $dupLocation . '/' . $file->getFileName();
+		echo $file->FullPath() . "\n";
+		echo $fullPath . "\n";
+		rename($file->FullPath(), $fullPath);
 	}
 }
 

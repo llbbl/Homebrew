@@ -89,7 +89,14 @@ class FileVO
 		}
 		
 		$parts = pathinfo($this->FullPath());
-		$this->extension = strtolower($parts['extension']);
+		if (isset($parts['extension']))
+		{
+			$this->extension = strtolower();
+		}
+		else
+		{
+			error_log('No extension for ' . $this->FullPath());
+		}
 	}
 	
 	public function FullPath()

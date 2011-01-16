@@ -64,6 +64,22 @@ class FileCollection
 		return -1;
 	}
 	
+	/**
+	 * Merge this collection with another collection
+	 * 
+	 * @param FileCollection $collection
+	 */
+	public function Merge(FileCollection $collection)
+	{
+		if ($collection->count() > 0)
+		{
+			foreach($collection->getFileVOs() as $file)
+			{
+				$this->AddFile($file);
+			}
+		}
+	}
+	
 	public function __toString()
 	{
 		$x = array();
