@@ -7,7 +7,8 @@ class FileVO
 	private $path;
 	private $size;
 	private $extension;
-
+	private $isDir;
+	
 	public function __construct($fileName, $path)
 	{
 		$this->setFileName($fileName);
@@ -15,6 +16,8 @@ class FileVO
 		$this->FindMd5();
 		$this->FindFileSize();
 		$this->FindExtension();
+		
+		$this->isDir = is_dir($this->FullPath());
 	}
 	
 	/**
@@ -52,6 +55,14 @@ class FileVO
 		return $this->path;
 	}
 
+	/**
+	 * @return bool true if the file is a directory
+	 */
+	public function IsDir()
+	{
+		return $this->isDir;
+	}
+	
 	/**
 	 * Find the md5sum of the file
 	 */
@@ -93,7 +104,7 @@ class FileVO
 		{
 			$this->extension = strtolower($parts['extension']);
 		}
-		else
+		else if (!is_dir($this->FullPath()))
 		{
 			error_log('No extension for ' . $this->FullPath());
 		}
