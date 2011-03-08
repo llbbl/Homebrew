@@ -1,4 +1,6 @@
 <?php
+include_once './TestClass.php';
+
 /*
  	System Info 
  	
@@ -82,22 +84,6 @@ function CheckResult($actual, $expect, $msg)
 
 
 
-/**
- * Simple testing of reflection using pass by reference 
- *
- */
-class TestClass
-{
-	/**
-	 * Append 'Ref' to the passed in string
-	 * 
-	 * @param string $ref
-	 * @param string $stub - just a dummy variable to demonstrate passing more than one arg in
-	 */
-	private static function PrivateStaticFunc(&$ref, &$stub)
-	{
-		$ref .='Ref';
-	}
-}
+
 
 ?>
