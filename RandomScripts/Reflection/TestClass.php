@@ -33,6 +33,15 @@ class TestClass
 	}
 
 	/**
+	 * Simple static public function
+	 * @return string
+	 */
+	public static function PublicStaticFunc()
+	{
+		return 'Hello PHP Meetup';
+	}
+	
+	/**
 	 * Random private static
 	 * 
 	 * @param string $ref
