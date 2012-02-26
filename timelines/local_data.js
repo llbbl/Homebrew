@@ -5,8 +5,8 @@ var timeline_data = {  // save as a global variable
 
 'events' : [
         {'start': '2012',
-        'title': 'Barfusserkirche',
-        'description': 'by Lyonel Feininger, American/German Painter, 1871-1956',
+        'title': 'bubble',
+        'description': 'distress bubble',
         'image': 'http://images.allposters.com/images/AWI/NR096_b.jpg',
         'link': 'http://www.allposters.com/-sp/Barfusserkirche-1924-Posters_i1116895_.htm'
         },
@@ -15,9 +15,9 @@ var timeline_data = {  // save as a global variable
 
 
         {'start': '2012',
-        'end': '2012',
-        'title': 'Landschaft bei Montreuil',
-        'description': 'by Albert Gleizes, French Painter, 1881-1953',
+        'end': '2013',
+        'title': 'screen capture',
+        'description': 'screen capture by x',
         'image': 'http://images.allposters.com/images/mer/1336_b.jpg',
         'link': 'http://www.allposters.com/-sp/Landschaft-bei-Montreuil-Posters_i339007_.htm',
         'isDuration' : true,
