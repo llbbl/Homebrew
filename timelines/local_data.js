@@ -5,7 +5,7 @@ var timeline_data = {  // save as a global variable
 
 'events' : [
         {'start': '2012',
-        'title': 'bubble',
+        'title': '1 bubble',
         'description': 'distress bubble',
         'image': 'http://images.allposters.com/images/AWI/NR096_b.jpg',
         'link': 'http://www.allposters.com/-sp/Barfusserkirche-1924-Posters_i1116895_.htm'
