@@ -251,11 +251,14 @@
      */
     if (typeof SimileAjax == "undefined") {
         window.SimileAjax_onLoad = loadMe;
+		var url = "http://localhost/timeline/timeline_2.3.0/timeline_ajax/simile-ajax-api.js"
         
-        var url = useLocalResources ?
+		/*
+		var url = useLocalResources ?
             "http://127.0.0.1:9999/ajax/api/simile-ajax-api.js?bundle=false" :
             "http://static.simile.mit.edu/ajax/api-2.2.0/simile-ajax-api.js";
-        if (typeof Timeline_ajax_url == "string") {
+        */
+		if (typeof Timeline_ajax_url == "string") {
            url = Timeline_ajax_url;
         }
         var createScriptElement = function() {
