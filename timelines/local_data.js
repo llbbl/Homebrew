@@ -4,7 +4,7 @@ var timeline_data = {  // save as a global variable
 'wikiSection': "Simile Cubism Timeline",
 
 'events' : [
-        {'start': '2012-01-02',
+        {'start': '2012-02-27',
         'title': '1 bubble',
         'description': 'distress bubble',
         'image': 'http://images.allposters.com/images/AWI/NR096_b.jpg',
@@ -12,7 +12,7 @@ var timeline_data = {  // save as a global variable
         },
 
 
-		{'start': '2012',
+		{'start': '2012-02-27',
         'title': '2 bubble',
         'description': 'distress bubble',
         'image': 'http://images.allposters.com/images/AWI/NR096_b.jpg',
@@ -20,8 +20,8 @@ var timeline_data = {  // save as a global variable
 		'icon' : "dark-red-circle.png"
         },
 
-        {'start': '2012',
-        'end': '2013',
+        {'start': '2012-02-27',
+        'end': '2012-02-28',
         'title': 'screen capture',
         'description': 'screen capture by x',
         'image': 'http://images.allposters.com/images/mer/1336_b.jpg',
