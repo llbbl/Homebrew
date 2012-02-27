@@ -34,6 +34,7 @@
            
 		   /*
 			Not sure what these actually do but they are needed for the banding below
+			Can we have more than one timeline in each zone?
 		   */
 			var zones = [
                 {   start:    "Mon Feb 27 2012 00:00:00 GMT-0600",
@@ -77,6 +78,35 @@
             ];
             bandInfos[1].syncWith = 0;
             bandInfos[1].highlight = true;
+            
+			/*
+			// add highlighting to bottom "zone"
+			for (var i = 0; i < bandInfos.length; i++) {
+                bandInfos[i].decorators = [
+                    new Timeline.SpanHighlightDecorator({
+                        startDate:  "Mon Feb 27 2012 01:00:00 GMT-0600",
+                        endDate:    "Mon Feb 27 2012 02:00:00 GMT-0600",
+                        color:      "#FFC080", // set color explicitly
+                        opacity:    50,
+                        startLabel: "label",
+                        endLabel:   "end",
+                        theme:      theme1
+                    }),
+                    new Timeline.PointHighlightDecorator({
+                        date:       "Sun Feb 26 2012 00:00:00 GMT-0600",
+                        opacity:    50,
+                        theme:      theme1
+                        // use the color from the css file
+                    }),
+                    new Timeline.PointHighlightDecorator({
+                        date:       "Tues Feb 28 2012 00:00:00 GMT-0600",
+                        opacity:    50,
+                        theme:      theme1
+                        // use the color from the css file
+                    })
+                ];
+            }
+			*/
             
                                                             
             // create the Timeline
