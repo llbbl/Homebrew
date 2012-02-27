@@ -28,9 +28,10 @@
             theme1.autoWidth = true; // Set the Timeline's "width" automatically.
                                      // Set autoWidth on the Timeline's first band's theme,
                                      // will affect all bands.
-            theme1.timeline_start = new Date(Date.UTC(2012, 02, 25));
-            theme1.timeline_stop  = new Date(Date.UTC(2012, 02, 26));
             
+			theme1.timeline_start = new Date("Mon Feb 27 2012 00:00:00 GMT-0600");
+            theme1.timeline_stop  = new Date("Tue Feb 28 2012 00:00:00 GMT-0600");
+           
 			var zones = [
                 {   start:    "Fri Nov 22 1963 00:00:00 GMT-0600",
                     end:      "Mon Nov 25 1963 00:00:00 GMT-0600",
@@ -85,7 +86,7 @@
             var bandInfos = [
                 Timeline.createHotZoneBandInfo({
                     width:          "80%", 
-                    intervalUnit:   Timeline.DateTime.WEEK, 
+                    intervalUnit:   Timeline.DateTime.HOUR, 
                     intervalPixels: 220,
                     zones:          zones,
                     eventSource:    eventSource1,
@@ -95,7 +96,7 @@
                 }),
                 Timeline.createHotZoneBandInfo({
                     width:          "20%", 
-                    intervalUnit:   Timeline.DateTime.MONTH, 
+                    intervalUnit:   Timeline.DateTime.DAY, 
                     intervalPixels: 200,
                     zones:          zones2, 
                     eventSource:    eventSource1,
