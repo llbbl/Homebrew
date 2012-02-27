@@ -4,7 +4,7 @@ var timeline_data = {  // save as a global variable
 'wikiSection': "Simile Cubism Timeline",
 
 'events' : [
-        {'start': '2012',
+        {'start': '2012-01-02',
         'title': '1 bubble',
         'description': 'distress bubble',
         'image': 'http://images.allposters.com/images/AWI/NR096_b.jpg',
@@ -12,7 +12,13 @@ var timeline_data = {  // save as a global variable
         },
 
 
-
+		{'start': '2012',
+        'title': '2 bubble',
+        'description': 'distress bubble',
+        'image': 'http://images.allposters.com/images/AWI/NR096_b.jpg',
+        'link': 'http://www.allposters.com/-sp/Barfusserkirche-1924-Posters_i1116895_.htm',
+		'icon' : "dark-red-circle.png"
+        },
 
         {'start': '2012',
         'end': '2013',
@@ -21,7 +27,6 @@ var timeline_data = {  // save as a global variable
         'image': 'http://images.allposters.com/images/mer/1336_b.jpg',
         'link': 'http://www.allposters.com/-sp/Landschaft-bei-Montreuil-Posters_i339007_.htm',
         'isDuration' : true,
-        'icon' : "dark-red-circle.png",        
         'color' : 'red',
         'textColor' : 'green'},
 
