@@ -2,12 +2,12 @@
   wiki-url="http://mattersight.com" 
   wiki-section="Data Timeline">
     <event 
-       start='Feb 27 2012 01:00:00 GMT-0600' 
+       start="Mon Feb 27 2012 01:00:00 GMT-0600" 
        title="Event 1">
     </event>
     <event 
-       start="Feb 27 2012 02:00:00 GMT-0600" 
-       end="Feb 27 2012 03:00:00 GMT-0600" 
+       start="Mon Feb 27 2012 02:00:00 GMT-0600" 
+       end="Mon Feb 27 2012 03:00:00 GMT-0600" 
        isDuration="true" 
        title="Duration 1">
          Some data spanned a particular timeframe

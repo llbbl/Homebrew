@@ -20,16 +20,19 @@
 			// add an eventsource object
 			var eventSource = new Timeline.DefaultEventSource();
 		 
+			var d = "Feb 27 2012 01:00:00 GMT-0600";
 			// load the separate banding
 		   var bandInfos = [
 			 Timeline.createBandInfo({
 				eventSource:    eventSource, // link to the event source object
+				date:          d,
 				 width:          "60%", 
 				 intervalUnit:   Timeline.DateTime.HOUR, 
 				 intervalPixels: 100
 			 }),
 			 Timeline.createBandInfo({
 				eventSource:    eventSource, // link to the event source object
+				date:          d,
 				width:          "40%", 
 				intervalUnit:   Timeline.DateTime.DAY, 
 				intervalPixels: 700
@@ -43,7 +46,8 @@
 		   // build timeline frame
 		   tl = Timeline.create(document.getElementById("my-timeline"), bandInfos);
 		   
-		   Timeline.loadXML("mack3.xml", function(xml, url) { eventSource.loadXML(xml, url); })
+		   var url = '.';
+		   t1.loadXML("mack3.xml", function(xml, url) { eventSource.loadXML(xml, url); })
 		   
 		 }
 		 
