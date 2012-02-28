@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+   <!-- See http://developer.yahoo.com/yui/grids/ for info on the grid layout -->
+   <title>Local Timeline Example</title>
+   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+
+   <!-- See http://developer.yahoo.com/yui/ for info on the reset, font and base css -->
+   <link rel="stylesheet" href="reset-fonts-grids.css" type="text/css">
+   <link rel="stylesheet" type="text/css" href="base-min.css"> 
+
+   <script src="http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true" type="text/javascript"></script>
+   <link rel="stylesheet" href="local_example.css" type="text/css">  
+   
+   <script>        
+        var tl;
+		 function onLoad() {
+		   var bandInfos = [
+			 Timeline.createBandInfo({
+				 width:          "70%", 
+				 intervalUnit:   Timeline.DateTime.MONTH, 
+				 intervalPixels: 100
+			 }),
+			 Timeline.createBandInfo({
+				 width:          "30%", 
+				 intervalUnit:   Timeline.DateTime.YEAR, 
+				 intervalPixels: 200
+			 })
+		   ];
+		   tl = Timeline.create(document.getElementById("my-timeline"), bandInfos);
+		 }
+		 
+		 var resizeTimerID = null;
+		 function onResize() {
+			 if (resizeTimerID == null) {
+				 resizeTimerID = window.setTimeout(function() {
+					 resizeTimerID = null;
+					 tl.layout();
+				 }, 500);
+			 }
+		 }
+   </script>
+
+</head>
+ <body onload="onLoad();" onresize="onResize();">
+    <div id="my-timeline" style="height: 150px; border: 1px solid #aaa"></div>
+<noscript>
+This page uses Javascript to show you a Timeline. Please enable Javascript in your browser to see the full page. Thank you.
+</noscript>
+  </body>
+</body>
+</html>
+
+
