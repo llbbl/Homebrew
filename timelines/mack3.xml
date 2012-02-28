@@ -1,32 +1,132 @@
 <data 
   wiki-url="http://mattersight.com" 
   wiki-section="Data Timeline">
+  
+	<!-- Phone track -->
     <event 
-       start="Feb 27 2012 01:00:00 GMT" 
-       title="Bubble 1"
-	   trackNum="2">
+       start="Feb 27 2012 09:00:00 GMT" 
+       title=""
+	   trackNum="1"
+	   description="This is a short call based on this agent's 13 week average">
     </event>
 	<event 
-       start="Feb 27 2012 02:30:00 GMT" 
-       title="Bubble 2"
-	   trackNum="3"
-	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/red-circle.png">
+       start="Feb 27 2012 09:15:00 GMT" 
+       title=""
+	   trackNum="1"
+	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/red-circle.png"
+	   description="This call had high distress time compared to this team's coach.  The coach has not mentored this call yet.">
+    </event>
+	<event 
+       start="Feb 27 2012 09:20:00 GMT" 
+       title=""
+	   trackNum="1"
+	   description="">
     </event>
     <event 
-       start="Feb 27 2012 02:00:00 GMT" 
-       end="Feb 27 2012 03:00:00 GMT" 
+       start="Feb 27 2012 09:42:00 GMT" 
+       title=""
+	   trackNum="1"
+	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/green-circle.png"
+	   description="Coached call"
+	   caption="This call was coached based on distress">
+    </event>
+	<event 
+       start="Feb 27 2012 10:42:00 GMT" 
+       title=""
+	   trackNum="1"
+	   description="">
+    </event>
+	<event 
+       start="Feb 27 2012 11:12:00 GMT" 
+       title=""
+	   trackNum="1"
+	   description="">
+    </event>
+	<event 
+       start="Feb 27 2012 11:12:00 GMT" 
+       title=""
+	   trackNum="1"
+	   description="">
+    </event>
+	<event 
+       start="Feb 27 2012 13:01:00 GMT" 
+       title=""
+	   trackNum="1"
+	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/red-circle.png"
+	   description="This call had high distress time compared to this team's coach.  The coach has not mentored this call yet.">
+    </event>
+	<event 
+       start="Feb 27 2012 12:12:00 GMT" 
+       title=""
+	   trackNum="1"
+	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/green-circle.png"
+	   description="Coached call"
+	   caption="This call was coached based on distress">
+    </event>
+	
+	<!-- Desktop track -->
+	<event 
+       start="Feb 27 2012 09:00:00 GMT" 
+       end="Feb 27 2012 09:47:00 GMT" 
        isDuration="true" 
        title=""
-	   trackNum="1">
-         Dialog
+	   trackNum="2"
+	   color="blue"
+	   caption="ORS Desktop time">
+         ORS Desktop processing time
     </event>
 	<event 
-       start="Feb 27 2012 03:00:01 GMT" 
-       end="Feb 27 2012 04:00:00 GMT" 
+       start="Feb 27 2012 09:47:01 GMT" 
+       end="Feb 27 2012 10:57:00 GMT" 
        isDuration="true" 
        title=""
 	   color="white"
-	   trackNum="1">
-         Silence
+	   caption="Idle Desktop time"
+	   trackNum="2">
+         Idle processing time
     </event>
+	<event 
+       start="Feb 27 2012 10:57:01 GMT" 
+       end="Feb 27 2012 12:57:00 GMT" 
+       isDuration="true" 
+       title=""
+	   color="blue"
+	   caption="Idle Desktop time"
+	   trackNum="2">
+         ORS Desktop processing time
+    </event>
+	<event 
+       start="Feb 27 2012 12:57:01 GMT" 
+       end="Feb 27 2012 13:36:00 GMT" 
+       isDuration="true" 
+       title=""
+	   color="red"
+	   caption="Compliance issue"
+	   trackNum="2">
+	   Agent should be in Aux 2 but was in Personal time looking at ORS
+    </event>
+	<event 
+       start="Feb 27 2012 13:36:01 GMT" 
+       end="Feb 27 2012 14:36:00 GMT" 
+       isDuration="true" 
+       title=""
+	   color="blue"
+	   caption="ORS"
+	   trackNum="2">
+	   ORS Desktop Processing time
+    </event>
+	
+	<!-- Callless screen capture track -->
+	<event 
+       start="Feb 27 2012 12:00:01 GMT" 
+       end="Feb 27 2012 13:30:00 GMT" 
+       isDuration="true" 
+       title=""
+	   color="pink"
+	   caption="Callless Screen Capture"
+	   trackNum="3">
+	   Callless Screen Capture
+    </event>
+	
+	
 </data>
