@@ -3,13 +3,20 @@
   wiki-section="Data Timeline">
     <event 
        start="Feb 27 2012 01:00:00 GMT" 
-       title="Bubble 1">
+       title="Bubble 1"
+	   trackNum="2">
+    </event>
+	<event 
+       start="Feb 27 2012 02:30:00 GMT" 
+       title="Bubble 2"
+	   trackNum="3">
     </event>
     <event 
        start="Feb 27 2012 02:00:00 GMT" 
        end="Feb 27 2012 03:00:00 GMT" 
        isDuration="true" 
-       title="">
+       title=""
+	   trackNum="1">
          Dialog
     </event>
 	<event 
@@ -17,7 +24,8 @@
        end="Feb 27 2012 04:00:00 GMT" 
        isDuration="true" 
        title=""
-	   color="white">
+	   color="white"
+	   trackNum="1">
          Silence
     </event>
 </data>
