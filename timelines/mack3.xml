@@ -118,6 +118,17 @@
 	
 	<!-- Callless screen capture track -->
 	<event 
+       start="Feb 27 2012 10:30:01 GMT" 
+       end="Feb 27 2012 11:05:00 GMT" 
+       isDuration="true" 
+       title=""
+	   color="pink"
+	   caption="Callless Screen Capture"
+	   trackNum="3">
+	   Callless Screen Capture
+    </event>
+	
+	<event 
        start="Feb 27 2012 12:00:01 GMT" 
        end="Feb 27 2012 13:30:00 GMT" 
        isDuration="true" 
