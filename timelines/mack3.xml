@@ -9,7 +9,8 @@
 	<event 
        start="Feb 27 2012 02:30:00 GMT" 
        title="Bubble 2"
-	   trackNum="3">
+	   trackNum="3"
+	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/red-circle.png">
     </event>
     <event 
        start="Feb 27 2012 02:00:00 GMT" 
