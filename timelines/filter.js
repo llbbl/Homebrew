@@ -58,6 +58,14 @@ function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
 	SimileAjax.DOM.registerEvent(button1, "click", function() {
         buttonFilter(timeline, bandIndices, button1);
     });
+	
+	var button2 = document.createElement("button");
+    button2.innerHTML = "ORS";
+    div.appendChild(button2);
+	
+	SimileAjax.DOM.registerEvent(button2, "click", function() {
+        buttonFilter(timeline, bandIndices, button2);
+    });
 }
 
 var timerID = null;
