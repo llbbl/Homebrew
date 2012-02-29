@@ -20,11 +20,14 @@
 			var eventSource = new Timeline.DefaultEventSource();
 			var theme = Timeline.ClassicTheme.create();
             theme.event.bubble.width = 250;
+			theme.event.track.height = 15;
+			theme.event.tape.height = 8;
+
 			var bandInfos = [
 			 Timeline.createBandInfo({
 				 eventSource:    eventSource,
 				 date:           "Feb 27 2012 10:30:00 GMT",
-				 width:          "70%", 
+				 width:          "80%", 
 				 intervalUnit:   Timeline.DateTime.HOUR, 
 				 intervalPixels: 400,
 				 theme:			 theme
@@ -33,7 +36,7 @@
 				 overview:       true,
 				 eventSource:    eventSource,
 				 date:           "Feb 27 2012 09:00:00 GMT",
-				 width:          "30%", 
+				 width:          "20%", 
 				 intervalUnit:   Timeline.DateTime.DAY, 
 				 intervalPixels: 300,
 				 theme:			 theme
