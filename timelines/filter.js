@@ -3,45 +3,7 @@ function centerSimileAjax(date) {
 }
 
 function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
-    var table = document.createElement("table");
-    var tr = table.insertRow(0);
-    
-    var td = tr.insertCell(0);
-    td.innerHTML = "Filter:";
-    
-    td = tr.insertCell(1);
-    td.innerHTML = "Highlight:";
-    
-    var handler = function(elmt, evt, target) {
-        onKeyPress(timeline, bandIndices, table);
-    };
-    
-    tr = table.insertRow(1);
-    tr.style.verticalAlign = "top";
-    
-    td = tr.insertCell(0);
-    
-    var input = document.createElement("input");
-    input.type = "text";
-    SimileAjax.DOM.registerEvent(input, "keypress", handler);
-    td.appendChild(input);
-    
-    for (var i = 0; i < theme.event.highlightColors.length; i++) {
-        td = tr.insertCell(i + 1);
-        
-        input = document.createElement("input");
-        input.type = "text";
-        SimileAjax.DOM.registerEvent(input, "keypress", handler);
-        td.appendChild(input);
-        
-        var divColor = document.createElement("div");
-        divColor.style.height = "0.5em";
-        divColor.style.background = theme.event.highlightColors[i];
-        td.appendChild(divColor);
-    }
-    
-    div.appendChild(table);
-	
+
 	//added by mack
 	var button1 = document.createElement("button");
     button1.innerHTML = "Coached Call";
@@ -70,7 +32,7 @@ function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
 	var button = document.createElement("button");
     button.innerHTML = "Clear All";
     SimileAjax.DOM.registerEvent(button, "click", function() {
-        clearAll(timeline, bandIndices, table);
+        clearAll(timeline, bandIndices);
     });
     div.appendChild(button);
 
@@ -78,14 +40,6 @@ function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
 }
 
 var timerID = null;
-function onKeyPress(timeline, bandIndices, table) {
-    if (timerID != null) {
-        window.clearTimeout(timerID);
-    }
-    timerID = window.setTimeout(function() {
-        performFiltering(timeline, bandIndices, table);
-    }, 300);
-}
 function cleanString(s) {
     return s.replace(/^\s+/, '').replace(/\s+$/, '');
 }
@@ -136,6 +90,7 @@ function showTrack(timeline, bandIndices, track)
 function performFiltering(timeline, bandIndices, table) {
     timerID = null;
     
+	// can remove now that tables 
     var tr = table.rows[1];
     var text = cleanString(tr.cells[0].firstChild.value);
     
@@ -178,11 +133,7 @@ function performFiltering(timeline, bandIndices, table) {
     }
     timeline.paint();
 }
-function clearAll(timeline, bandIndices, table) {
-    var tr = table.rows[1];
-    for (var x = 0; x < tr.cells.length - 1; x++) {
-        tr.cells[x].firstChild.value = "";
-    }
+function clearAll(timeline, bandIndices) {
     
     for (var i = 0; i < bandIndices.length; i++) {
         var bandIndex = bandIndices[i];
