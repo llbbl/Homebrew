@@ -40,14 +40,6 @@ function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
         td.appendChild(divColor);
     }
     
-    td = tr.insertCell(tr.cells.length);
-    var button = document.createElement("button");
-    button.innerHTML = "Clear All";
-    SimileAjax.DOM.registerEvent(button, "click", function() {
-        clearAll(timeline, bandIndices, table);
-    });
-    td.appendChild(button);
-    
     div.appendChild(table);
 	
 	//added by mack
@@ -66,6 +58,23 @@ function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
 	SimileAjax.DOM.registerEvent(button2, "click", function() {
         buttonFilter(timeline, bandIndices, button2);
     });
+	
+	var button3 = document.createElement("button");
+    button3.innerHTML = "Screen Cap";
+    div.appendChild(button3);
+	
+	SimileAjax.DOM.registerEvent(button3, "click", function() {
+        showTrack(timeline, bandIndices, "3")
+    });
+	
+	var button = document.createElement("button");
+    button.innerHTML = "Clear All";
+    SimileAjax.DOM.registerEvent(button, "click", function() {
+        clearAll(timeline, bandIndices, table);
+    });
+    div.appendChild(button);
+
+	
 }
 
 var timerID = null;
@@ -95,6 +104,24 @@ function buttonFilter(timeline, bandIndices, element)
 	for (var i = 0; i < bandIndices.length; i++) {
         var bandIndex = bandIndices[i];
         timeline.getBand(bandIndex).getEventPainter().setFilterMatcher(filterMatcher);
+    }
+    timeline.paint();
+}
+
+function showTrack(timeline, bandIndices, track)
+{
+	// hacked this together
+	filterMatcher = function(evt) {
+            return regex.test('zzzzz');
+    };
+		
+	for (var i = 0; i < bandIndices.length; i++) 
+	{
+        var bandIndex = bandIndices[i];
+		if (i != (track-1))
+		{
+			timeline.getBand(bandIndex).getEventPainter().setFilterMatcher(filterMatcher);
+		}
     }
     timeline.paint();
 }
