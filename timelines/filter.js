@@ -87,52 +87,6 @@ function showTrack(timeline, bandIndices, track)
     timeline.paint();
 }
 
-function performFiltering(timeline, bandIndices, table) {
-    timerID = null;
-    
-	// can remove now that tables 
-    var tr = table.rows[1];
-    var text = cleanString(tr.cells[0].firstChild.value);
-    
-    var filterMatcher = null;
-    if (text.length > 0) {
-        var regex = new RegExp(text, "i");
-        filterMatcher = function(evt) {
-            return regex.test(evt.getText()) || regex.test(evt.getDescription());
-        };
-    }
-    
-    var regexes = [];
-    var hasHighlights = false;
-    for (var x = 1; x < tr.cells.length - 1; x++) {
-        var input = tr.cells[x].firstChild;
-        var text2 = cleanString(input.value);
-        if (text2.length > 0) {
-            hasHighlights = true;
-            regexes.push(new RegExp(text2, "i"));
-        } else {
-            regexes.push(null);
-        }
-    }
-    var highlightMatcher = hasHighlights ? function(evt) {
-        var text = evt.getText();
-        var description = evt.getDescription();
-        for (var x = 0; x < regexes.length; x++) {
-            var regex = regexes[x];
-            if (regex != null && (regex.test(text) || regex.test(description))) {
-                return x;
-            }
-        }
-        return -1;
-    } : null;
-    
-    for (var i = 0; i < bandIndices.length; i++) {
-        var bandIndex = bandIndices[i];
-        timeline.getBand(bandIndex).getEventPainter().setFilterMatcher(filterMatcher);
-        timeline.getBand(bandIndex).getEventPainter().setHighlightMatcher(highlightMatcher);
-    }
-    timeline.paint();
-}
 function clearAll(timeline, bandIndices) {
     
     for (var i = 0; i < bandIndices.length; i++) {
