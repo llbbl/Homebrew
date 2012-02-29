@@ -112,14 +112,21 @@ function showTrack(timeline, bandIndices, track)
 {
 	// hacked this together
 	filterMatcher = function(evt) {
-            return regex.test('zzzzz');
+		if (evt.getTrackNum() == track)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
     };
-		
+
 	for (var i = 0; i < bandIndices.length; i++) 
 	{
         var bandIndex = bandIndices[i];
 		if (i != (track-1))
-		{
+		{	
 			timeline.getBand(bandIndex).getEventPainter().setFilterMatcher(filterMatcher);
 		}
     }
