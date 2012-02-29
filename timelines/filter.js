@@ -49,6 +49,15 @@ function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
     td.appendChild(button);
     
     div.appendChild(table);
+	
+	//added by mack
+	var button1 = document.createElement("button");
+    button1.innerHTML = "Coached Call";
+    div.appendChild(button1);
+	
+	SimileAjax.DOM.registerEvent(button1, "click", function() {
+        buttonFilter(timeline, bandIndices, button1);
+    });
 }
 
 var timerID = null;
@@ -63,6 +72,25 @@ function onKeyPress(timeline, bandIndices, table) {
 function cleanString(s) {
     return s.replace(/^\s+/, '').replace(/\s+$/, '');
 }
+
+function buttonFilter(timeline, bandIndices, element)
+{
+	var filterMatcher = null;
+	var text = element.innerHTML;
+	if (text.length > 0) {
+        var regex = new RegExp(text, "i");
+        filterMatcher = function(evt) {
+            return regex.test(evt.getText()) || regex.test(evt.getDescription());
+        };
+    }
+	
+	for (var i = 0; i < bandIndices.length; i++) {
+        var bandIndex = bandIndices[i];
+        timeline.getBand(bandIndex).getEventPainter().setFilterMatcher(filterMatcher);
+    }
+    timeline.paint();
+}
+
 function performFiltering(timeline, bandIndices, table) {
     timerID = null;
     
