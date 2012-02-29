@@ -7,61 +7,64 @@
        start="Feb 27 2012 09:00:00 GMT" 
        title=""
 	   trackNum="1"
-	   description="This is a short call based on this agent's 13 week average">
+	   image="phone.png"
+	   >This is a short call based on this agent's 13 week average
     </event>
 	<event 
        start="Feb 27 2012 09:15:00 GMT" 
        title=""
 	   trackNum="1"
 	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/red-circle.png"
-	   description="This call had high distress time compared to this team's coach.  The coach has not mentored this call yet.">
+	   image="phone.png">This call had high distress time compared to this team's coach.  The coach has not mentored this call yet.
     </event>
 	<event 
        start="Feb 27 2012 09:20:00 GMT" 
        title=""
 	   trackNum="1"
-	   description="">
+	   description=""
+	   image="phone.png">Call Length: 2 min 30 seconds
     </event>
     <event 
        start="Feb 27 2012 09:42:00 GMT" 
        title=""
 	   trackNum="1"
 	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/green-circle.png"
-	   description="Coached call"
-	   caption="This call was coached based on distress">
+	   image="phone.png">
+	   Coached call
     </event>
 	<event 
        start="Feb 27 2012 10:42:00 GMT" 
        title=""
 	   trackNum="1"
-	   description="">
+	   image="phone.png">Call length: 5 min
     </event>
 	<event 
        start="Feb 27 2012 11:12:00 GMT" 
        title=""
 	   trackNum="1"
-	   description="">
+	   image="phone.png">Call Length: 14 min
     </event>
 	<event 
        start="Feb 27 2012 11:12:00 GMT" 
        title=""
 	   trackNum="1"
-	   description="">
+	   image="phone.png">Call Length: 7 mins
     </event>
 	<event 
        start="Feb 27 2012 13:01:00 GMT" 
        title=""
 	   trackNum="1"
 	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/red-circle.png"
-	   description="This call had high distress time compared to this team's coach.  The coach has not mentored this call yet.">
+	   image="phone.png">
+	   This call had high distress time compared to this team's coach.  The coach has not mentored this call yet.
     </event>
 	<event 
        start="Feb 27 2012 12:12:00 GMT" 
-       title="Coached call"
+       title=""
 	   trackNum="1"
 	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/green-circle.png"
-	   description="Coached call"
-	   caption="This call was coached based on distress">
+	   image="phone.png">
+	   Coached call - based on distress
     </event>
 	
 	<!-- Desktop track -->
@@ -72,7 +75,7 @@
        title=""
 	   trackNum="2"
 	   color="blue"
-	   caption="ORS Desktop time">
+	   image="laptop.png">
          ORS Desktop processing time
     </event>
 	<event 
@@ -81,7 +84,7 @@
        isDuration="true" 
        title=""
 	   color="white"
-	   caption="Idle Desktop time"
+	   image="laptop.png"
 	   trackNum="2">
          Idle processing time
     </event>
@@ -91,7 +94,7 @@
        isDuration="true" 
        title=""
 	   color="blue"
-	   caption="Idle Desktop time"
+	   image="laptop.png"
 	   trackNum="2">
          ORS Desktop processing time
     </event>
@@ -101,9 +104,9 @@
        isDuration="true" 
        title=""
 	   color="red"
-	   caption="Compliance issue"
+	   image="laptop.png"
 	   trackNum="2">
-	   Agent should be in Aux 2 but was in Personal time looking at ORS
+	   Agent should be in Aux 2 but was in Personal time
     </event>
 	<event 
        start="Feb 27 2012 13:36:01 GMT" 
@@ -111,7 +114,7 @@
        isDuration="true" 
        title=""
 	   color="blue"
-	   caption="ORS"
+	   image="laptop.png"
 	   trackNum="2">
 	   ORS Desktop Processing time
     </event>
@@ -123,7 +126,7 @@
        isDuration="true" 
        title=""
 	   color="pink"
-	   caption="Callless Screen Capture"
+	   image="screen.png"
 	   trackNum="3">
 	   Callless Screen Capture
     </event>
@@ -134,10 +137,8 @@
        isDuration="true" 
        title=""
 	   color="pink"
-	   caption="Callless Screen Capture"
+	   image="screen.png"
 	   trackNum="3">
 	   Callless Screen Capture
     </event>
-	
-	
 </data>
