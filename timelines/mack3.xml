@@ -24,6 +24,14 @@
 	   description=""
 	   image="phone.png">Call Length: 2 min 30 seconds
     </event>
+	<event 
+       start="Feb 27 2012 09:39:00 GMT" 
+       title=""
+	   trackNum="1"
+	   description=""
+	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/red-circle.png"
+	   image="phone.png">Distress call
+    </event>
     <event 
        start="Feb 27 2012 09:42:00 GMT" 
        title=""
@@ -31,6 +39,14 @@
 	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/green-circle.png"
 	   image="phone.png">
 	   Coached call
+    </event>
+	<event 
+       start="Feb 27 2012 10:12:00 GMT" 
+       title=""
+	   trackNum="1"
+	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/gray-circle.png"
+	   image="phone.png">
+	   Call with lots of silence
     </event>
 	<event 
        start="Feb 27 2012 10:42:00 GMT" 
