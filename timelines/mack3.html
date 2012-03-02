@@ -15,7 +15,12 @@
    <link rel="stylesheet" href="local_example.css" type="text/css">  
 
    <script>        
-        var tl;
+        var tl
+		var bandVisible = new Array(3);
+		bandVisible[1] = 'off';
+		bandVisible[2] = 'off';
+		bandVisible[3] = 'off';
+		
 		function onLoad() {
 			var eventSource = new Timeline.DefaultEventSource();
 			var theme = Timeline.ClassicTheme.create();
@@ -50,6 +55,9 @@
 			
 			
 			setupFilterHighlightControls(document.getElementById("controls"), tl, [0,1], theme);
+			
+			removeTrack(t1, 2);
+			removeTrack(t1, 3);
 		}
 		 
 		 

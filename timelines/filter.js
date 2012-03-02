@@ -5,6 +5,28 @@ function centerSimileAjax(date) {
 function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
 
 	//added by mack
+	var buttonCall = document.createElement("button");
+    buttonCall.innerHTML = "Call";
+    SimileAjax.DOM.registerEvent(buttonCall, "click", function() {
+        toggleTrack(timeline, 1);
+    });
+    div.appendChild(buttonCall);
+
+	var buttonDesk = document.createElement("button");
+    buttonDesk.innerHTML = "Desktop";
+    SimileAjax.DOM.registerEvent(buttonDesk, "click", function() {
+        toggleTrack(timeline, 2);
+    });
+    div.appendChild(buttonDesk);
+	
+	var buttonScreen = document.createElement("button");
+    buttonScreen.innerHTML = "Screen";
+    SimileAjax.DOM.registerEvent(buttonScreen, "click", function() {
+        toggleTrack(timeline, 3);
+    });
+    div.appendChild(buttonScreen);
+	
+	
 	var button1 = document.createElement("button");
     button1.innerHTML = "Coached Call";
     div.appendChild(button1);
@@ -85,6 +107,57 @@ function showTrack(timeline, bandIndices, track)
 		}
     }
     timeline.paint();
+}
+
+function removeTrack(timeline, track)
+{
+	filterMatcher = function(evt) {
+		if (evt.getTrackNum() != track)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+    };
+
+	alert(track);
+	timeline.getBand(track-1).getEventPainter().setFilterMatcher(filterMatcher);
+	timeline.paint();
+}
+
+function toggleTrack(timeline,track)
+{
+	if (bandVisible[track] == 'on')
+	{
+		bandVisible[track] = 'off';
+	}
+	else
+	{
+		bandVisible[track] = 'on';
+	}
+
+	filterMatcher = function(evt) {
+		if (evt.getTrackNum() != track)
+		{
+			return true;
+		}
+		
+		if (bandVisible[track] == 'on')
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	};
+	
+	timeline.getBand(0).getEventPainter().setFilterMatcher(filterMatcher);
+	timeline.getBand(1).getEventPainter().setFilterMatcher(filterMatcher);
+	timeline.paint();
+
 }
 
 function clearAll(timeline, bandIndices) {
