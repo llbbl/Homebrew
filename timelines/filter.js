@@ -43,14 +43,6 @@ function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
         buttonFilter(timeline, bandIndices, button2);
     });
 	
-	var button3 = document.createElement("button");
-    button3.innerHTML = "Screen Cap";
-    div.appendChild(button3);
-	
-	SimileAjax.DOM.registerEvent(button3, "click", function() {
-        showTrack(timeline, bandIndices, "3")
-    });
-	
 	var button = document.createElement("button");
     button.innerHTML = "Clear All";
     SimileAjax.DOM.registerEvent(button, "click", function() {

@@ -14,7 +14,7 @@
        start="Feb 27 2012 09:15:00 GMT" 
        title=""
 	   trackNum="1"
-	   icon="timeline_2.3.0/timeline_js/images/red-circle.png"
+	   icon="timeline_2.3.0/timeline_js/images/dark-red-circle.png"
 	   image="phone.png">This call had high distress time compared to this team's coach.  The coach has not mentored this call yet.
     </event>
 	<event 
@@ -29,8 +29,8 @@
        title=""
 	   trackNum="1"
 	   description=""
-	   icon="timeline_2.3.0/timeline_js/images/red-circle.png"
-	   image="phone.png">Distress call
+	   icon="timeline_2.3.0/timeline_js/images/big-dark-red-circle.png"
+	   image="phone.png">High distress call
     </event>
     <event 
        start="Feb 27 2012 09:42:00 GMT" 
@@ -55,6 +55,14 @@
 	   image="phone.png">Call length: 5 min
     </event>
 	<event 
+       start="Feb 27 2012 11:00:00 GMT" 
+       title=""
+	   trackNum="1"
+	   icon="timeline_2.3.0/timeline_js/images/medium-gray-circle.png"
+	   image="phone.png">
+	   Call with some of silence
+    </event>
+	<event 
        start="Feb 27 2012 11:12:00 GMT" 
        title=""
 	   trackNum="1"
@@ -70,7 +78,7 @@
        start="Feb 27 2012 13:01:00 GMT" 
        title=""
 	   trackNum="1"
-	   icon="timeline_2.3.0/timeline_js/images/red-circle.png"
+	   icon="timeline_2.3.0/timeline_js/images/dark-red-circle.png"
 	   image="phone.png">
 	   This call had high distress time compared to this team's coach.  The coach has not mentored this call yet.
     </event>
