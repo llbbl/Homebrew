@@ -141,7 +141,14 @@ function toggleTrack(timeline,track)
 	filterMatcher = function(evt) {
 		if (evt.getTrackNum() != track)
 		{
-			return true;
+			if (bandVisible[evt.getTrackNum()] == 'on')
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
 		}
 		
 		if (bandVisible[track] == 'on')
