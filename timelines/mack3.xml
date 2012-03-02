@@ -14,7 +14,7 @@
        start="Feb 27 2012 09:15:00 GMT" 
        title=""
 	   trackNum="1"
-	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/red-circle.png"
+	   icon="timeline_2.3.0/timeline_js/images/red-circle.png"
 	   image="phone.png">This call had high distress time compared to this team's coach.  The coach has not mentored this call yet.
     </event>
 	<event 
@@ -29,14 +29,14 @@
        title=""
 	   trackNum="1"
 	   description=""
-	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/red-circle.png"
+	   icon="timeline_2.3.0/timeline_js/images/red-circle.png"
 	   image="phone.png">Distress call
     </event>
     <event 
        start="Feb 27 2012 09:42:00 GMT" 
        title=""
 	   trackNum="1"
-	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/green-circle.png"
+	   icon="timeline_2.3.0/timeline_js/images/green-circle.png"
 	   image="phone.png">
 	   Coached call
     </event>
@@ -44,7 +44,7 @@
        start="Feb 27 2012 10:12:00 GMT" 
        title=""
 	   trackNum="1"
-	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/gray-circle.png"
+	   icon="timeline_2.3.0/timeline_js/images/gray-circle.png"
 	   image="phone.png">
 	   Call with lots of silence
     </event>
@@ -70,7 +70,7 @@
        start="Feb 27 2012 13:01:00 GMT" 
        title=""
 	   trackNum="1"
-	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/red-circle.png"
+	   icon="timeline_2.3.0/timeline_js/images/red-circle.png"
 	   image="phone.png">
 	   This call had high distress time compared to this team's coach.  The coach has not mentored this call yet.
     </event>
@@ -78,7 +78,7 @@
        start="Feb 27 2012 12:12:00 GMT" 
        title=""
 	   trackNum="1"
-	   icon="http://api.simile-widgets.org/timeline/2.3.1/images/green-circle.png"
+	   icon="timeline_2.3.0/timeline_js/images/green-circle.png"
 	   image="phone.png">
 	   Coached call - based on distress
     </event>
