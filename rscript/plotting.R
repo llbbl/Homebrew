@@ -22,7 +22,6 @@ with(iris, plot(Sepal.Length, Petal.Width, main="Iris Plot", xlab = "Sepal Lengt
 opar <- par(no.readonly=TRUE)
 par(lty=2, pch=17)
 plot(dose, drugA, type="b")
-par(opar)
 
 par(pin=c(2,3))
 par(lwd=2, cex=1.5)
@@ -43,3 +42,14 @@ axis(2, at=x, labels=x, col.axis="red", las=2)
 axis(4, at=z, labels, round(z, digits=2s))
 
 demo(graphics)
+
+par(opar)
+tickets.completed <- c(4, 182, 102, 115, 212, 22)
+names(tickets.completed) <- c("H", "C", "P", "N", "E", "CO")
+ticket.colors <- c("purple", "green", "pink", "white", "brown", "red")
+pie(tickets.completed, col=ticket.colors)
+title(main="Completed in 2012", cex.main = 1.8, font.main = 1)
+barplot(tickets.completed, names.arg=names(tickets.completed), col=ticket.colors)
+lines(tickets.completed, type="b", col="red")
+
+tickets.
