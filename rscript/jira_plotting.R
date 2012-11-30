@@ -12,6 +12,7 @@ barplot(VADeaths, plot = FALSE)
 barplot(VADeaths, plot = FALSE, beside = TRUE)
 mp <- barplot(VADeaths) # default
 tot <- colMeans(VADeaths)
+format(tot)
 text(mp, tot + 3, format(tot), xpd = TRUE, col = "blue")
 barplot(VADeaths, beside = TRUE,
         col = c("lightblue", "mistyrose", "lightcyan",
@@ -41,10 +42,14 @@ resolved <- c(15, 4, 29, 33, 18)
 validated <- c(3, 1, 5, 7, 8)
 open <- c(5, 34, 22, 11, 3)
 tickets = c(open, validated, resolved, hold, feedback)
-rnames = c("12.12", "12.13", "12.14", "12.15", "12.16")
-cnames = c("open", "validated", "resolved", "hold", "feedback")
+cnames = c("12.12", "12.13", "12.14", "12.15", "12.16")
+rnames = c("open", "validated", "resolved", "hold", "feedback")
 mat <- matrix(tickets, nrow = length(cnames), ncol = length(rnames), byrow = TRUE, dimnames = list(rnames, 
                                                                                                  cnames))
 mat
+p = barplot(mat, names.arg=cnames, legend=rnames, col=palette(rainbow(5)))
 
-barplot(mat, names.arg=rnames, legend=cnames)
+# add text the top of the bar
+total <- colSums(mat)
+total
+text(p, total + 4, format(total), xpd=TRUE)
