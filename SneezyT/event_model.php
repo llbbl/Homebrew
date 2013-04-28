@@ -7,37 +7,54 @@ class Event_model extends CI_Model {
 		parent::__construct();
 	}
 
-	function get_food_types($term)
+	function get_types($term)
 	{
-		$this->db->select('FoodTypeId as id, Food as value');
-		$this->db->order_by('Food', 'asc');
-		$this->db->like('Food', $term);
-		$query = $this->db->get('FoodType', 10);
+		log_message('error', $term);
+		
+		$this->db->select('EventTypeId as id, EventName as value');
+		$this->db->order_by('EventName', 'asc');
+		$this->db->like('EventName', $term);
+		$query = $this->db->get('EventType', 10);
 		return $query->result();
 	}
 
-	function insert_meal($food, $mealDate)
+	function insert_event($event, $event_date)
 	{
-		$typeId = $this->getFoodId($food);
+		$typeId = $this->get_event_type_id($event);
 		
-		log_message('error', $mealDate->format("Y-m-d H:i:s"));
+		log_message('error', $event_date->format("Y-m-d H:i:s"));
 		
 		$data = array(
-				'FoodTypeId' => $typeId ,
-				'MealDate' => $mealDate->format("Y-m-d H:i:s")
+				'EventTypeId' => $typeId ,
+				'EventDate' => $event_date->format("Y-m-d H:i:s")
 		);
 		
-		$this->db->insert('Meal', $data);
+		$this->db->insert('Event', $data);
 		return $this->db->insert_id();
 	}
 	
-	function getFoodId($food)
+	/**
+	 * Looks up the event name based user input.  If a event is not found, it is added (probably not the best idea but cheap)
+	 * 
+	 * @param string $event
+	 */
+	function get_event_type_id($event)
 	{
-		$this->db->select('FoodTypeId');
-		$query = $this->db->from('FoodType')->where('Food', $food)->get();
+		$this->db->select('EventTypeId');
+		$query = $this->db->from('EventType')->where('EventName', $event)->get();
 		$row = $query->first_row();
-		return $row->FoodTypeId;
 		
+		if (!isset($row->EventTypeId) || $row->EventTypeId == null)
+		{
+			$data = array(
+					'EventName' => $event
+			);
+			
+			$this->db->insert('EventType', $data);
+			return $this->db->insert_id();
+		}	
+		
+		return $row->EventTypeId;
 	}
 
 }

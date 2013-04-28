@@ -14,7 +14,7 @@ class Meal extends CI_Controller {
 		$data = array();
 		
 		$food = $_POST['food'];
-		$mealDate = new DateTime($_POST['mealDate']);
+		$mealDate = new DateTime($_POST['meal_date']);
 		
 		$this->load->model('Meal_model');
 		$data['result'] = $this->Meal_model->insert_meal($food, $mealDate);
@@ -23,18 +23,21 @@ class Meal extends CI_Controller {
 		$this->load->view('insert_meal', $data);
 	}
 	
-	public function get_food_types()
+	public function get_types()
 	{
 		$data = array();
 		
 		$term = '';
+		
 		if(isset($_GET['term']))
 		{
 			$term = $_GET['term'];
 		}
 		
+		log_message('error', $term);
+		
 		$this->load->model('Meal_model');
-		$data['food_types'] = $this->Meal_model->get_food_types($term);
+		$data['food_types'] = $this->Meal_model->get_types($term);
 		$this->load->helper('url');
 		$this->load->view('get_food_types', $data);
 	}
@@ -44,7 +47,7 @@ class Meal extends CI_Controller {
 		$data = array();
 		
 		$this->load->model('Meal_model');
-		$data['food_types'] = $this->Meal_model->cleanFoodTypes();
+		$data['food_types'] = $this->Meal_model->clean_food_types();
 		$this->load->helper('url');
 		$this->load->view('clean_food', $data);
 	}

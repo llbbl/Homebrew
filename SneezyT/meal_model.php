@@ -7,18 +7,20 @@ class Meal_model extends CI_Model {
 		parent::__construct();
 	}
 
-	function get_food_types($term)
+	function get_types($term)
 	{
-		$this->db->select('FoodTypeId as id, Food as value');
-		$this->db->order_by('Food', 'asc');
-		$this->db->like('Food', $term);
+		log_message('error', $term);
+		
+		$this->db->select('FoodTypeId as id, FoodName as value');
+		$this->db->order_by('FoodName', 'asc');
+		$this->db->like('FoodName', $term);
 		$query = $this->db->get('FoodType', 10);
 		return $query->result();
 	}
 
 	function insert_meal($food, $mealDate)
 	{
-		$typeId = $this->getFoodId($food);
+		$typeId = $this->get_food_type_id($food);
 		
 		log_message('error', $mealDate->format("Y-m-d H:i:s"));
 		
@@ -31,17 +33,33 @@ class Meal_model extends CI_Model {
 		return $this->db->insert_id();
 	}
 	
-	function getFoodId($food)
+	/**
+	 * Looks up the food name based user input.  If a food is not found, it is added (probably not the best idea but cheap)
+	 * 
+	 * @param string $food
+	 */
+	function get_food_type_id($food)
 	{
 		$this->db->select('FoodTypeId');
-		$query = $this->db->from('FoodType')->where('Food', $food)->get();
+		$query = $this->db->from('FoodType')->where('FoodName', $food)->get();
 		$row = $query->first_row();
-		return $row->FoodTypeId;
 		
+		if (!isset($row->FoodTypeId) || $row->FoodTypeId == null)
+		{
+			$data = array(
+					'FoodName' => $food,
+					'FoodLongName' => $food
+			);
+			
+			$this->db->insert('FoodType', $data);
+			return $this->db->insert_id();
+		}	
+		
+		return $row->FoodTypeId;
 	}
 	
 	
-	function cleanFoodTypes()
+	function clean_food_types()
 	{
 		// select COUNT(1), TRIM(LEADING '"' FROM SUBSTRING_INDEX(Food, ',', 1)) as ShortName from FoodType GROUP BY TRIM(LEADING 'X' FROM SUBSTRING_INDEX(Food, ',', 1)) HAVING COUNT(1) > 1;
 	
@@ -68,7 +86,7 @@ SQL;
 			$sql = <<<SQL
 DELETE FROM FoodType WHERE FoodName = '$name' AND FoodTypeId != $id;
 SQL;
-			$this->db->query($sql);
+			//$this->db->query($sql); // commenting out just in case
 			$saved_ids[] = $sql;
 		}
 		

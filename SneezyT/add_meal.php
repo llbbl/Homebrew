@@ -40,7 +40,7 @@
 			<button class="btn btn-primary" type="button">Submit</button>
 		</div>
 	</form>
-	<div id="response" ></div>
+	<div id="meal_response"  class="alert_response" ></div>
 </div>
 <script>
 sneezySingleton.getInstance().initializeAddMeal();

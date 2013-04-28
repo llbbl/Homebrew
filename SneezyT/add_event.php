@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Add a meal</title>
+<title>Add an event</title>
 	<!-- jQuery -->
 	<script src="<?php echo base_url();?>js/jquery-ui/js/jquery-1.9.1.js"></script>
 	<script src="<?php echo base_url();?>js/jquery-ui/js/jquery-ui-1.10.2.custom.min.js"></script>
@@ -26,24 +26,24 @@
 <body >
 
 <div class='content-area'>
-	<h1>Add Meal</h1>
+	<h1>Add Event</h1>
 	<form action="post">
 		<div class="ui-widget">
-  				<label for="food_types">Food Type: </label>
-  				<input id="food_types" />
+  				<label for="event_types">Event Type: </label>
+  				<input id="event_types" />
 		</div>
 		<div class="ui-widget">
-  				<label for="meal_date">Date: </label>
-  				<input id="meal_date" />
+  				<label for="event_date">Date: </label>
+  				<input id="event_date" />
 		</div>
-		<div id='add-meal-submit' >
+		<div id='add-event-submit' >
 			<button class="btn btn-primary" type="button">Submit</button>
 		</div>
 	</form>
-	<div id="response" ></div>
+	<div id="event_response" class="alert_response"></div>
 </div>
 <script>
-sneezySingleton.getInstance().initializeAddMeal();
+sneezySingleton.getInstance().initializeAddEvent();
 </script>
 
 
