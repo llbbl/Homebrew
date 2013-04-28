@@ -1,11 +1,9 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class AddMeal extends CI_Controller {
+class Meal extends CI_Controller {
 	public function index()
 	{
-		log_message('error', __METHOD__);
-		
 		$this->load->model('Meal_model');
 		$this->load->helper('url');
 		$this->load->view('add_meal');
@@ -39,6 +37,16 @@ class AddMeal extends CI_Controller {
 		$data['food_types'] = $this->Meal_model->get_food_types($term);
 		$this->load->helper('url');
 		$this->load->view('get_food_types', $data);
+	}
+	
+	public function clean()
+	{
+		$data = array();
+		
+		$this->load->model('Meal_model');
+		$data['food_types'] = $this->Meal_model->cleanFoodTypes();
+		$this->load->helper('url');
+		$this->load->view('clean_food', $data);
 	}
 }
 ?>
