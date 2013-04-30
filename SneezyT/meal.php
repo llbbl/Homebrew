@@ -2,10 +2,9 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Meal extends CI_Controller {
+	
 	public function index()
 	{
-		$this->load->model('Meal_model');
-		$this->load->helper('url');
 		$this->load->view('add_meal');
 	}
 	
