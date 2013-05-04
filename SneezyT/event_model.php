@@ -56,6 +56,17 @@ class Event_model extends CI_Model {
 		
 		return $row->EventTypeId;
 	}
+	
+	// 
+	/**
+	 * Get all the events in a list
+	 */
+	function get_events()
+	{
+		$sql = "select EventId as event_id, EventDate as event_date, EventName as event_name from Event as e join EventType et on e.EventTypeId = et.EventTypeId order by EventDate ASC;";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
 
 }
 ?>

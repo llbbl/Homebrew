@@ -34,12 +34,24 @@ class Event extends CI_Controller {
 			$term = $_GET['term'];
 		}
 	
-		log_message('error', $term);
-	
 		$this->load->model('Event_model');
 		$data['event_types'] = $this->Event_model->get_types($term);
 		$this->load->helper('url');
 		$this->load->view('get_event_types', $data);
+	}
+	
+	public function event_view()
+	{
+		$data = array();
+		$this->load->helper('url');
+		$this->load->view('event_view', $data);
+	}
+	
+	public function event_list()
+	{
+		$this->load->model('Event_model');
+		$data['events'] = $this->Event_model->get_events();
+		$this->load->view('event_list', $data);
 	}
 }
 ?>	

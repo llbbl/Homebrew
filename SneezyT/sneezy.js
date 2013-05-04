@@ -139,9 +139,33 @@ var sneezySingleton = new function sneezySingleton()
         };
         
     	grid = new Slick.Grid("#mealGrid", data, columns, options);
-            
     }
 
+    // go get the meal list via json
+ 	function initializeEventList() {
+  		$.getJSON('../event_list/', function(data) {
+  			loadEventList(data);
+		});
+    }
+ 	this.initializeEventList = initializeEventList;
+ 	
+ 	// after the ajax call is complete, load the list
+    function loadEventList(data)
+    {
+        var grid;
+        var columns = [
+          {id: "event_id", name: "Event Id", field: "event_id"},
+          {id: "event_date", name: "Event Date", field: "event_date"},
+          {id: "event_name", name: "Event", field: "event_name", width: "300"}
+        ];
+
+        var options = {
+          enableCellNavigation: true,
+          enableColumnReorder: false
+        };
+        
+    	grid = new Slick.Grid("#eventGrid", data, columns, options);
+    }
    
     return sneezySingleton;
 };
