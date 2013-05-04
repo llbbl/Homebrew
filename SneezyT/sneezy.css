@@ -77,6 +77,11 @@ h1 {
 	width: 200px;
 }
 
+.grid {
+	width:	600px;
+	height:	500px;
+}
+
 /* css for timepicker */
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
 .ui-timepicker-div dl { text-align: left; }

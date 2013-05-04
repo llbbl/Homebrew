@@ -41,7 +41,7 @@ var sneezySingleton = new function sneezySingleton()
 		
 		// bind autocomplete
 		$( "#food_types" ).autocomplete({
-			source: "../meal/get_types",
+			source: "index.php/meal/get_types",
 		      minLength: 1
 		});
     };
@@ -54,11 +54,13 @@ var sneezySingleton = new function sneezySingleton()
 	     p['meal_date'] = $('#meal_date').val();
 	     
 	     // goofy ajax request from CI
-	     $('#meal_response').load('../meal/insert',p,function(str){
+	     $('#meal_response').load('index.php/meal/insert',p,function(str){
 	    	 setTimeout(function() {
 	    		 $('#meal_response').empty();
 	    	 	} ,2000);
 	     });
+	     
+	     $( "#food_types" ).focus();
     }
     this.submitMeal = submitMeal;
 
@@ -80,7 +82,7 @@ var sneezySingleton = new function sneezySingleton()
 		
 		// bind autocomplete
 		$( "#event_types" ).autocomplete({
-			source: "../event/get_types",
+			source: "index.php/event/get_types",
 		      minLength: 1
 		});
    };
@@ -94,11 +96,13 @@ var sneezySingleton = new function sneezySingleton()
 	     p['event_date'] = $('#event_date').val();
 	     
 	     // goofy ajax request from CI
-	     $('#event_response').load('../event/insert',p,function(str){
+	     $('#event_response').load('index.php/event/insert',p,function(str){
 	    	 setTimeout(function() {
 	    		 $('#event_response').empty();
 	    	 	} ,2000);
 	     });
+	     
+	     $( "#event_types" ).focus();
    }
    this.submitEvent = submitEvent;
    
@@ -110,6 +114,34 @@ var sneezySingleton = new function sneezySingleton()
 		})
    }
    this.initializeTabs = initializeTabs;
+   
+    // go get the meal list via json
+ 	function initializeMealList() {
+  		$.getJSON('../meal_list/', function(data) {
+  			loadMealList(data);
+		});
+    }
+ 	this.initializeMealList = initializeMealList;
+ 	
+ 	// after the ajax call is complete, load the list
+    function loadMealList(data)
+    {
+        var grid;
+        var columns = [
+          {id: "meal_id", name: "Meal Id", field: "meal_id"},
+          {id: "meal_date", name: "Meal Date", field: "meal_date"},
+          {id: "food_name", name: "Food", field: "food_name", width: "300"}
+        ];
+
+        var options = {
+          enableCellNavigation: true,
+          enableColumnReorder: false
+        };
+        
+    	grid = new Slick.Grid("#mealGrid", data, columns, options);
+            
+    }
+
    
     return sneezySingleton;
 };

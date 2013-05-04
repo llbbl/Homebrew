@@ -50,5 +50,19 @@ class Meal extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->view('clean_food', $data);
 	}
+	
+	public function meal_view()
+	{
+		$data = array();
+		$this->load->helper('url');
+		$this->load->view('meal_view', $data);
+	}
+	
+	public function meal_list()
+	{
+		$this->load->model('Meal_model');
+		$data['meals'] = $this->Meal_model->get_meals();
+		$this->load->view('meal_list', $data);
+	}
 }
 ?>
