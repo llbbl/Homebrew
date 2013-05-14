@@ -96,9 +96,14 @@ SQL;
 	/**
 	 * Get all the meals in a list
 	 */
-	function get_meals()
+	function get_meals($index, $pageSize, $sort)
 	{
-		$sql = "select MealId as meal_id, MealDate as meal_date, FoodName as food_name from Meal as m join FoodType ft on m.FoodTypeId = ft.FoodTypeId order by MealDate ASC";
+		
+		
+		$sql = "select MealId, MealDate, FoodName from Meal as m join FoodType ft on m.FoodTypeId = ft.FoodTypeId order by " . $sort . " LIMIT " . $index . ', ' . $pageSize;
+		log_message('error', $sql);
+		
+		
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}

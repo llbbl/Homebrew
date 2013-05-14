@@ -117,55 +117,85 @@ var sneezySingleton = new function sneezySingleton()
    
     // go get the meal list via json
  	function initializeMealList() {
-  		$.getJSON('../meal_list/', function(data) {
-  			loadMealList(data);
-		});
+ 		$('#mealGrid').jtable({
+            title: 'Meal List',
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            defaultSorting: 'MealDate ASC', //Set default sorting
+            gotoPageArea: 'none',
+            //MealId as meal_id, MealDate as meal_date, FoodName as food_name
+            actions: {
+                listAction: '../meal_list/',
+                deleteAction: '',
+                updateAction: '',
+                createAction: ''
+            },
+            fields: {
+            	MealId: {
+                    key: true,
+                    create: false,
+                    edit: false
+                },
+                MealDate: {
+                    title: 'Date',
+                    width: '23%',
+                    create: false,
+                    edit: false
+                },
+                FoodName: {
+                    title: 'Food',
+                    create: false,
+                    edit: false
+                }
+            }
+        });
+ 
+        //Load student list from server
+        $('#mealGrid').jtable('load');
     }
  	this.initializeMealList = initializeMealList;
- 	
- 	// after the ajax call is complete, load the list
-    function loadMealList(data)
-    {
-        var grid;
-        var columns = [
-          {id: "meal_id", name: "Meal Id", field: "meal_id"},
-          {id: "meal_date", name: "Meal Date", field: "meal_date"},
-          {id: "food_name", name: "Food", field: "food_name", width: "300"}
-        ];
-
-        var options = {
-          enableCellNavigation: true,
-          enableColumnReorder: false
-        };
-        
-    	grid = new Slick.Grid("#mealGrid", data, columns, options);
-    }
 
     // go get the meal list via json
  	function initializeEventList() {
-  		$.getJSON('../event_list/', function(data) {
-  			loadEventList(data);
-		});
+  		$('#eventGrid').jtable({
+            title: 'Event List',
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            defaultSorting: 'EventDate ASC', //Set default sorting
+            gotoPageArea: 'none',
+            //MealId as meal_id, MealDate as meal_date, FoodName as food_name
+            actions: {
+                listAction: '../event_list/',
+                deleteAction: '',
+                updateAction: '',
+                createAction: ''
+            },
+            fields: {
+            	EventId: {
+                    key: true,
+                    create: false,
+                    edit: false
+                },
+                EventDate: {
+                    title: 'Date',
+                    width: '23%',
+                    create: false,
+                    edit: false
+                },
+                EventName: {
+                    title: 'Event',
+                    create: false,
+                    edit: false
+                }
+            }
+        });
+ 
+        //Load student list from server
+        $('#eventGrid').jtable('load');
     }
  	this.initializeEventList = initializeEventList;
  	
- 	// after the ajax call is complete, load the list
-    function loadEventList(data)
-    {
-        var grid;
-        var columns = [
-          {id: "event_id", name: "Event Id", field: "event_id"},
-          {id: "event_date", name: "Event Date", field: "event_date"},
-          {id: "event_name", name: "Event", field: "event_name", width: "300"}
-        ];
-
-        var options = {
-          enableCellNavigation: true,
-          enableColumnReorder: false
-        };
-        
-    	grid = new Slick.Grid("#eventGrid", data, columns, options);
-    }
-   
     return sneezySingleton;
 };

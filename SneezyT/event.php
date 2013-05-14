@@ -50,7 +50,19 @@ class Event extends CI_Controller {
 	public function event_list()
 	{
 		$this->load->model('Event_model');
-		$data['events'] = $this->Event_model->get_events();
+		
+		$index = intval($_GET['jtStartIndex']);
+		$pageSize = intval($_GET['jtPageSize']);
+		log_message("error", print_r($_GET, true));
+		
+		$sort = ' EventDate DESC ';
+		if (isset($_GET['jtSorting']))
+		{
+			$sort = html_entity_decode($_GET['jtSorting']);
+		}
+		
+		$events = $this->Event_model->get_events($index, $pageSize, $sort);
+		$data['events'] = array("Result" => "OK", "Records" => $events );
 		$this->load->view('event_list', $data);
 	}
 }

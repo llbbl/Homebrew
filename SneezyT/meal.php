@@ -61,7 +61,17 @@ class Meal extends CI_Controller {
 	public function meal_list()
 	{
 		$this->load->model('Meal_model');
-		$data['meals'] = $this->Meal_model->get_meals();
+		// jtStartIndex=0&jtPageSize=10&jtSorting=meal_date%20ASC
+		$index = intval($_GET['jtStartIndex']);
+		$pageSize = intval($_GET['jtPageSize']);
+		log_message("error", print_r($_GET, true));
+		$sort = ' MealDate DESC ';
+		if (isset($_GET['jtSorting']))
+		{
+			$sort = html_entity_decode($_GET['jtSorting']);
+		}
+		$meals = $this->Meal_model->get_meals($index, $pageSize, $sort);
+		$data['meals'] = array("Result" => "OK", "Records" => $meals ); 
 		$this->load->view('meal_list', $data);
 	}
 }
