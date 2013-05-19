@@ -18,7 +18,7 @@ class Event_model extends CI_Model {
 		return $query->result();
 	}
 
-	function insert_event($event, $event_date)
+	function insert_event($event, $event_date, $event_note)
 	{
 		$typeId = $this->get_event_type_id($event);
 		
@@ -26,7 +26,8 @@ class Event_model extends CI_Model {
 		
 		$data = array(
 				'EventTypeId' => $typeId ,
-				'EventDate' => $event_date->format("Y-m-d H:i:s")
+				'EventDate' => $event_date->format("Y-m-d H:i:s"),
+				'EventNote' => $event_note
 		);
 		
 		$this->db->insert('Event', $data);

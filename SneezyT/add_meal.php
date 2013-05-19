@@ -7,6 +7,12 @@
   				<label for="food_types">Food Type: </label>
   				<input id="food_types" />
 		</div>
+		
+		<div class="ui-widget">
+  				<label for="meal-note">Note: </label>
+  				<input id="meal-note" />
+		</div>
+		
 		<div class="ui-widget">
   				<label for="meal_date">Date: </label>
   				<input id="meal_date" />

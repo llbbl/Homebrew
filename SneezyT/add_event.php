@@ -5,10 +5,17 @@
   				<label for="event_types">Event Type: </label>
   				<input id="event_types" />
 		</div>
+		
+		<div class="ui-widget">
+  				<label for="event-note">Note: </label>
+  				<input id="event-note" />
+		</div>
+		
 		<div class="ui-widget">
   				<label for="event_date">Date: </label>
   				<input id="event_date" />
 		</div>
+
 		<div id='add-event-submit' >
 			<button class="btn btn-primary" type="button">Submit</button>
 		</div>

@@ -14,9 +14,10 @@ class Meal extends CI_Controller {
 		
 		$food = $_POST['food'];
 		$mealDate = new DateTime($_POST['meal_date']);
+		$meal_note = $_POST['meal-note'];
 		
 		$this->load->model('Meal_model');
-		$data['result'] = $this->Meal_model->insert_meal($food, $mealDate);
+		$data['result'] = $this->Meal_model->insert_meal($food, $mealDate, $meal_note);
 		
 		$this->load->helper('url');
 		$this->load->view('insert_meal', $data);

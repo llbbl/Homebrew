@@ -28,6 +28,8 @@ var sneezySingleton = new function sneezySingleton()
 		this.initializeAddMeal();
 		this.initializeAddEvent();
 		this.initializeNavClick();
+		this.initializeMealList();
+		this.initializeEventList();
 	}
 	
 	this.initializeNav = initializeNav;
@@ -62,15 +64,18 @@ var sneezySingleton = new function sneezySingleton()
     	 var p = {};
 	     p['food'] = $('#food_types').val();
 	     p['meal_date'] = $('#meal_date').val();
+	     p['meal-note'] = $('#meal-note').val();
+	     
 	     
 	     // goofy ajax request from CI
 	     $('#meal_response').load('http://192.168.1.10/sneezy/index.php/meal/insert',p,function(str){
 	    	 setTimeout(function() {
 	    		 $('#meal_response').empty();
-	    	 	} ,2000);
+	    	 	} ,1500);
 	     });
 	     
-	     $( "#food_types" ).focus();
+	     $( "#meal-note" ).text('');
+	     $( "#food_types" ).text('').focus();
     }
     this.submitMeal = submitMeal;
 
@@ -103,15 +108,17 @@ var sneezySingleton = new function sneezySingleton()
    	 	 var p = {};
 	     p['event'] = $('#event_types').val();
 	     p['event_date'] = $('#event_date').val();
+	     p['event-note'] = $('#event-note').val();
 	     
 	     // goofy ajax request from CI
 	     $('#event_response').load('http://192.168.1.10/sneezy/index.php/event/insert',p,function(str){
 	    	 setTimeout(function() {
 	    		 $('#event_response').empty();
-	    	 	} ,2000);
+	    	 	} ,1500);
 	     });
 	     
-	     $( "#event_types" ).focus();
+	     $( "#event-note").text('');
+	     $( "#event_types" ).text('').focus();
    };
    this.submitEvent = submitEvent;
    
@@ -133,6 +140,7 @@ var sneezySingleton = new function sneezySingleton()
 		   
 		   $('.content-pane .content-pane-container').addClass('hide');
 		   $('.content-pane #container-add-meal').removeClass('hide');
+		   $('.collapse').collapse();
 	   });
 	   
 	   $('#nav-add-event').click(function (e) {

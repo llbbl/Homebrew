@@ -15,9 +15,10 @@ class Event extends CI_Controller {
 	
 		$event = $_POST['event'];
 		$event_date = new DateTime($_POST['event_date']);
-	
+		$event_note = $_POST['event-note'];
+		
 		$this->load->model('Event_model');
-		$data['result'] = $this->Event_model->insert_event($event, $event_date);
+		$data['result'] = $this->Event_model->insert_event($event, $event_date, $event_note);
 	
 		$this->load->helper('url');
 		$this->load->view('insert_event', $data);
@@ -57,7 +58,7 @@ class Event extends CI_Controller {
 		
 		$sort = ' EventDate DESC ';
 		if (isset($_GET['jtSorting']))
-		{
+		{	     
 			$sort = html_entity_decode($_GET['jtSorting']);
 		}
 		

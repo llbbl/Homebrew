@@ -26,7 +26,7 @@
 	<link rel=stylesheet href="<?php echo base_url();?>css/sneezy.css" type="text/css" />
 </head>
 <body >
-<div class="navbar">
+<div class="navbar navbar-inverse">
 	<div class="navbar-inner">
 		<div class="container">
 			<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
@@ -59,10 +59,10 @@
 	<?php echo $add_event;?>
 	</div>
 	<div id="container-meal-list"  class="content-pane-container hide">
-	<?php echo '3'; //$meal_list;?>
+	<?php echo $meal_list;?>
 	</div>
 	<div id="container-event-list"  class="content-pane-container hide">
-	<?php echo '4'; //$event_list;?>
+	<?php echo $event_list;?>
 	</div>
 </div>
 <script>

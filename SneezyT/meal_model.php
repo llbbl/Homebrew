@@ -18,15 +18,16 @@ class Meal_model extends CI_Model {
 		return $query->result();
 	}
 
-	function insert_meal($food, $mealDate)
+	function insert_meal($food, $meal_date, $meal_note)
 	{
-		$typeId = $this->get_food_type_id($food);
+		$type_id = $this->get_food_type_id($food);
 		
-		log_message('error', $mealDate->format("Y-m-d H:i:s"));
+		log_message('error', $meal_date->format("Y-m-d H:i:s"));
 		
 		$data = array(
-				'FoodTypeId' => $typeId ,
-				'MealDate' => $mealDate->format("Y-m-d H:i:s")
+				'FoodTypeId' => $type_id ,
+				'MealDate' => $meal_date->format("Y-m-d H:i:s"),
+				'MealNote' => $meal_note
 		);
 		
 		$this->db->insert('Meal', $data);
