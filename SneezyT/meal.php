@@ -71,8 +71,8 @@ class Meal extends CI_Controller {
 			$sort = html_entity_decode($_GET['jtSorting']);
 		}
 		$meals = $this->Meal_model->get_meals($index, $pageSize, $sort);
-		$data['meals'] = array("Result" => "OK", "Records" => $meals ); 
-		$this->load->view('meal_list', $data);
+		$data['json'] = array("Result" => "OK", "Records" => $meals ); 
+		$this->load->view('json_encode', $data);
 	}
 }
 ?>

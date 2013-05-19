@@ -62,8 +62,8 @@ class Event extends CI_Controller {
 		}
 		
 		$events = $this->Event_model->get_events($index, $pageSize, $sort);
-		$data['events'] = array("Result" => "OK", "Records" => $events );
-		$this->load->view('event_list', $data);
+		$data['json'] = array("Result" => "OK", "Records" => $events );
+		$this->load->view('json_encode', $data);
 	}
 }
 ?>	

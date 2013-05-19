@@ -10,10 +10,12 @@ class Welcome extends CI_Controller {
 		$this->load->helper('url');
 		$data = array();
 		
-		$data['meal']  = $this->load->view('add_meal', array(), true);
-		$data['event'] = $this->load->view('add_event', array(), true);
+		$data['add_meal']  	= $this->load->view('add_meal', array(), true);
+		$data['add_event'] 	= $this->load->view('add_event', array(), true);
+		$data['meal_list'] 	= $this->load->view('meal_view', array(), true);
+		$data['event_list'] = $this->load->view('event_view', array(), true);
 		
-		$this->load->view('welcome_message', $data);
+		$this->load->view('nav_view', $data);
 	}
 }
 

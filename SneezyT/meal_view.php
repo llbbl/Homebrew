@@ -14,15 +14,13 @@
 	<!-- Bootstrap -->
 	<script src="<?php echo base_url();?>js/bootstrap/js/bootstrap.js"></script>
 	
-	<!-- Slickgrids -->
-	<script src="<?php echo base_url();?>js/slickgrid/lib/jquery.event.drag-2.2.js"></script>
-	<script src="<?php echo base_url();?>js/slickgrid/slick.core.js"></script>
-	<script src="<?php echo base_url();?>js/slickgrid/slick.grid.js"></script>
+	<!-- jTables -->
+	<script src="<?php echo base_url();?>js/jtable.2.3.0/jquery.jtable.min.js"></script>
 	
 	<!-- CSS -->
 	<link rel=stylesheet href="<?php echo base_url();?>js/jquery-ui/css/ui-lightness/jquery-ui-1.10.2.custom.min.css" type="text/css" />
+	<link rel=stylesheet href="<?php echo base_url();?>js/jtable.2.3.0/themes/metro/blue/jtable.min.css" rel="stylesheet" type="text/css" />
 	<link rel=stylesheet href="<?php echo base_url();?>js/bootstrap/css/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="<?php echo base_url();?>js/slickgrid/slick.grid.css" type="text/css"/>
 	
 	<!-- handrolled css and js -->
 	<script src="<?php echo base_url();?>js/sneezy.js"></script>
