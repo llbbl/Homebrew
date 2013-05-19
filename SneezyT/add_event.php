@@ -13,7 +13,7 @@
 		
 		<div class="ui-widget">
   				<label for="event_date">Date: </label>
-  				<input id="event_date" />
+  				<input id="event_date" value="<?php echo date("m/d/Y h:i a"); ?>"/>
 		</div>
 
 		<div id='add-event-submit' >

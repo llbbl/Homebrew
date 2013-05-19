@@ -43,11 +43,13 @@ var sneezySingleton = new function sneezySingleton()
     
     function initializeAddMeal(){
     	 // date picker
-    	var jqMealDate = $('#meal_date').datetimepicker({
-			timeFormat: "hh:mm tt"
-		}); 
-		jqMealDate.datetimepicker('setDate', (new Date()));
-		
+    	if (window.screen.availWidth > 960) {
+	    	var jqMealDate = $('#meal_date').datetimepicker({
+				timeFormat: "hh:mm tt"
+			}); 
+			jqMealDate.datetimepicker('setDate', (new Date()));
+    	}
+    	
 		// bind on click event to bootstrap button
 		var jqSubmit = $('#add-meal-submit button').click(this.submitMeal);
 		
@@ -74,24 +76,26 @@ var sneezySingleton = new function sneezySingleton()
 	    	 	} ,1500);
 	     });
 	     
-	     $( "#meal-note" ).text('');
-	     $( "#food_types" ).text('').focus();
+	     $( "#meal-note" ).val('');
+	     $( "#food_types" ).val('').focus();
     }
     this.submitMeal = submitMeal;
 
     /*
      * 
      * EVENT FunctionsinitializeTabs
-     * 
+     * id="navbar-button" 
      */
     
     function initializeAddEvent(){
     	// date picker
-    	var jqEventDate = $('#event_date').datetimepicker({
-			timeFormat: "hh:mm tt"
-		}); 
-    	jqEventDate.datetimepicker('setDate', (new Date()));
-		
+    	if (window.screen.availWidth > 960) {
+    		var jqEventDate = $('#event_date').datetimepicker({
+				timeFormat: "hh:mm tt"
+			}); 
+	    	jqEventDate.datetimepicker('setDate', (new Date()));
+    	}
+    	
 		// bind on click event to bootstrap button
 		var jqSubmit = $('#add-event-submit button').click(this.submitEvent);
 		
@@ -117,21 +121,11 @@ var sneezySingleton = new function sneezySingleton()
 	    	 	} ,1500);
 	     });
 	     
-	     $( "#event-note").text('');
-	     $( "#event_types" ).text('').focus();
+	     $( "#event-note").val('');
+	     $( "#event_types" ).val('').focus();
    };
    this.submitEvent = submitEvent;
-   
-   /*
-   function initializeTabs() {
-		$('#myTab a').click(function (e) {
-		  e.preventDefault();
-		  $(this).tab('show');http://192.168.1.10/sneezy/index.php/
-		});
-   };
-   
-   this.initializeTabs = initializeTabs;
-   */
+
    
    function initializeNavClick() {
 	   $('#nav-add-meal').click(function (e) {
@@ -140,7 +134,7 @@ var sneezySingleton = new function sneezySingleton()
 		   
 		   $('.content-pane .content-pane-container').addClass('hide');
 		   $('.content-pane #container-add-meal').removeClass('hide');
-		   $('.collapse').collapse();
+		   $('.navbar-inner .btn').click();
 	   });
 	   
 	   $('#nav-add-event').click(function (e) {
@@ -149,6 +143,7 @@ var sneezySingleton = new function sneezySingleton()
 		   
 		   $('.content-pane .content-pane-container').addClass('hide');
 		   $('.content-pane #container-add-event').removeClass('hide');
+		   $('.navbar-inner .btn').click();
 	   });
 	   
 	   $('#nav-meal-list').click(function (e) {
@@ -157,6 +152,7 @@ var sneezySingleton = new function sneezySingleton()
 		   
 		   $('.content-pane .content-pane-container').addClass('hide');
 		   $('.content-pane #container-meal-list').removeClass('hide');
+		   $('.navbar-inner .btn').click();
 	   });
 	   
 	   $('#nav-event-list').click(function (e) {
@@ -165,6 +161,7 @@ var sneezySingleton = new function sneezySingleton()
 		   
 		   $('.content-pane .content-pane-container').addClass('hide');
 		   $('.content-pane #container-event-list').removeClass('hide');
+		   $('.navbar-inner .btn').click();
 	   });
    }
    this.initializeNavClick = initializeNavClick;

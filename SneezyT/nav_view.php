@@ -68,6 +68,5 @@
 <script>
   	sneezySingleton.getInstance().initializeNav();
 </script>
-
 </body>
 </html>

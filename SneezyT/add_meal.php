@@ -15,7 +15,7 @@
 		
 		<div class="ui-widget">
   				<label for="meal_date">Date: </label>
-  				<input id="meal_date" />
+  				<input id="meal_date" value="<?php echo date("m/d/Y h:i a"); ?>"/>
 		</div>
 		<div id='add-meal-submit' >
 			<button class="btn btn-primary" type="button">Submit</button>
