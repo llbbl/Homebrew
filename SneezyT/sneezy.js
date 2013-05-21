@@ -43,13 +43,11 @@ var sneezySingleton = new function sneezySingleton()
     
     function initializeAddMeal(){
     	 // date picker
-    	if (window.screen.availWidth > 960) {
-	    	var jqMealDate = $('#meal_date').datetimepicker({
-				timeFormat: "hh:mm tt"
-			}); 
-			jqMealDate.datetimepicker('setDate', (new Date()));
-    	}
-    	
+		var jqMealDate = $('#meal_date').datetimepicker({
+			timeFormat: "hh:mm tt"
+		}); 
+		jqMealDate.datetimepicker('setDate', (new Date()));
+	
 		// bind on click event to bootstrap button
 		var jqSubmit = $('#add-meal-submit button').click(this.submitMeal);
 		
@@ -65,9 +63,15 @@ var sneezySingleton = new function sneezySingleton()
     {
     	 var p = {};
 	     p['food'] = $('#food_types').val();
-	     p['meal_date'] = $('#meal_date').val();
-	     p['meal-note'] = $('#meal-note').val();
 	     
+	     if (jQuery('#meal_date_container').is(':visible')) {
+	    	 p['meal_date'] = $('#meal_date').val(); 
+	     }
+	     else {
+	    	 p['meal_date'] = $('#meal_date_wheel').val();
+	     }
+	    
+	     p['meal-note'] = $( "#meal-note" ).val();
 	     
 	     // goofy ajax request from CI
 	     $('#meal_response').load('http://192.168.1.10/sneezy/index.php/meal/insert',p,function(str){
@@ -112,6 +116,12 @@ var sneezySingleton = new function sneezySingleton()
    	 	 var p = {};
 	     p['event'] = $('#event_types').val();
 	     p['event_date'] = $('#event_date').val();
+	     if (jQuery('#meal_date_container').is(':visible')) {
+	    	 p['event_date'] = $('#event_date').val(); 
+	     }
+	     else {
+	    	 p['event_date'] = $('#event_date_wheel').val();
+	     }
 	     p['event-note'] = $('#event-note').val();
 	     
 	     // goofy ajax request from CI

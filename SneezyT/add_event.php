@@ -11,11 +11,16 @@
   				<input id="event-note" />
 		</div>
 		
-		<div class="ui-widget">
+		<div id="event_date_container" class="ui-widget visible-desktop visible-tablet">
   				<label for="event_date">Date: </label>
   				<input id="event_date" value="<?php echo date("m/d/Y h:i a"); ?>"/>
 		</div>
-
+		
+		<div id="event_date_wheel_container" class="ui-widget visible-phone">
+  				<label for="event_date_wheel">Date: </label>
+  				<input id="event_date_wheel" type="datetime-local"/>
+		</div>
+		
 		<div id='add-event-submit' >
 			<button class="btn btn-primary" type="button">Submit</button>
 		</div>

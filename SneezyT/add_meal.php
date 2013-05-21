@@ -13,10 +13,16 @@
   				<input id="meal-note" />
 		</div>
 		
-		<div class="ui-widget">
+		<div id="meal_date_container" class="ui-widget visible-desktop visible-tablet">
   				<label for="meal_date">Date: </label>
   				<input id="meal_date" value="<?php echo date("m/d/Y h:i a"); ?>"/>
 		</div>
+		
+		<div id="meal_date_wheel_container" class="ui-widget visible-phone">
+  				<label for="meal_date_wheel">Date: </label>
+  				<input id="meal_date_wheel" type="datetime-local"/>
+		</div>
+		
 		<div id='add-meal-submit' >
 			<button class="btn btn-primary" type="button">Submit</button>
 		</div>
