@@ -101,12 +101,21 @@ SQL;
 	{
 		
 		
-		$sql = "select MealId, MealDate, FoodName, MealNote from Meal as m join FoodType ft on m.FoodTypeId = ft.FoodTypeId order by " . $sort . " LIMIT " . $index . ', ' . $pageSize;
+		$sql = "select MealId, MealDate, FoodName, MealNote from Meal as m join FoodType ft on m.FoodTypeId = ft.FoodTypeId WHERE m.IsDeleted = 0 order by " . $sort . " LIMIT " . $index . ', ' . $pageSize;
 		log_message('error', $sql);
 		
 		
 		$query = $this->db->query($sql);
 		return $query->result_array();
+	}
+	
+	/**
+	 * Soft delete a meal from the list
+	 */
+	function delete($id)
+	{
+		$sql = "update Meal set IsDeleted = 1 WHERE MealId = " . intval($id);
+		$query = $this->db->query($sql);
 	}
 }
 ?>

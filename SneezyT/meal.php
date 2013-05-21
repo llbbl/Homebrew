@@ -34,8 +34,6 @@ class Meal extends CI_Controller {
 			$term = $_GET['term'];
 		}
 		
-		log_message('error', $term);
-		
 		$this->load->model('Meal_model');
 		$data['food_types'] = $this->Meal_model->get_types($term);
 		$this->load->helper('url');
@@ -65,7 +63,7 @@ class Meal extends CI_Controller {
 		// jtStartIndex=0&jtPageSize=10&jtSorting=meal_date%20ASC
 		$index = intval($_GET['jtStartIndex']);
 		$pageSize = intval($_GET['jtPageSize']);
-		log_message("error", print_r($_GET, true));
+		
 		$sort = ' MealDate DESC ';
 		if (isset($_GET['jtSorting']))
 		{
@@ -73,6 +71,16 @@ class Meal extends CI_Controller {
 		}
 		$meals = $this->Meal_model->get_meals($index, $pageSize, $sort);
 		$data['json'] = array("Result" => "OK", "Records" => $meals ); 
+		$this->load->view('json_encode', $data);
+	}
+	
+	public function delete()
+	{
+		$this->load->model('Meal_model');
+		$this->Meal_model->delete(intval($_POST['MealId']));
+	
+		$data = array();
+		$data['json'] = array("Result" => "OK");
 		$this->load->view('json_encode', $data);
 	}
 }

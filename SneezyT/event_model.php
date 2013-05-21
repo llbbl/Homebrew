@@ -62,10 +62,18 @@ class Event_model extends CI_Model {
 	 */
 	function get_events($index, $pageSize, $sort)
 	{
-		$sql = "select EventId, EventDate, EventName, EventNote from Event as e join EventType et on e.EventTypeId = et.EventTypeId order by " . $sort . " LIMIT " . $index . ', ' . $pageSize;
+		$sql = "select EventId, EventDate, EventName, EventNote from Event as e join EventType et on e.EventTypeId = et.EventTypeId WHERE e.IsDeleted = 0 order by " . $sort . " LIMIT " . $index . ', ' . $pageSize;
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
 
+	/**
+	 * Soft delete a meal from the list
+	 */
+	function delete($id)
+	{
+		$sql = "update Event set IsDeleted = 1 WHERE EventId = " . intval($id);
+		$query = $this->db->query($sql);
+	}
 }
 ?>

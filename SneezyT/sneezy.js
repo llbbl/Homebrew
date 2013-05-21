@@ -188,7 +188,7 @@ var sneezySingleton = new function sneezySingleton()
             //MealId as meal_id, MealDate as meal_date, FoodName as food_name
             actions: {
                 listAction: 'http://192.168.1.10/sneezy/index.php/meal/meal_list/',
-                deleteAction: '',
+                deleteAction: 'http://192.168.1.10/sneezy/index.php/meal/delete/',
                 updateAction: '',
                 createAction: ''
             },
@@ -233,7 +233,7 @@ var sneezySingleton = new function sneezySingleton()
             //MealId as meal_id, MealDate as meal_date, FoodName as food_name
             actions: {
                 listAction: 'http://192.168.1.10/sneezy/index.php/event/event_list/',
-                deleteAction: '',
+                deleteAction: 'http://192.168.1.10/sneezy/index.php/event/delete/',
                 updateAction: '',
                 createAction: ''
             },

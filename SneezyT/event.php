@@ -54,7 +54,6 @@ class Event extends CI_Controller {
 		
 		$index = intval($_GET['jtStartIndex']);
 		$pageSize = intval($_GET['jtPageSize']);
-		log_message("error", print_r($_GET, true));
 		
 		$sort = ' EventDate DESC ';
 		if (isset($_GET['jtSorting']))
@@ -64,6 +63,16 @@ class Event extends CI_Controller {
 		
 		$events = $this->Event_model->get_events($index, $pageSize, $sort);
 		$data['json'] = array("Result" => "OK", "Records" => $events );
+		$this->load->view('json_encode', $data);
+	}
+	
+	public function delete()
+	{
+		$this->load->model('Event_model');
+		$this->Event_model->delete(intval($_POST['EventId']));
+	
+		$data = array();
+		$data['json'] = array("Result" => "OK");
 		$this->load->view('json_encode', $data);
 	}
 }
