@@ -101,7 +101,7 @@ SQL;
 	{
 		
 		
-		$sql = "select MealId, MealDate, FoodName from Meal as m join FoodType ft on m.FoodTypeId = ft.FoodTypeId order by " . $sort . " LIMIT " . $index . ', ' . $pageSize;
+		$sql = "select MealId, MealDate, FoodName, MealNote from Meal as m join FoodType ft on m.FoodTypeId = ft.FoodTypeId order by " . $sort . " LIMIT " . $index . ', ' . $pageSize;
 		log_message('error', $sql);
 		
 		

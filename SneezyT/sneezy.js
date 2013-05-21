@@ -183,7 +183,7 @@ var sneezySingleton = new function sneezySingleton()
             paging: true, //Enable paging
             pageSize: 10, //Set page size (default: 10)
             sorting: true, //Enable sorting
-            defaultSorting: 'MealDate ASC', //Set default sorting
+            defaultSorting: 'MealDate DESC', //Set default sorting
             gotoPageArea: 'none',
             //MealId as meal_id, MealDate as meal_date, FoodName as food_name
             actions: {
@@ -200,12 +200,16 @@ var sneezySingleton = new function sneezySingleton()
                 },
                 MealDate: {
                     title: 'Date',
-                    width: '23%',
                     create: false,
                     edit: false
                 },
                 FoodName: {
                     title: 'Food',
+                    create: false,
+                    edit: false
+                },
+                MealNote: {
+                    title: 'Note',
                     create: false,
                     edit: false
                 }
@@ -224,7 +228,7 @@ var sneezySingleton = new function sneezySingleton()
             paging: true, //Enable paginghttp://192.168.1.10/sneezy/index.php/meal/
             pageSize: 10, //Set page size (default: 10)
             sorting: true, //Enable sorting
-            defaultSorting: 'EventDate ASC', //Set default sorting
+            defaultSorting: 'EventDate DESC', //Set default sorting
             gotoPageArea: 'none',
             //MealId as meal_id, MealDate as meal_date, FoodName as food_name
             actions: {
@@ -247,6 +251,11 @@ var sneezySingleton = new function sneezySingleton()
                 },
                 EventName: {
                     title: 'Event',
+                    create: false,
+                    edit: false
+                },
+                EventNote: {
+                    title: 'Note',
                     create: false,
                     edit: false
                 }

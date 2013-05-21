@@ -22,8 +22,6 @@ class Event_model extends CI_Model {
 	{
 		$typeId = $this->get_event_type_id($event);
 		
-		log_message('error', $event_date->format("Y-m-d H:i:s"));
-		
 		$data = array(
 				'EventTypeId' => $typeId ,
 				'EventDate' => $event_date->format("Y-m-d H:i:s"),
@@ -64,7 +62,7 @@ class Event_model extends CI_Model {
 	 */
 	function get_events($index, $pageSize, $sort)
 	{
-		$sql = "select EventId, EventDate, EventName from Event as e join EventType et on e.EventTypeId = et.EventTypeId order by " . $sort . " LIMIT " . $index . ', ' . $pageSize;
+		$sql = "select EventId, EventDate, EventName, EventNote from Event as e join EventType et on e.EventTypeId = et.EventTypeId order by " . $sort . " LIMIT " . $index . ', ' . $pageSize;
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
