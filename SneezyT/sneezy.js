@@ -189,7 +189,7 @@ var sneezySingleton = new function sneezySingleton()
             actions: {
                 listAction: 'http://192.168.1.10/sneezy/index.php/meal/meal_list/',
                 deleteAction: 'http://192.168.1.10/sneezy/index.php/meal/delete/',
-                updateAction: '',
+                updateAction: 'http://192.168.1.10/sneezy/index.php/meal/update/',
                 createAction: ''
             },
             fields: {
@@ -211,7 +211,7 @@ var sneezySingleton = new function sneezySingleton()
                 MealNote: {
                     title: 'Note',
                     create: false,
-                    edit: false
+                    edit: true
                 }
             }
         });
@@ -234,7 +234,7 @@ var sneezySingleton = new function sneezySingleton()
             actions: {
                 listAction: 'http://192.168.1.10/sneezy/index.php/event/event_list/',
                 deleteAction: 'http://192.168.1.10/sneezy/index.php/event/delete/',
-                updateAction: '',
+                updateAction: 'http://192.168.1.10/sneezy/index.php/event/update/',
                 createAction: ''
             },
             fields: {
@@ -257,7 +257,7 @@ var sneezySingleton = new function sneezySingleton()
                 EventNote: {
                     title: 'Note',
                     create: false,
-                    edit: false
+                    edit: true
                 }
             }
         });

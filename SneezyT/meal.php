@@ -83,5 +83,17 @@ class Meal extends CI_Controller {
 		$data['json'] = array("Result" => "OK");
 		$this->load->view('json_encode', $data);
 	}
+
+	public function update()
+	{
+		$this->load->helper('url');
+		
+		$this->load->model('Meal_model');
+		$this->Meal_model->update(intval($_POST['MealId']), $_POST['MealNote']);
+		
+		$data = array();
+		$data['json'] = array("Result" => "OK");
+		$this->load->view('json_encode', $data);
+	}
 }
 ?>

@@ -75,5 +75,17 @@ class Event extends CI_Controller {
 		$data['json'] = array("Result" => "OK");
 		$this->load->view('json_encode', $data);
 	}
+	
+	public function update()
+	{
+		$this->load->helper('url');
+		
+		$this->load->model('Event_model');
+		$this->Event_model->update(intval($_POST['EventId']), $_POST['EventNote']);
+		
+		$data = array();
+		$data['json'] = array("Result" => "OK");
+		$this->load->view('json_encode', $data);
+	}
 }
 ?>	

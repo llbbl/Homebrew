@@ -9,8 +9,6 @@ class Event_model extends CI_Model {
 
 	function get_types($term)
 	{
-		log_message('error', $term);
-		
 		$this->db->select('EventTypeId as id, EventName as value');
 		$this->db->order_by('EventName', 'asc');
 		$this->db->like('EventName', $term);
@@ -72,8 +70,25 @@ class Event_model extends CI_Model {
 	 */
 	function delete($id)
 	{
-		$sql = "update Event set IsDeleted = 1 WHERE EventId = " . intval($id);
-		$query = $this->db->query($sql);
+		$data = array(
+           		'IsDeleted' => 1
+	        );
+
+        	$this->db->where('EventId', intval($id));
+	        $this->db->update('Event', $data); 
+	}
+
+	/**
+	 * Update just the note
+	 */
+	function update($id, $note)
+	{
+		$data = array(
+           		'EventNote' => $note
+	        );
+
+        	$this->db->where('EventId', intval($id));
+	        $this->db->update('Event', $data); 
 	}
 }
 ?>

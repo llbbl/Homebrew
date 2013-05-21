@@ -9,8 +9,6 @@ class Meal_model extends CI_Model {
 
 	function get_types($term)
 	{
-		log_message('error', $term);
-		
 		$this->db->select('FoodTypeId as id, FoodName as value');
 		$this->db->order_by('FoodName', 'asc');
 		$this->db->like('FoodName', $term);
@@ -21,8 +19,6 @@ class Meal_model extends CI_Model {
 	function insert_meal($food, $meal_date, $meal_note)
 	{
 		$type_id = $this->get_food_type_id($food);
-		
-		log_message('error', $meal_date->format("Y-m-d H:i:s"));
 		
 		$data = array(
 				'FoodTypeId' => $type_id ,
@@ -99,11 +95,7 @@ SQL;
 	 */
 	function get_meals($index, $pageSize, $sort)
 	{
-		
-		
 		$sql = "select MealId, MealDate, FoodName, MealNote from Meal as m join FoodType ft on m.FoodTypeId = ft.FoodTypeId WHERE m.IsDeleted = 0 order by " . $sort . " LIMIT " . $index . ', ' . $pageSize;
-		log_message('error', $sql);
-		
 		
 		$query = $this->db->query($sql);
 		return $query->result_array();
@@ -114,8 +106,25 @@ SQL;
 	 */
 	function delete($id)
 	{
-		$sql = "update Meal set IsDeleted = 1 WHERE MealId = " . intval($id);
-		$query = $this->db->query($sql);
+		$data = array(
+           		'IsDeleted' => 1
+	        );
+
+        	$this->db->where('MealId', intval($id));
+	        $this->db->update('Meal', $data); 
+	}
+
+	/**
+	 * Update the note
+	 */
+	function update($id, $note)
+	{
+		$data = array(
+           		'MealNote' => $note
+	        );
+
+        	$this->db->where('MealId', intval($id));
+	        $this->db->update('Meal', $data); 
 	}
 }
 ?>
