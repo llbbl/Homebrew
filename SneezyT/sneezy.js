@@ -173,6 +173,17 @@ var sneezySingleton = new function sneezySingleton()
 		   $('.content-pane #container-event-list').removeClass('hide');
 		   $('.navbar-inner .btn').click();
 	   });
+	   
+	   $('#nav-timeline').click(function (e) {
+		   $('.nav li').removeClass('active');
+		   $(this).closest('li').addClass('active');
+		   
+		   $('.content-pane .content-pane-container').addClass('hide');
+		   $('.content-pane #container-timeline').removeClass('hide');
+		   $('.content-pane #container-timeline').load('http://192.168.1.10/sneezy/index.php/result/timeline',{},function(str){});
+		   $('.navbar-inner .btn').click();
+	   });
+	   
    }
    this.initializeNavClick = initializeNavClick;
    

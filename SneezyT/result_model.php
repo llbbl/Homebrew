@@ -8,9 +8,27 @@ class Result_model extends CI_Model {
 		parent::__construct();
 	}
 
+	public function timeline_data() 
+	{
+		$sql = <<<SQL
+select EventId as Id, EventDate as Date, EventName as Name, EventNote as Note, 'Event' as Type 
+from Event as e 
+join EventType et on e.EventTypeId = et.EventTypeId 
+WHERE e.IsDeleted = 0
+UNION
+select MealId as Id, MealDate as Date, FoodName as Name, MealNote as Note, 'Meal' AS Type
+from Meal as m 
+join FoodType ft on m.FoodTypeId = ft.FoodTypeId 
+WHERE m.IsDeleted = 0
+SQL;
+		
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+	
 	function hours_from_event($final, $interval, $event_id)
 	{
-
+/*
 		$ticks = round($final/$interval);
 		$column_names = array();
 		$at_tick = $final;
@@ -33,14 +51,13 @@ SELECT ft.FoodName, MAX( 0 ) AS NumOfMeals, COUNT( 1 ) AS NumOf24Vomits
 		BETWEEN -24
 		AND 0
 		JOIN FoodType ft ON ft.FoodTypeId = m.FoodTypeId
-		WHERE e.EventTypeId =1/* Vomit */
+		WHERE e.EventTypeId =1
 		GROUP BY ft.FoodName
 					
 UNION;
 
 			
 			$ticks++;
-		}
 		
 		
 		
@@ -50,7 +67,7 @@ UNION;
 		BETWEEN -24
 		AND 0
 		JOIN FoodType ft ON ft.FoodTypeId = m.FoodTypeId
-		WHERE e.EventTypeId =1/* Vomit */
+		WHERE e.EventTypeId =1-- Vomit
 		GROUP BY ft.FoodName
 		
 		/*
@@ -75,7 +92,7 @@ UNION;
 				BETWEEN -24
 				AND 0
 				JOIN FoodType ft ON ft.FoodTypeId = m.FoodTypeId
-				WHERE e.EventTypeId =1/* Vomit */
+				WHERE e.EventTypeId =1-- Vomit 
 				GROUP BY ft.FoodName
 		
 				UNION ALL
@@ -86,7 +103,7 @@ UNION;
 				BETWEEN -6
 				AND 0
 				JOIN FoodType ft ON ft.FoodTypeId = m.FoodTypeId
-				WHERE e.EventTypeId =1/* Vomit */
+				WHERE e.EventTypeId =1-- Vomit 
 				GROUP BY ft.FoodName
 		
 				UNION ALL
@@ -97,7 +114,7 @@ UNION;
 				BETWEEN -2
 				AND 0
 				JOIN FoodType ft ON ft.FoodTypeId = m.FoodTypeId
-				WHERE e.EventTypeId =1/* Vomit */
+				WHERE e.EventTypeId =1-- Vomit 
 				GROUP BY ft.FoodName
 		
 		) AS FoodCounts

@@ -25,6 +25,10 @@
 	<!-- handrolled css and js -->
 	<script src="<?php echo base_url();?>js/sneezy.js"></script>
 	<link rel=stylesheet href="<?php echo base_url();?>css/sneezy.css" type="text/css" />
+	
+	<!-- Load the Timeline library after reseting the fonts, etc -->
+	<script src="http://static.simile.mit.edu/timeline/api/timeline-api.js" type="text/javascript"></script>
+	
 </head>
 <body >
 <div class="navbar navbar-inverse">
@@ -47,6 +51,15 @@
 				      <li><a href="#" id="nav-add-event">Add Event</a></li>
 				      <li><a href="#" id="nav-meal-list">Meal List</a></li>
 				      <li><a href="#" id="nav-event-list">Event List</a></li>
+				      <li class="dropdown">
+					    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					      Visual
+					      <b class="caret"></b>
+					    </a>
+     				 	<ul class="dropdown-menu">
+     				  		<li><a href="#" id="nav-timeline">Timeline</a></li>
+     				  	</ul>
+     				  </li>
 				</ul>
 			</div>
 		</div>
@@ -65,6 +78,7 @@
 	<div id="container-event-list"  class="content-pane-container hide">
 	<?php echo $event_list;?>
 	</div>
+	<div id="container-timeline"  class="content-pane-container hide"></div>
 </div>
 <script>
   	sneezySingleton.getInstance().initializeNav();
