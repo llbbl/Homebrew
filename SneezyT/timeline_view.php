@@ -1,15 +1,3 @@
-<html>
-<head>
-   <!-- See http://developer.yahoo.com/yui/grids/ for info on the grid layout -->
-   <title>Local Timeline Example</title>
-   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-
-
-   <!-- Load the Timeline library after reseting the fonts, etc -->
-   <script src="http://static.simile.mit.edu/timeline/api/timeline-api.js" type="text/javascript"></script>
- 
-</head>
-<body>   
 <div id="doc3" class="yui-t7">
    <div id="bd" role="main">
 	   <div class="yui-g">
@@ -18,10 +6,9 @@
 	 </div>
 </div>
 
-
-
 <script>        
-        var tl;
+		// clean this up, not in a singleton or global variable
+		var tl;
         function loadTimeline() {
             var tl_el = document.getElementById("tl");
             var eventSource1 = new Timeline.DefaultEventSource();
@@ -54,8 +41,9 @@
                            // references in the data
 			tl.loadJSON('<?php echo base_url() . "index.php/result/get_timeline_data/"; ?>', function(json, url) {
        			eventSource1.loadJSON(json, url);
+       			tl.layout(); // draw the timeline after we get all the data
    			});                                                       
-            tl.layout(); // display the Timeline
+            //tl.layout(); // display the Timeline
         }
         
         var resizeTimerID = null;
@@ -72,5 +60,3 @@
             loadTimeline();
         }, 2000);
 </script>
-
-</body>

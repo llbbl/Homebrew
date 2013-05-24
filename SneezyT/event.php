@@ -88,4 +88,4 @@ class Event extends CI_Controller {
 		$this->load->view('json_encode', $data);
 	}
 }
-?>	
+?>
