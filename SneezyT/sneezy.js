@@ -64,7 +64,7 @@ var sneezySingleton = new function sneezySingleton()
     	 var p = {};
 	     p['food'] = $('#food_types').val();
 	     
-	     if (jQuery('#meal_date_container').is(':visible')) {
+	     if ($('#meal_date_container').is(':visible')) {
 	    	 p['meal_date'] = $('#meal_date').val(); 
 	     }
 	     else {
@@ -116,7 +116,7 @@ var sneezySingleton = new function sneezySingleton()
    	 	 var p = {};
 	     p['event'] = $('#event_types').val();
 	     p['event_date'] = $('#event_date').val();
-	     if (jQuery('#meal_date_container').is(':visible')) {
+	     if ($('#meal_date_container').is(':visible')) {
 	    	 p['event_date'] = $('#event_date').val(); 
 	     }
 	     else {
