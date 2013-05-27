@@ -2,7 +2,7 @@
 	<h1>Add <?php echo $header; ?></h1>
 	<form action="post">
 		<div class="ui-widget">
-  				<label for="<?php echo $name; ?>-types">Event Type: </label>
+  				<label for="<?php echo $name; ?>-types"><?php echo ucfirst($name); ?> Type: </label>
   				<input id="<?php echo $name; ?>-types" />
 		</div>
 		
@@ -28,5 +28,5 @@
 	<div id="<?php echo $name; ?>-response" class="alert_response"></div>
 </div>
 <script>
-  	sneezySingleton.getInstance().initializeAdd('<?php echo ucfirst($name); ?>');
+  	sneezySingleton.getInstance().initializeAdd('<?php echo $name; ?>');
 </script>

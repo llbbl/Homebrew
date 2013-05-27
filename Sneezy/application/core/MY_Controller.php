@@ -82,7 +82,7 @@ class MY_Controller extends CI_Controller {
 		$model = ucfirst($this->name) . '_model';
 		$this->load->model($model);
 		
-		$data['types'] = $this->$model->get_types($term);
+		$data['json'] = $this->$model->get_types($term);
 		
 		$this->load->view('json_encode', $data);
 	}

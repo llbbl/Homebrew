@@ -19,14 +19,17 @@ var sneezySingleton = new function sneezySingleton()
     function initializeAdd(type){
     	// date picker
     	if (window.screen.availWidth > 960) {
-    		var jqDate = $('#' + type +'_date').datetimepicker({
+    		var jqDate = $('#' + type +'-date').datetimepicker({
 				timeFormat: "hh:mm tt"
 			}); 
+    		
     		jqDate.datetimepicker('setDate', (new Date()));
     	}
     	
 		// bind on click event to bootstrap button
-		$('#add-' + type + '-submit button').click(this.submitAdd(type));
+		var jqResult = $('#add-' + type + '-submit button').click( function() {
+					sneezySingleton.getInstance().submitAdd(type);
+				});
 		
 		// bind autocomplete
 		$( "#" + type + "-types" ).autocomplete({
@@ -53,15 +56,14 @@ var sneezySingleton = new function sneezySingleton()
 	     }
 	     p[type + '-note'] = $('#' + type + '-note').val();
 	     
-	     // goofy ajax request from CI
-	     $('#' + type + '-response').load(base_url + 'index.php/event/insert',p,function(str){
+	     $('#' + type + '-response').load(base_url + 'index.php/' + type + '/insert',p,function(str){
 	    	 setTimeout(function() {
 	    		 $('#' + type + '-response').empty();
 	    	 	} ,1500);
 	     });
 	     
 	     $( '#' + type + '-note').val('');
-	     $( '#' + type + 'types').val('').focus();
+	     $( '#' + type + '-types').val('').focus();
    };
    this.submitAdd = submitAdd;
 
@@ -73,6 +75,7 @@ var sneezySingleton = new function sneezySingleton()
 		   
 		   $('.content-pane .content-pane-container').addClass('hide');
 		   $('.content-pane #container-add-meal').removeClass('hide');
+		   $('.content-pane #container-add-meal').load(base_url + 'index.php/food/add',{},function(str){});
 		   $('.navbar-inner .btn').click();
 	   });
 	   

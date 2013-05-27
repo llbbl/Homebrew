@@ -9,8 +9,8 @@ class Welcome extends CI_Controller {
 	{
 		$data = array();
 		
-		$data['add_meal']  	= '';//$this->load->view('add_meal', array(), true);
-		$data['add_event'] 	= $this->load->view('add_view', array('header'=>'Event', 'header'=>'Event', 'name'=>'event'), true);
+		$data['add_meal']  	= $this->load->view('add_view', array('header'=>'Food', 'name'=>'food'), true);
+		$data['add_event'] 	= $this->load->view('add_view', array('header'=>'Event', 'name'=>'event'), true);
 		$data['meal_list'] 	= '';//$this->load->view('meal_view', array(), true);
 		$data['event_list'] = '';//$this->load->view('event_view', array(), true);
 		
