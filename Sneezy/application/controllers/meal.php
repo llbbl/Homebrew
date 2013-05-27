@@ -1,7 +1,7 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Meal extends CI_Controller {
+class Meal extends MY_Controller {
 	
 	public function index()
 	{

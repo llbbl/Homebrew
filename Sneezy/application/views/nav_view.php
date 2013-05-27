@@ -4,6 +4,11 @@
 <title>Sneezy T Food Tracker</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
+	<script>
+	// globals
+	var base_url = '<?php echo base_url();?>';
+	</script>
+	
 	<!-- jQuery -->
 	<script src="<?php echo base_url();?>js/jquery-ui/js/jquery-1.9.1.js"></script>
 	<script src="<?php echo base_url();?>js/jquery-ui/js/jquery-ui-1.10.2.custom.min.js"></script>
@@ -23,7 +28,7 @@
 	<link rel=stylesheet href="<?php echo base_url();?>js/bootstrap/css/bootstrap-responsive.min.css"  type="text/css">
 	
 	<!-- handrolled css and js -->
-	<script src="<?php echo base_url();?>js/sneezy.js"></script>
+	<script src="<?php echo base_url();?>js/sneezyt.js"></script>
 	<link rel=stylesheet href="<?php echo base_url();?>css/sneezy.css" type="text/css" />
 	
 	<!-- Load the Timeline library after reseting the fonts, etc -->
@@ -81,7 +86,7 @@
 	<div id="container-timeline"  class="content-pane-container hide"></div>
 </div>
 <script>
-  	sneezySingleton.getInstance().initializeNav();
+  	sneezySingleton.getInstance().initializeNavClick();
 </script>
 </body>
 </html>

@@ -7,15 +7,13 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->helper('url');
 		$data = array();
 		
-		$data['add_meal']  	= $this->load->view('add_meal', array(), true);
-		$data['add_event'] 	= $this->load->view('add_event', array(), true);
-		$data['meal_list'] 	= $this->load->view('meal_view', array(), true);
-		$data['event_list'] = $this->load->view('event_view', array(), true);
+		$data['add_meal']  	= '';//$this->load->view('add_meal', array(), true);
+		$data['add_event'] 	= $this->load->view('add_view', array('header'=>'Event', 'header'=>'Event', 'name'=>'event'), true);
+		$data['meal_list'] 	= '';//$this->load->view('meal_view', array(), true);
+		$data['event_list'] = '';//$this->load->view('event_view', array(), true);
 		
 		$this->load->view('nav_view', $data);
 	}
 }
-
