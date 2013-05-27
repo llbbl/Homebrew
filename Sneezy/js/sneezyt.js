@@ -119,98 +119,33 @@ var sneezySingleton = new function sneezySingleton()
 	   
    }
    this.initializeNavClick = initializeNavClick;
-   
+ 	
     // go get the meal list via json
- 	function initializeInventoryMeal() {
- 		$('$meal-Grid').jtable({
-            title: 'Meal List',
-            paging: true, //Enable paging
-            pageSize: 10, //Set page size (default: 10)
-            sorting: true, //Enable sorting
-            defaultSorting: 'MealDate DESC', //Set default sorting
-            gotoPageArea: 'none',
-            //MealId as meal_id, MealDate as meal_date, FoodName as food_name
-            actions: {
-                listAction: 'http://192.168.1.10/sneezy/index.php/meal/meal_list/',
-                deleteAction: 'http://192.168.1.10/sneezy/index.php/meal/delete/',
-                updateAction: 'http://192.168.1.10/sneezy/index.php/meal/update/',
-                createAction: ''
-            },
-            fields: {
-            	MealId: {
-                    key: true,
-                    create: false,
-                    edit: false
-                },
-                MealDate: {
-                    title: 'Date',
-                    create: false,
-                    edit: false
-                },
-                FoodName: {
-                    title: 'Food',
-                    create: false,
-                    edit: false
-                },
-                MealNote: {
-                    title: 'Note',
-                    create: false,
-                    edit: true
-                }
-            }
-        });
- 
-        //Load student list from server
-        $('#meal-grid').jtable('load');
-    }
- 	this.initializeInventoryMeal = initializeInventoryMeal;
-
-    // go get the meal list via json
- 	function initializeInventoryEvent() {
-  		$('#eventGrid').jtable({
-            title: 'Event List',
+ 	function initializeInventory(type, columns) {
+  		$('#' + type + '-grid').jtable({
+            title: type + ' Inventory',
             paging: true, //Enable paginghttp://192.168.1.10/sneezy/index.php/meal/
             pageSize: 10, //Set page size (default: 10)
             sorting: true, //Enable sorting
-            defaultSorting: 'EventDate DESC', //Set default sorting
+            defaultSorting: type + 'Date DESC', //Set default sorting
             gotoPageArea: 'none',
+            
             //MealId as meal_id, MealDate as meal_date, FoodName as food_name
             actions: {
-                listAction: 'http://192.168.1.10/sneezy/index.php/event/event_list/',
-                deleteAction: 'http://192.168.1.10/sneezy/index.php/event/delete/',
-                updateAction: 'http://192.168.1.10/sneezy/index.php/event/update/',
+                listAction: 	base_url + 'index.php/' + type + '/retrieve_inventory/',
+                deleteAction: 	base_url + 'index.php/' + type + '/delete/',
+                updateAction: 	base_url + 'index.php/' + type + '/update/',
                 createAction: ''
             },
-            fields: {
-            	EventId: {
-                    key: true,
-                    create: false,
-                    edit: false
-                },
-                EventDate: {
-                    title: 'Date',
-                    width: '23%',
-                    create: false,
-                    edit: false
-                },
-                EventName: {
-                    title: 'Event',
-                    create: false,
-                    edit: false
-                },
-                EventNote: {
-                    title: 'Note',
-                    create: false,
-                    edit: true
-                }
-            }
+            
+            fields: columns
+
         });
  
-        //Load student list from server
-        $('#eventGrid').jtable('load');
+  		$('#' + type + '-grid').jtable('load');
     }
- 	this.initializeInventoryEvent = initializeInventoryEvent;
- 	
+ 	this.initializeInventory = initializeInventory;
+ 
  	 	
     return sneezySingleton;
 };

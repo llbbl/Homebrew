@@ -87,12 +87,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->view('json_encode', $data);
 	}
 	
-	public function inventory()
-	{
-		$data = array();
-		$data['name'] = $this->name;
-		$this->load->view('inventory_view', $data);
-	}
+	
 	
 	public function retrieve_inventory()
 	{
@@ -108,7 +103,7 @@ class MY_Controller extends CI_Controller {
 			$sort = html_entity_decode($_GET['jtSorting']);
 		}
 		
-		$result = $this->$model->inventory($index, $page_size, $sort);
+		$result = $this->$model->inventory($index, $page_size, trim($sort));
 		$data['json'] = array("Result" => "OK", "Records" => $result );
 		$this->load->view('json_encode', $data);
 	}

@@ -89,13 +89,13 @@ class Sneezy_model extends CI_Model {
 	{
 		$sort = explode(' ', $sort_str);
 		
-		$this->db->select( $this->table  . 'Id, ' . $this->table . 'Date, ' . $this->table . 'Name, ' . $this->table . 'Note');
-		$this->db->from($this->table . ' i');
-		$this->db->join($this->table . 'Type t', 'i.'.$this->table.'TypeId = t.'. $this->table .'TypeId');
-		$this->db->where('i.IsDeleted', 0);
-		$this->db->order_by(trim($sort[0]), trim($sort[1]));
-		
-		$query = $this->db->get($this->table, $index, $page_Size);
+		$this->db->select( $this->table  . 'Id, ' . $this->table . 'Date, ' . $this->table . 'Name, ' . $this->table . 'Note')
+					->from($this->table . ' i')
+					->join($this->table . 'Type t', 'i.'.$this->table.'TypeId = t.'. $this->table .'TypeId')
+					->where('i.IsDeleted', 0)
+					->order_by(trim($sort[0]), trim($sort[1]))
+					->limit($page_size, $index);
+		$query = $this->db->get();
 		return $query->result_array();
 	}
 	

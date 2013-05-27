@@ -75,13 +75,12 @@
 	<?php echo $add_meal;?>
 	</div>
 	<div id="container-add-event"  class="content-pane-container hide ">
-	<?php echo $add_event;?>
 	</div>
 	<div id="container-meal-list"  class="content-pane-container hide">
-	<?php echo $meal_list;?>
+	<?php echo $food_inventory;?>
 	</div>
 	<div id="container-event-list"  class="content-pane-container hide">
-	<?php echo $event_list;?>
+	<?php echo $event_inventory;?>
 	</div>
 	<div id="container-timeline"  class="content-pane-container hide"></div>
 </div>
