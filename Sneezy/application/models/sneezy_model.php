@@ -113,12 +113,13 @@ class Sneezy_model extends CI_Model {
 	}
 
 	/**
-	 * Update just the note
+	 * Update just the note and date
 	 */
-	public function update($id, $note)
+	public function update($id, $note, $date)
 	{
 		$data = array(
-           		$this->table . 'Note' => $note
+           		$this->table . 'Note' => $note,
+				$this->table  . 'Date' => $date->format("Y-m-d H:i:s"),
 	        );
 
         $this->db->where($this->table . 'Id', intval($id));

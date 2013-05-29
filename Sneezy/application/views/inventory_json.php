@@ -16,7 +16,7 @@ $date = new stdClass();
 $date->title	= 'Date';
 $date->width	= '23%';
 $date->create = false;
-$date->edit 	= false;
+$date->edit 	= true;
 
 $date_name = $type . 'Date';
 $toJSON->$date_name = $date;

@@ -127,7 +127,8 @@ class MY_Controller extends CI_Controller {
 		$model = ucfirst($this->name) . '_model';
 		$this->load->model($model);
 		
-		$this->$model->update(intval($_POST[ ucfirst($this->name) . 'Id']), $_POST[ucfirst($this->name) .'Note']);
+		$date = new DateTime($_POST[ucfirst($this->name) .'Date']);
+		$this->$model->update(intval($_POST[ ucfirst($this->name) . 'Id']), $_POST[ucfirst($this->name) .'Note'], $date);
 		
 		$data = array();
 		$data['json'] = array("Result" => "OK");
