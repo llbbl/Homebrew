@@ -12,10 +12,24 @@ var sneezySingleton = new function sneezySingleton()
 		return "[object Singleton]";
 	};
 
-    /*
-     * Add Functions  
-     */
 
+	/**
+	 * Not the cleanest JS ever but seems to do the job
+	 * @param type
+	 */
+	function initializeCategoryButton(type) {
+		// for every button in the group
+		$('#container-' + type + ' .category-button').click({type: type}, function (e) {
+			// hide all panes
+			$('#container-' + e.data.type + ' .content-pane-container').addClass('hide');
+			
+			// how the one that contains the role of this button
+			var key = $(this).data('role');
+			$('#container-' + e.data.type + ' .container-pane-' + key).removeClass('hide');
+		});
+	}
+	this.initializeCategoryButton = initializeCategoryButton;
+	
     function initializeAdd(type){
     	// date picker
     	if (window.screen.availWidth > 960) {
@@ -52,7 +66,7 @@ var sneezySingleton = new function sneezySingleton()
 	    	 p[type + '-date'] = $('#' + type + '-date').val(); 
 	     }
 	     else {
-	    	 p[type + '-date'] = $('#' + type + '-wheel').val();
+	    	 p[type + '-date'] = $('#' + type + '-date-wheel').val();
 	     }
 	     p[type + '-note'] = $('#' + type + '-note').val();
 	     
@@ -69,49 +83,32 @@ var sneezySingleton = new function sneezySingleton()
 
    
    function initializeNavClick() {
-	   $('#nav-add-meal').click(function (e) {
-		   $('.nav li').removeClass('active');
-		   $(this).closest('li').addClass('active');
-		   
-		   $('.content-pane .content-pane-container').addClass('hide');
-		   $('.content-pane #container-add-meal').removeClass('hide');
-		   $('.content-pane #container-add-meal').load(base_url + 'index.php/food/add',{},function(str){});
-		   $('.navbar-inner .btn').click();
-	   });
 	   
-	   $('#nav-add-event').click(function (e) {
-		   $('.nav li').removeClass('active');
-		   $(this).closest('li').addClass('active');
-		   
-		   $('.content-pane .content-pane-container').addClass('hide');
-		   $('.content-pane #container-add-event').removeClass('hide');
-		   $('.content-pane #container-add-event').load(base_url + 'index.php/event/add',{},function(str){});
-		   $('.navbar-inner .btn').click();
-	   });
+	   var arr = ['food', 'reaction','environment','medicine'];
 	   
-	   $('#nav-meal-list').click(function (e) {
-		   $('.nav li').removeClass('active');
-		   $(this).closest('li').addClass('active');
-		   
-		   $('.content-pane .content-pane-container').addClass('hide');
-		   $('.content-pane #container-meal-list').removeClass('hide');
-		   $('.navbar-inner .btn').click();
-	   });
+	   var length = arr.length;
+	   var type = null;
 	   
-	   $('#nav-event-list').click(function (e) {
-		   $('.nav li').removeClass('active');
-		   $(this).closest('li').addClass('active');
+	   for (var i = 0; i < length; i++) {
+		   type = arr[i];
 		   
-		   $('.content-pane .content-pane-container').addClass('hide');
-		   $('.content-pane #container-event-list').removeClass('hide');
-		   $('.navbar-inner .btn').click();
-	   });
+		   $('#nav-' + type).click({type: type}, function (e) {
+			   $('.nav li').removeClass('active');
+			   $(this).closest('li').addClass('active');
+			   
+			   $('.content-pane .content-category-container').addClass('hide');
+			   $('.content-pane #container-' +  e.data.type).removeClass('hide');
+			   $('.content-pane #container-' +  e.data.type).load(base_url + 'index.php/' +  e.data.type + '/category',{},function(str){});
+			   $('.navbar-inner .btn').click();
+		   });
+		   
+	   }
 	   
 	   $('#nav-timeline').click(function (e) {
 		   $('.nav li').removeClass('active');
 		   $(this).closest('li').addClass('active');
 		   
-		   $('.content-pane .content-pane-container').addClass('hide');
+		   $('.content-pane .content-category-container').addClass('hide');
 		   $('.content-pane #container-timeline').removeClass('hide');
 		   $('.content-pane #container-timeline').load(base_url + 'index.php/result/timeline',{},function(str){});
 		   $('.navbar-inner .btn').click();

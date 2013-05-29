@@ -33,7 +33,7 @@
 	
 	<!-- Load the Timeline library after reseting the fonts, etc -->
 	<script src="http://static.simile.mit.edu/timeline/api/timeline-api.js" type="text/javascript"></script>
-	
+
 </head>
 <body >
 <div class="navbar navbar-inverse">
@@ -52,10 +52,10 @@
 			<!-- Everything you want hidden at 940px or less, place within here -->
 			<div class="nav-collapse">
 				<ul class="nav">
-				      <li class="active"><a href="#" id="nav-add-meal">Add Meal</a></li>
-				      <li><a href="#" id="nav-add-event">Add Event</a></li>
-				      <li><a href="#" id="nav-meal-list">Meal List</a></li>
-				      <li><a href="#" id="nav-event-list">Event List</a></li>
+				      <li class="active"><a href="#" id="nav-food">Food</a></li>
+				      <li><a href="#" id="nav-reaction">Reaction</a></li>
+				      <li><a href="#" id="nav-environment">Environment</a></li>
+				      <li><a href="#" id="nav-medicine">Medicine</a></li>
 				      <li class="dropdown">
 					    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					      Visual
@@ -71,18 +71,13 @@
 	</div>
 </div>
 <div class="content-pane">
-	<div id="container-add-meal" class="content-pane-container" >
-	<?php echo $add_meal;?>
-	</div>
-	<div id="container-add-event"  class="content-pane-container hide ">
-	</div>
-	<div id="container-meal-list"  class="content-pane-container hide">
-	<?php echo $food_inventory;?>
-	</div>
-	<div id="container-event-list"  class="content-pane-container hide">
-	<?php echo $event_inventory;?>
-	</div>
-	<div id="container-timeline"  class="content-pane-container hide"></div>
+	<?php 
+		echo $food;
+		echo $reaction;
+		echo $environment;
+		echo $medicine;	
+	?>
+	<div id="container-timeline"  class="content-category-container hide"></div>
 </div>
 <script>
   	sneezySingleton.getInstance().initializeNavClick();

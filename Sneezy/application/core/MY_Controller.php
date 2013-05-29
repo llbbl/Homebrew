@@ -133,5 +133,24 @@ class MY_Controller extends CI_Controller {
 		$data['json'] = array("Result" => "OK");
 		$this->load->view('json_encode', $data);
 	}
+	
+	/**
+	 * Simplify the view of the type into one div
+	 */
+	public function category() 
+	{
+		$category_data = array();
+			
+		$category_data['name'] = $this->name;
+		$category_data['hide'] = false;
+		
+		$category_data['section'] = array();
+		$category_data['section']['add'] = $this->load->view('add_view', array('header'=>ucfirst($this->name), 'name'=>$this->name), true);
+		
+		$json = $this->load->view('inventory_json', array('type'=>ucfirst($this->name)), true);
+		$category_data['section']['inventory'] = $this->load->view('inventory_view', array('name'=>$this->name, 'json'=>$json), true);
+			
+		$this->load->view('category_view', $category_data);
+	}
 }
 ?>

@@ -59,6 +59,10 @@ h1 {
 	padding: 5px;
 }
 
+.button-pane {
+	margin-bottom: 3px;
+}
+
 #add-meal-submit {
 	margin-top: 5px;
 }
