@@ -26,6 +26,12 @@ var sneezySingleton = new function sneezySingleton()
 			// how the one that contains the role of this button
 			var key = $(this).data('role');
 			$('#container-' + e.data.type + ' .container-pane-' + key).removeClass('hide');
+			
+			// only per click should we load the jtable
+			if (key == 'inventory') {
+		  		$('#' + type + '-grid').jtable('load');
+			}
+				
 		});
 	}
 	this.initializeCategoryButton = initializeCategoryButton;
@@ -139,7 +145,6 @@ var sneezySingleton = new function sneezySingleton()
 
         });
  
-  		$('#' + type + '-grid').jtable('load');
     }
  	this.initializeInventory = initializeInventory;
  

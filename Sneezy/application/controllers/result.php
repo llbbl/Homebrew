@@ -62,9 +62,17 @@ class Result extends CI_Controller {
 			$temp['title'] = $line['Name'];
 			$temp['description'] = 'Id: ' . $line['Id'] . ' - ' . $line['Note'];
 
-			if ($line['Type'] == 'Event')
+			if ($line['Type'] == 'Reaction')
 			{
 				$temp['icon'] = base_url() . 'js/timeline_2.3.0/timeline_js/images/dark-red-circle.png';
+			}
+			else if ($line['Type'] == 'Environment')
+			{
+				$temp['icon'] = base_url() . 'js/timeline_2.3.0/timeline_js/images/medium-gray-circle.png';
+			}
+			else if ($line['Type'] == 'Medicine')
+			{
+				$temp['icon'] = base_url() . 'js/timeline_2.3.0/timeline_js/images/dark-green-circle.png';
 			}
 			
 			$data['events'][] = $temp; 

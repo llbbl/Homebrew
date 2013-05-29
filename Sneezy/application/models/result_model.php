@@ -10,19 +10,22 @@ class Result_model extends CI_Model {
 
 	public function timeline_data() 
 	{
-		$sql = <<<SQL
-select EventId as Id, EventDate as Date, EventName as Name, EventNote as Note, 'Event' as Type 
-from Event as e 
-join EventType et on e.EventTypeId = et.EventTypeId 
-WHERE e.IsDeleted = 0
-UNION
-select MealId as Id, MealDate as Date, FoodName as Name, MealNote as Note, 'Meal' AS Type
-from Meal as m 
-join FoodType ft on m.FoodTypeId = ft.FoodTypeId 
-WHERE m.IsDeleted = 0
-SQL;
+		$types = array('Reaction', 'Food', 'Medicine', 'Environment');
 		
-		$query = $this->db->query($sql);
+		$sql = array();
+		foreach ($types as $type)
+		{
+			$first = substr($type, 0, 1);
+			$subselect = <<<SQL
+select {$type}Id as Id, {$type}Date as Date, {$type}Name as Name, {$type}Note as Note, '{$type}' as Type
+from $type as $first
+join {$type}Type {$first}t on {$first}.{$type}TypeId = {$first}t.{$type}TypeId
+WHERE {$first}.IsDeleted = 0
+SQL;
+			$sql[] = $subselect;
+		}
+		
+		$query = $this->db->query(implode(' UNION ', $sql));
 		return $query->result_array();
 	}
 	
