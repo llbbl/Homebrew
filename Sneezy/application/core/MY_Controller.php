@@ -64,6 +64,11 @@ class MY_Controller extends CI_Controller {
 		$this->load->model($model);
 		
 		$data['result'] = $this->$model->insert($selection, $date, $note);
+		$data['alert'] = 'alert-success';
+		if (!$data['result'])
+		{
+			$data['alert'] = 'alert-error';
+		}
 		
 		$this->load->view('insert_view', $data);
 	}

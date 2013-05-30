@@ -42,6 +42,12 @@ class Sneezy_model extends CI_Model {
 	public function insert($selection, $date, $note)
 	{
 		$type_id = $this->get_type_id($selection);
+		if (!$type_id)
+		{
+			log_message('error', "Error generating new: $selection");
+			return false;
+		}
+		
 		
 		$data = array(
 				$this->table  . 'TypeId' => $type_id ,
@@ -57,6 +63,7 @@ class Sneezy_model extends CI_Model {
 	 * Looks up the name based user input.  If an entry is not found, it is added (probably not the best idea but cheap)
 	 * 
 	 * @param string $term
+	 * @return int|false
 	 */
 	public function get_type_id($term)
 	{
@@ -65,15 +72,19 @@ class Sneezy_model extends CI_Model {
 		$row = $query->first_row();
 		
 		$column_name = $this->table . 'TypeId';
-		
 		if (!isset($row->$column_name) || $row->$column_name == null)
 		{
 			$data = array(
-					$this->table . 'Name' => $term
+					$this->table . 'Name' => $term 
 			);
 			
-			$this->db->insert($this->table . 'Type', $data);
-			return $this->db->insert_id();
+			if($this->db->insert($this->table . 'Type', $data))
+			{
+				return $this->db->insert_id();
+			}
+			
+			log_message('error', "Here 2");
+			return false;
 		}	
 		
 		return $row->$column_name;
