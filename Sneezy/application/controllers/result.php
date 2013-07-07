@@ -5,29 +5,22 @@ class Result extends CI_Controller {
 
 	public function index()
 	{
-		$data = array();
-		$this->load->helper('url');
-		$this->load->view('hours_from_event');
+		$this->hours_from_reaction();
 	}
 
-	/**
-	 * @todo complete this
-	 */
-	public function hours_from_event()
+	public function hours_from_reaction()
 	{
-		$this->load->model('Meal_model');
 		// jtStartIndex=0&jtPageSize=10&jtSorting=meal_date%20ASC
-		$index = intval($_GET['jtStartIndex']);
-		$pageSize = intval($_GET['jtPageSize']);
+		//$index = intval($_GET['jtStartIndex']);
+		//$pageSize = intval($_GET['jtPageSize']);
+		
 		log_message("error", print_r($_GET, true));
-		$sort = ' MealDate DESC ';
-		if (isset($_GET['jtSorting']))
-		{
-			$sort = html_entity_decode($_GET['jtSorting']);
-		}
-		$meals = $this->Meal_model->get_meals($index, $pageSize, $sort);
-		$data['meals'] = array("Result" => "OK", "Records" => $meals );
-		$this->load->view('meal_list', $data);
+		$this->load->model('Result_model');
+		$data = array();
+		$data['hours'] = $this->Result_model->hours_from_event();
+		
+		$this->load->helper('url');
+		$this->load->view('hours_from_event', $data);
 	}
 	
 	public function timeline()
