@@ -16,8 +16,7 @@
 		</div>
 	</form>
 </div>
-<div id="hours-from-reaction-grid">
-</div>
+<div id="hours-from-reaction-grid"></div>
 <script>
   	sneezySingleton.getInstance().initializeHourReactionButton();
 </script>

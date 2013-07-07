@@ -165,7 +165,7 @@ var sneezySingleton = new function sneezySingleton()
 					FoodName:{key:true,title:"Food",create:false,edit:false},
 					NumOfFood:{key:false,title:"Times Eaten",create:false,edit:false}
 			};
-			alert(scale);
+			
 			// @todo correct this duplication of logic in both js and php  
 			for (var i=1;i<=gaps;i++) {
 				var h;
@@ -181,19 +181,24 @@ var sneezySingleton = new function sneezySingleton()
 					
 				columns["NumOf" + h +"Reactions"] = {key:false,title:"Reaction Within " + h + " Hours",create:false,edit:false};
 			}
-			/*
-				"NumOf2Reactions":{key:false,title:"Reaction Within 2 Hours",create:false,edit:false},
-					"NumOf3Reactions":{key:false,title:"Reaction Within 3 Hours",create:false,edit:false}
-			*/
 			
 			console.log(columns);
 			
-			$('#hours-from-reaction-grid').jtable({
+			var grid = $('#hours-from-reaction-grid');
+			
+			// remove any previous jtable instance
+			if (!grid.is(':empty')) {
+				grid.jtable('destroy');
+			}
+				
+			
+			// redefine the jtable
+			grid.jtable({
 				title: 'Number of reaction after food by hour',
 	            paging: true, //Enable paginghttp://192.168.1.10/sneezy/index.php/meal/
 	            pageSize: 10, //Set page size (default: 10)
-	            sorting: false, //Enable sorting
-	            defaultSorting: 'not_used DESC', //Set default sorting
+	            sorting: true, //Enable sorting
+	            defaultSorting: 'NumOfFood DESC', //Set default sorting
 	            gotoPageArea: 'none',
 
 	            actions: {
@@ -206,7 +211,9 @@ var sneezySingleton = new function sneezySingleton()
 	            fields: columns
 			});
 			
-			$('#hours-from-reaction-grid').jtable('load');
+			// load the jtable
+			grid.jtable('load');
+			
 		});
  		
  	}

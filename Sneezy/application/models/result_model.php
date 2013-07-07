@@ -29,7 +29,7 @@ SQL;
 		return $query->result_array();
 	}
 	
-	function hours_from_reaction($index = 0, $page_size = 10, $num_of_gaps = 2, $scale = 'linear', $event_id = 1, $start_date = null)
+	function hours_from_reaction($index = 0, $page_size = 10, $num_of_gaps = 2, $scale = 'linear', $sort='NumOfFood DESC', $event_id = 1, $start_date = null)
 	{
 		//($index, $page_size, $sort_str)
 		
@@ -113,10 +113,19 @@ SQL;
 		$select  = "SELECT " . implode($columns, " , ") . " FROM ( ";
 		$select .= implode($subs, " UNION ALL ");
 		$select .= " ) AS FoodCounts ";
-		$select .= " GROUP BY FoodName HAVING SUM(NumOfFood) > 1 ";
+		$select .= " GROUP BY FoodName ";
 		
-		$max_hour = max($hour_gaps);
-		$select .= " ORDER BY SUM(NumOf{$max_hour}Reactions) DESC ";
+		$sort = explode(' ', $sort);
+		
+		if (trim($sort[0]) == "FoodName")
+		{
+			$select .= " ORDER BY " . trim($sort[0]). " " . trim($sort[1]);
+		} 
+		else 
+		{
+			$select .= " ORDER BY SUM(" . trim($sort[0]). ") " . trim($sort[1]); // only works because of the naming convention
+		}
+		
 		$select .= " LIMIT $index, $page_size"; 
 		$query = $this->db->query($select);
 		
