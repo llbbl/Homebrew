@@ -2,7 +2,7 @@
 	<form action="post">
 		<div class="ui-widget">
 			<label for="hours-from-reaction-gap">Num Of Gaps: </label>
-  			<input id="hours-from-reaction-gap" />
+  			<input id="hours-from-reaction-gap" value="2"/>
   		</div>
 		<div class="ui-widget">
 			<select id = "hours-from-reaction-scale">

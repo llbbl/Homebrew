@@ -29,7 +29,7 @@ SQL;
 		return $query->result_array();
 	}
 	
-	function hours_from_reaction($index = 0, $page_size = 10, $num_of_gaps = 2, $event_id = 1, $scale = 'linear', $start_date = null)
+	function hours_from_reaction($index = 0, $page_size = 10, $num_of_gaps = 2, $scale = 'linear', $event_id = 1, $start_date = null)
 	{
 		//($index, $page_size, $sort_str)
 		
@@ -39,15 +39,15 @@ SQL;
 		{
 			if ($scale == 'quadratic')
 			{
-				$hour_gaps[$i] = ($i ^ 2);
+				$hour_gaps[$i] = pow($i, 2);
 			}
 			else if ($scale == 'exponential')
 			{
-				$hour_gaps[$i] = (2 ^ $i);
+				$hour_gaps[$i] = pow(2, $i);
 			}
 			else //if ($scale == 'linear')
 			{
-				$hour_gaps[$i] = ($i + 1);
+				$hour_gaps[$i] = $i;
 			}
 		}
 		

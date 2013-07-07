@@ -162,11 +162,29 @@ var sneezySingleton = new function sneezySingleton()
 			var gaps = $('#hours-from-reaction-gap').val();
 			var scale = $('#hours-from-reaction-scale').val();
 			var columns = {
-					"FoodName":{key:true,title:"Food",create:false,edit:false},
-					"NumOfFood":{key:false,title:"Times Eaten",create:false,edit:false},
-					"NumOf2Reactions":{key:false,title:"Reaction Within 2 Hours",create:false,edit:false},
-					"NumOf3Reactions":{key:false,title:"Reaction Within 3 Hours",create:false,edit:false}
+					FoodName:{key:true,title:"Food",create:false,edit:false},
+					NumOfFood:{key:false,title:"Times Eaten",create:false,edit:false}
 			};
+			alert(scale);
+			// @todo correct this duplication of logic in both js and php  
+			for (var i=1;i<=gaps;i++) {
+				var h;
+				if (scale == 'quadratic') {
+					h = Math.pow(i,2);
+				}
+				else if (scale == 'exponential') {
+					h = Math.pow(2,i);
+				}
+				else {
+					h = i;
+				}
+					
+				columns["NumOf" + h +"Reactions"] = {key:false,title:"Reaction Within " + h + " Hours",create:false,edit:false};
+			}
+			/*
+				"NumOf2Reactions":{key:false,title:"Reaction Within 2 Hours",create:false,edit:false},
+					"NumOf3Reactions":{key:false,title:"Reaction Within 3 Hours",create:false,edit:false}
+			*/
 			
 			console.log(columns);
 			
@@ -179,7 +197,7 @@ var sneezySingleton = new function sneezySingleton()
 	            gotoPageArea: 'none',
 
 	            actions: {
-	                listAction:   base_url + 'index.php/result/retrieve_hours_from_reaction/',
+	                listAction:   base_url + 'index.php/result/retrieve_hours_from_reaction/' + gaps + '/' + scale + '/',
 	                deleteAction: '',
 	                updateAction: '',
 	                createAction: ''

@@ -14,18 +14,24 @@ class Result extends CI_Controller {
 		$this->load->view('hours_from_reaction');
 	}
 	
-	public function retrieve_hours_from_reaction()
+	public function retrieve_hours_from_reaction($num_of_gaps, $scale)
 	{
 		// jtStartIndex=0&jtPageSize=10&jtSorting=meal_date%20ASC
 		$index = intval($_GET['jtStartIndex']);
 		$page_size = intval($_GET['jtPageSize']);
+		$num_of_gaps = intval($num_of_gaps);
+		$scale = filter_var($scale, FILTER_SANITIZE_STRING);
+		/*
+		$num_of_gaps = intval($_GET['num-of-gaps']);
+		$scale = filter_var($_GET['scale'], FILTER_SANITIZE_STRING);
+		*/
 		
 		$this->load->model('Result_model');
 		
 		// build json for jTables
 		$json = array();
 		$json['Result'] = "OK";
-		$json['Records'] = $this->Result_model->hours_from_reaction($index, $page_size);
+		$json['Records'] = $this->Result_model->hours_from_reaction($index, $page_size, $num_of_gaps, $scale);
 		
 		$data = array();
 		$data['json'] = $json;
