@@ -157,6 +157,42 @@ var sneezySingleton = new function sneezySingleton()
     }
  	this.initializeInventory = initializeInventory;
  
- 	 	
+ 	function initializeHourReactionButton() {
+ 		$('#retrieve-hours-from-reaction-submit').click(function (e) {
+			var gaps = $('#hours-from-reaction-gap').val();
+			var scale = $('#hours-from-reaction-scale').val();
+			var columns = {
+					"FoodName":{key:true,title:"Food",create:false,edit:false},
+					"NumOfFood":{key:false,title:"Times Eaten",create:false,edit:false},
+					"NumOf2Reactions":{key:false,title:"Reaction Within 2 Hours",create:false,edit:false},
+					"NumOf3Reactions":{key:false,title:"Reaction Within 3 Hours",create:false,edit:false}
+			};
+			
+			console.log(columns);
+			
+			$('#hours-from-reaction-grid').jtable({
+				title: 'Number of reaction after food by hour',
+	            paging: true, //Enable paginghttp://192.168.1.10/sneezy/index.php/meal/
+	            pageSize: 10, //Set page size (default: 10)
+	            sorting: false, //Enable sorting
+	            defaultSorting: 'not_used DESC', //Set default sorting
+	            gotoPageArea: 'none',
+
+	            actions: {
+	                listAction:   base_url + 'index.php/result/retrieve_hours_from_reaction/',
+	                deleteAction: '',
+	                updateAction: '',
+	                createAction: ''
+	            },
+	            
+	            fields: columns
+			});
+			
+			$('#hours-from-reaction-grid').jtable('load');
+		});
+ 		
+ 	}
+ 	this.initializeHourReactionButton = initializeHourReactionButton;
+ 	
     return sneezySingleton;
 };

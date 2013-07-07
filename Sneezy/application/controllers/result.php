@@ -8,19 +8,29 @@ class Result extends CI_Controller {
 		$this->hours_from_reaction();
 	}
 
-	public function hours_from_reaction()
+	public function hours_from_reaction() 
+	{
+		$this->load->helper('url');
+		$this->load->view('hours_from_reaction');
+	}
+	
+	public function retrieve_hours_from_reaction()
 	{
 		// jtStartIndex=0&jtPageSize=10&jtSorting=meal_date%20ASC
-		//$index = intval($_GET['jtStartIndex']);
-		//$pageSize = intval($_GET['jtPageSize']);
+		$index = intval($_GET['jtStartIndex']);
+		$page_size = intval($_GET['jtPageSize']);
 		
-		log_message("error", print_r($_GET, true));
 		$this->load->model('Result_model');
-		$data = array();
-		$data['hours'] = $this->Result_model->hours_from_reaction();
 		
-		$this->load->helper('url');
-		$this->load->view('hours_from_reaction', $data);
+		// build json for jTables
+		$json = array();
+		$json['Result'] = "OK";
+		$json['Records'] = $this->Result_model->hours_from_reaction($index, $page_size);
+		
+		$data = array();
+		$data['json'] = $json;
+		
+		$this->load->view('json_encode', $data);
 	}
 	
 	public function timeline()
