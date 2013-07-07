@@ -120,6 +120,15 @@ var sneezySingleton = new function sneezySingleton()
 		   $('.navbar-inner .btn').click();
 	   });
 	   
+	   $('#nav-hours-from-reaction').click(function (e) {
+		   $('.nav li').removeClass('active');
+		   $(this).closest('li').addClass('active');
+		   
+		   $('.content-pane .content-category-container').addClass('hide');
+		   $('.content-pane #container-hours-from-reaction').removeClass('hide');
+		   $('.content-pane #container-hours-from-reaction').load(base_url + 'index.php/result/hours_from_reaction',{},function(str){});
+		   $('.navbar-inner .btn').click();
+	   });
    }
    this.initializeNavClick = initializeNavClick;
  	

@@ -29,7 +29,7 @@ SQL;
 		return $query->result_array();
 	}
 	
-	function hours_from_event($index = 0, $page_size = 10, $num_of_gaps = 2, $event_id = 1, $scale = 'linear', $start_date = null)
+	function hours_from_reaction($index = 0, $page_size = 10, $num_of_gaps = 2, $event_id = 1, $scale = 'linear', $start_date = null)
 	{
 		//($index, $page_size, $sort_str)
 		

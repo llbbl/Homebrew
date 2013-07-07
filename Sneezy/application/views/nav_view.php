@@ -63,6 +63,7 @@
 					    </a>
      				 	<ul class="dropdown-menu">
      				  		<li><a href="#" id="nav-timeline">Timeline</a></li>
+     				  		<li><a href="#" id="nav-hours-from-reaction">Reaction Time from Food</a></li>
      				  	</ul>
      				  </li>
 				</ul>
@@ -78,6 +79,7 @@
 		echo $medicine;	
 	?>
 	<div id="container-timeline"  class="content-category-container hide"></div>
+	<div id="container-hours-from-reaction"  class="content-category-container hide"></div>
 </div>
 <script>
   	sneezySingleton.getInstance().initializeNavClick();

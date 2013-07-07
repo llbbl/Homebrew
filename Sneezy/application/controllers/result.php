@@ -17,10 +17,10 @@ class Result extends CI_Controller {
 		log_message("error", print_r($_GET, true));
 		$this->load->model('Result_model');
 		$data = array();
-		$data['hours'] = $this->Result_model->hours_from_event();
+		$data['hours'] = $this->Result_model->hours_from_reaction();
 		
 		$this->load->helper('url');
-		$this->load->view('hours_from_event', $data);
+		$this->load->view('hours_from_reaction', $data);
 	}
 	
 	public function timeline()
