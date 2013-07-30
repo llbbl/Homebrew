@@ -17,7 +17,8 @@
             theme1.autoWidth = true; // Set the Timeline's "width" automatically.
                                      // Set autoWidth on the Timeline's first band's theme,
                                      // will affect all bands.
-			var d = "Fri March 27 2013 00:00:00 GMT-0600"                                     
+			//var d = "Fri June 16 2013 00:00:00 GMT-0600";
+			var d = "<?php echo date("D F d Y "); ?> 00:00:00 GMT-0600";
             theme1.timeline_start = new Date(Date.UTC(2013, 3, 27));//2013-03-27 07:00:00
             theme1.timeline_stop  = new Date(Date.UTC(2160, 0, 1));
             
