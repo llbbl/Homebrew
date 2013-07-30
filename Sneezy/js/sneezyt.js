@@ -158,9 +158,37 @@ var sneezySingleton = new function sneezySingleton()
  	this.initializeInventory = initializeInventory;
  
  	function initializeHourReactionButton() {
+ 		$('#hours-from-reaction-start-date').datepicker({
+			timeFormat: "hh:mm tt"
+		}); 
+		
+ 		$('#hours-from-reaction-end-date').datepicker({
+			timeFormat: "hh:mm tt"
+		});
+ 		
+ 		// bind autocomplete
+		$( "#hours-from-reaction-type" ).autocomplete({
+			  source: base_url + "index.php/reaction/get_types",
+		      minLength: 1
+		});
+ 		
  		$('#retrieve-hours-from-reaction-submit').click(function (e) {
+			var startDate = $('#hours-from-reaction-start-date').val();
+			startDate = startDate.replace(/\//g, '-');
+			if (startDate == "") {
+				startDate = '01-01-1970';
+			}
+			
+			var endDate = $('#hours-from-reaction-end-date').val();
+			endDate = endDate.replace(/\//g, '-');
+			if (endDate == "") {
+				endDate = '01-01-2020';
+			}
+			
 			var gaps = $('#hours-from-reaction-gap').val();
 			var scale = $('#hours-from-reaction-scale').val();
+			var type = $('#hours-from-reaction-type').val();
+			
 			var columns = {
 					FoodName:{key:true,title:"Food",create:false,edit:false},
 					NumOfFood:{key:false,title:"Times Eaten",create:false,edit:false}
@@ -202,7 +230,7 @@ var sneezySingleton = new function sneezySingleton()
 	            gotoPageArea: 'none',
 
 	            actions: {
-	                listAction:   base_url + 'index.php/result/retrieve_hours_from_reaction/' + gaps + '/' + scale + '/',
+	                listAction:   base_url + 'index.php/result/retrieve_hours_from_reaction/' + gaps + '/' + scale + '/' + startDate + '/' + endDate + '/' + type + '/',
 	                deleteAction: '',
 	                updateAction: '',
 	                createAction: ''

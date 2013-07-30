@@ -29,11 +29,9 @@ SQL;
 		return $query->result_array();
 	}
 	
-	function hours_from_reaction($index = 0, $page_size = 10, $num_of_gaps = 2, $scale = 'linear', $sort='NumOfFood DESC', $event_id = 1, $start_date = null)
+	function hours_from_reaction($index, $page_size, $num_of_gaps, $scale, $sort, $start_date, $end_date, $reaction_id)
 	{
 		//($index, $page_size, $sort_str)
-		
-		$event_id = 1; // vomit
 		$hour_gaps = array();
 		for($i = 1; $i <= $num_of_gaps; $i++)
 		{
@@ -95,7 +93,9 @@ SQL;
 				$sub .= " FROM Food AS f JOIN Reaction AS r ON TIMESTAMPDIFF( HOUR , r.ReactionDate, f.FoodDate ) ";
 				$sub .= " BETWEEN -" . $hour_gaps[$i] . " AND 0 ";
 				$sub .= " JOIN FoodType ft ON ft.FoodTypeId = f.FoodTypeId ";
-				$sub .= " WHERE r.ReactionTypeId = $event_id ";
+				$sub .= " WHERE r.ReactionTypeId = $reaction_id ";
+				$sub .= " AND FoodDate >= '$start_date' ";
+				$sub .= " AND FoodDate <= '$end_date' ";
 				$sub .= " GROUP BY ft.FoodName ";
 				$subs[] = $sub;
 			}
