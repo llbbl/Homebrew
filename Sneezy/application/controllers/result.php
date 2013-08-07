@@ -32,12 +32,12 @@ class Result extends CI_Controller {
 		$start_date = DateTime::createFromFormat('m-d-Y', $start_date);
 		$end_date = DateTime::createFromFormat('m-d-Y', $end_date);
 		
-		$type = html_entity_decode($type);
 		$type = filter_var($type, FILTER_SANITIZE_STRING);
+		$type = urldecode($type);
+		
 		$this->load->model('Reaction_model');
 		$id = $this->Reaction_model->get_type_id($type);
-		
-		
+				
 		$this->load->model('Result_model');
 		
 		// build json for jTables

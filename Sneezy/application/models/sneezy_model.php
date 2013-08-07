@@ -83,7 +83,6 @@ class Sneezy_model extends CI_Model {
 				return $this->db->insert_id();
 			}
 			
-			log_message('error', "Here 2");
 			return false;
 		}	
 		

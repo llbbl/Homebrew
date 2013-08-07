@@ -127,6 +127,7 @@ SQL;
 		}
 		
 		$select .= " LIMIT $index, $page_size"; 
+		
 		$query = $this->db->query($select);
 		
 		return $query->result_array();
