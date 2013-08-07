@@ -1,3 +1,3 @@
 #!/bin/bash
-if [ $(($RANDOM/32768)) -gt 25 ]; then exit; fi
+/bin/sleep `/usr/bin/expr $RANDOM % 600` ;
 exec php /home/cmack/Homebrew/AllergyScrapper/runner.php
