@@ -1,60 +1,118 @@
--- MySQL dump 10.13  Distrib 5.5.29, for debian-linux-gnu (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 3.4.10.1deb1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost    Database: sneezy
--- ------------------------------------------------------
--- Server version	5.5.29-0ubuntu0.12.04.2
+-- Host: localhost
+-- Generation Time: Aug 10, 2013 at 12:51 PM
+-- Server version: 5.5.29
+-- PHP Version: 5.3.10-1ubuntu3.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Event`
+-- Database: `sneezy`
 --
 
-DROP TABLE IF EXISTS `Event`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Event` (
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Environment`
+--
+
+CREATE TABLE IF NOT EXISTS `Environment` (
+  `EnvironmentId` int(11) NOT NULL AUTO_INCREMENT,
+  `EnvironmentTypeId` int(11) NOT NULL,
+  `EnvironmentDate` datetime NOT NULL,
+  `EnvironmentNote` text,
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`EnvironmentId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=172 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `EnvironmentType`
+--
+
+CREATE TABLE IF NOT EXISTS `EnvironmentType` (
+  `EnvironmentTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `EnvironmentName` varchar(250) NOT NULL,
+  PRIMARY KEY (`EnvironmentTypeId`),
+  UNIQUE KEY `EnvironmentName` (`EnvironmentName`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Event-old`
+--
+
+CREATE TABLE IF NOT EXISTS `Event-old` (
   `EventId` int(11) NOT NULL AUTO_INCREMENT,
   `EventTypeId` int(11) NOT NULL,
   `EventDate` datetime NOT NULL,
+  `EventNote` text,
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`EventId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=165 ;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `EventType`
+-- Table structure for table `EventType-old`
 --
 
-DROP TABLE IF EXISTS `EventType`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `EventType` (
+CREATE TABLE IF NOT EXISTS `EventType-old` (
   `EventTypeId` int(11) NOT NULL AUTO_INCREMENT,
   `EventName` varchar(250) NOT NULL,
   PRIMARY KEY (`EventTypeId`),
   UNIQUE KEY `EventName` (`EventName`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Food`
+--
+
+CREATE TABLE IF NOT EXISTS `Food` (
+  `FoodId` int(11) NOT NULL AUTO_INCREMENT,
+  `FoodTypeId` int(11) NOT NULL,
+  `FoodDate` datetime NOT NULL,
+  `FoodNote` text,
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`FoodId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5276 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `FoodBrand`
+--
+
+CREATE TABLE IF NOT EXISTS `FoodBrand` (
+  `FoodBrandId` int(11) NOT NULL AUTO_INCREMENT,
+  `FoodBrand` varchar(255) NOT NULL,
+  PRIMARY KEY (`FoodBrandId`),
+  UNIQUE KEY `FoodBrand` (`FoodBrand`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `FoodType`
 --
 
-DROP TABLE IF EXISTS `FoodType`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `FoodType` (
+CREATE TABLE IF NOT EXISTS `FoodType` (
   `FoodTypeId` int(11) NOT NULL AUTO_INCREMENT,
-  `FoodLongName` varchar(250) NOT NULL,
+  `FoodLongName` varchar(250) DEFAULT NULL,
   `FoodName` varchar(255) NOT NULL,
   `Water` float DEFAULT NULL,
   `Energ_Kcal` float DEFAULT NULL,
@@ -108,32 +166,91 @@ CREATE TABLE `FoodType` (
   `GmWt_Desc2` text,
   `Refuse_Pct` float DEFAULT NULL,
   PRIMARY KEY (`FoodTypeId`),
-  UNIQUE KEY `Food` (`FoodLongName`)
-) ENGINE=InnoDB AUTO_INCREMENT=7829 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  UNIQUE KEY `IX_Food_FoodName` (`FoodName`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8055 ;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `Meal`
+-- Table structure for table `Meal-old`
 --
 
-DROP TABLE IF EXISTS `Meal`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Meal` (
+CREATE TABLE IF NOT EXISTS `Meal-old` (
   `MealId` int(11) NOT NULL AUTO_INCREMENT,
   `FoodTypeId` int(11) NOT NULL,
   `MealDate` datetime NOT NULL,
+  `MealNote` text,
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`MealId`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3286 ;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Medicine`
+--
+
+CREATE TABLE IF NOT EXISTS `Medicine` (
+  `MedicineId` int(11) NOT NULL AUTO_INCREMENT,
+  `MedicineTypeId` int(11) NOT NULL,
+  `MedicineDate` datetime NOT NULL,
+  `MedicineNote` text,
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`MedicineId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=772 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `MedicineType`
+--
+
+CREATE TABLE IF NOT EXISTS `MedicineType` (
+  `MedicineTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `MedicineName` varchar(250) NOT NULL,
+  PRIMARY KEY (`MedicineTypeId`),
+  UNIQUE KEY `MedicineName` (`MedicineName`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `PollenFile`
+--
+
+CREATE TABLE IF NOT EXISTS `PollenFile` (
+  `FileDate` datetime NOT NULL,
+  `AllergyReport` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Reaction`
+--
+
+CREATE TABLE IF NOT EXISTS `Reaction` (
+  `ReactionId` int(11) NOT NULL AUTO_INCREMENT,
+  `ReactionTypeId` int(11) NOT NULL,
+  `ReactionDate` datetime NOT NULL,
+  `ReactionNote` text,
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`ReactionId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=448 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ReactionType`
+--
+
+CREATE TABLE IF NOT EXISTS `ReactionType` (
+  `ReactionTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `ReactionName` varchar(250) NOT NULL,
+  PRIMARY KEY (`ReactionTypeId`),
+  UNIQUE KEY `ReactionName` (`ReactionName`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2013-04-28 13:13:58
