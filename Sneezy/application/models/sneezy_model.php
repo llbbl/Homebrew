@@ -74,7 +74,13 @@ class Sneezy_model extends CI_Model {
 		$row = $query->first_row();
 		
 		$column_name = $this->table . 'TypeId';
-		$is_deleted = $row->IsDeleted;
+		
+		$is_deleted = false;
+		
+		if (isset($row->IsDeleted))
+		{
+			$is_deleted = $row->IsDeleted;
+		}
 		
 		if ($is_deleted == true)
 		{
