@@ -129,6 +129,16 @@ var sneezySingleton = new function sneezySingleton()
 		   $('.content-pane #container-hours-from-reaction').load(base_url + 'index.php/result/hours_from_reaction',{},function(str){});
 		   $('.navbar-inner .btn').click();
 	   });
+	   
+	   $('#nav-type-merge').click(function (e) {
+		   $('.nav li').removeClass('active');
+		   $(this).closest('li').addClass('active');
+		   
+		   $('.content-pane .content-category-container').addClass('hide');
+		   $('.content-pane #container-type-merge').removeClass('hide');
+		   $('.content-pane #container-type-merge').load(base_url + 'index.php/maintain/merge_type',{},function(str){});
+		   $('.navbar-inner .btn').click();
+	   });
    }
    this.initializeNavClick = initializeNavClick;
  	
@@ -246,6 +256,39 @@ var sneezySingleton = new function sneezySingleton()
  		
  	}
  	this.initializeHourReactionButton = initializeHourReactionButton;
+ 	
+ 	function initializeMergeType() {
+ 		$( "#type-merge-from" ).autocomplete({
+			  source: base_url + "index.php/food/get_types",
+		      minLength: 1
+		});
+ 		
+ 		$( "#type-merge-to" ).autocomplete({
+			  source: base_url + "index.php/food/get_types",
+		      minLength: 1
+		});
+ 		
+ 		$('#type-merge-submit button').click( function() {
+ 			sneezySingleton.getInstance().submitMerge();
+		});
+ 	};
+ 	this.initializeMergeType = initializeMergeType;
+ 	
+ 	function submitMerge() {
+  	 	 var p = {};
+	     p['type-merge-from'] = $('#type-merge-from').val();
+	     p['type-merge-to'] = $('#type-merge-to').val();
+	      
+	     $('#merge-response').load(base_url + 'index.php/maintain/merge',p,function(str){
+	    	 setTimeout(function() {
+	    		 $('#merge-response').empty();
+	    	 	} ,1500);
+	     });
+	     
+	     $( '#type-merge-to').val('');
+	     $( '#type-merge-from').val('').focus();
+ 	};
+ 	this.submitMerge = submitMerge;
  	
     return sneezySingleton;
 };

@@ -64,6 +64,7 @@
      				 	<ul class="dropdown-menu">
      				  		<li><a href="#" id="nav-timeline">Timeline</a></li>
      				  		<li><a href="#" id="nav-hours-from-reaction">Reaction Time from Food</a></li>
+     				  		<li><a href="#" id="nav-type-merge">Merge Types</a></li>
      				  	</ul>
      				  </li>
 				</ul>
@@ -80,6 +81,7 @@
 	?>
 	<div id="container-timeline"  class="content-category-container hide"></div>
 	<div id="container-hours-from-reaction"  class="content-category-container hide"></div>
+	<div id="container-type-merge"  class="content-category-container hide"></div>
 </div>
 <script>
   	sneezySingleton.getInstance().initializeNavClick();

@@ -2,14 +2,15 @@
 	<a class="close" data-dismiss="alert">×</a>
 	<span>
 <?php 
-if ($result) 
-{ 
-	echo 'Inserted ' . $name . '(id: ' . $result . ')';
+if ($result)
+{
+	echo "Merged $from ($from_id) to $to ($to_id)";
 }
 else
 {
-	echo 'Unable to save this type. Try another type';
+	echo "Unable to merge $from to $to";
 }
+	
 ?>
 	</span>
 </div>
