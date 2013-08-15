@@ -1,6 +1,6 @@
 <?php
-require_once('./class/Parser.php');
-require_once('./class/AllergenVO.php');
+require_once('Parser.php');
+require_once('AllergenVO.php');
 
 
 class Scrapper 

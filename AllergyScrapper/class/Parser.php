@@ -1,9 +1,10 @@
 <?php
+
 // load mininal zend framework for DOM library
-require_once('./library/ZendFramework-2.2.2/library/Zend/Dom/Query.php');
-require_once('./library/ZendFramework-2.2.2/library/Zend/Dom/Css2Xpath.php');
-require_once('./library/ZendFramework-2.2.2/library/Zend/Dom/NodeList.php');
-require_once('./library/ZendFramework-2.2.2/library/Zend/Stdlib/ErrorHandler.php');
+require_once('library/ZendFramework-2.2.2/library/Zend/Dom/Query.php');
+require_once('library/ZendFramework-2.2.2/library/Zend/Dom/Css2Xpath.php');
+require_once('library/ZendFramework-2.2.2/library/Zend/Dom/NodeList.php');
+require_once('library/ZendFramework-2.2.2/library/Zend/Stdlib/ErrorHandler.php');
 
 /*
 // if it is an exception, we'll get a "can't find class" error - no reason to go down the crazy path of Zend includes
