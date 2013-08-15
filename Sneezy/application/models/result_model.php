@@ -84,7 +84,10 @@ SQL;
 			if ($i == 0)
 			{
 				$sub  = "SELECT ft.FoodName, {$column_str} ";
-				$sub .= " FROM Food AS f JOIN FoodType ft ON ft.FoodTypeId = f.FoodTypeId GROUP BY ft.FoodName ";
+				$sub .= " FROM Food AS f JOIN FoodType ft ON ft.FoodTypeId = f.FoodTypeId  ";
+				$sub .= " WHERE FoodDate >= '$start_date' ";
+				$sub .= " AND FoodDate <= '$end_date' ";
+				$sub .= " GROUP BY ft.FoodName ";
 				$subs[] = $sub;
 			}
 			else 
