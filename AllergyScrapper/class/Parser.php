@@ -65,26 +65,40 @@ class Parser
 	 */
 	private function extract($fragment) 
 	{
-		// Allergy Count: Molds High.&nbsp; This allergy forecast ...
-		/*
-		 // Example parse:
+		// Allergy Count: Allergy Count: Ragweed Low 7 gr/m3,&nbsp;Mulberry 7 gr/m3 and Molds High.&nbsp; forecast ...
 		
-		Oak Medium 33 gr/m3, Molds Medium
-		Molds High
-		Ash Medium 20 gr/m3, Elm Medium 27 gr/m3, Oak Medium 27 hr/m3, Molds High
-		Trees High 107 gr/m3, Grass High 47 gr/m3, Oak High 1121 gr/m3, Molds High
-		Cedar Low 7 gr/m3, Oak Low 7 gr/m3, Ash High 93 gr/m3, Elm Medium 20 gr/m3, Molds Medium
+		// remove &nbsp; and other html entities trim does not remove
+		$fragment = preg_replace("/&#?[a-z0-9]+;/i","",$fragment);
 		
-		*/
-		
+		// Allergy Count: Ragweed Low 7 gr/m3, Mulberry 7 gr/m3 and Molds High.&nbsp;
 		$ex = explode('Allergy Count:', $fragment, 2);
 		$fragment = trim($ex[1]);
 		
+		// Ragweed Low 7 gr/m3, Mulberry 7 gr/m3 and Molds High.&nbsp;
 		$ex = explode('.', $fragment, 2);
 		$fragment = trim($ex[0]);
-		
+
+		// Ragweed Low 7 gr/m3
+		// Mulberry 7 gr/m3 and Molds High.&nbsp;
 		$ex = explode(',', $fragment);
 		
+		$last_key = count($ex) - 1;
+		
+		if ($last_key != 0)
+		{
+			// Mulberry 7 gr/m3 and Molds High.&nbsp;
+			$and = explode(' and ', $ex[$last_key], 2);
+			// Mulberry 7 gr/m3 
+			$ex[$last_key] = trim($and[0]);
+			
+			// Molds High.&nbsp;
+			$ex[] = trim($and[1]);
+			$last_key += 1;
+		}
+
+		// Ragweed Low 7 gr/m3
+		// Mulberry 7 gr/m3 
+		// Molds High.&nbsp;
 		$allergens = array();
 		foreach($ex as $str)
 		{
