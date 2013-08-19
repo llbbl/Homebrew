@@ -1,8 +1,12 @@
 <?php
-include_once('config.php');
-include_once('class/Scraper.php');
-include_once('class/Persister.php');
+require_once('config.php');
+require_once('class/Autoloader.php');
 
 $s = new Scraper('http://www.kvue.com/weather/allergy-forecast');
+
+//$s->add_mode(Scraper::MODE_NO_OVERWRITE);
+//$s->add_mode(Scraper::MODE_NO_CLEANUP);
+
 $s->attach(new Persister());
+//$s->attach(new Alerter());
 $s->scrape();

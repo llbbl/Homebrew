@@ -1,4 +1,6 @@
 <?php
+
+// autoloader won't find these b/c of relative path
 require_once('Parser.php');
 require_once('AllergenVO.php');
 
@@ -33,6 +35,16 @@ class Scraper implements SplSubject
 	 */
 	private $allergens;
 	
+	/**
+	 * Flag for different debug modes
+	 * 
+	 * @var unknown_type
+	 */
+	private $modes;
+	
+	const MODE_NO_CLEANUP = 'cleanup';
+	const MODE_NO_OVERWRITE = 'keep';
+	
 	
 	public function __construct($url)
 	{
@@ -52,6 +64,15 @@ class Scraper implements SplSubject
 		$this->out_file = $fileName;
 		
 		$this->allergens = array();
+		$this->modes = array();
+	}
+	
+	/**
+	 * Allow for different debug modes and settings
+	 */
+	public function add_mode($mode)
+	{
+		$this->modes[] = $mode;
 	}
 	
 	/**
@@ -121,10 +142,10 @@ class Scraper implements SplSubject
 	 */
 	public function scrape()
 	{
-		//$this->retrieve();
+		$this->retrieve();
 		$this->parse();
 		$this->notify();
-		//$this->cleanup();
+		$this->cleanup();
 	}
 	
 	/**
@@ -145,10 +166,13 @@ class Scraper implements SplSubject
 	 */
 	private function retrieve()
 	{
-		$cmd = 'wget --referer="http://www.google.com" --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"';
-		$cmd .= ' ' . $this->url;
-		
-		exec($cmd);
+		if (!file_exists($this->out_file) || !in_array(Scraper::MODE_NO_OVERWRITE, $this->modes))
+		{
+			$cmd = 'wget --referer="http://www.google.com" --user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"';
+			$cmd .= ' ' . $this->url;
+			
+			exec($cmd);
+		}
 	}
 
 	/**
@@ -157,6 +181,9 @@ class Scraper implements SplSubject
 	 */
 	private function cleanup()
 	{
-		unlink($this->out_file);
+		if (!in_array(Scraper::MODE_NO_CLEANUP, $this->modes))
+		{
+			unlink($this->out_file);
+		}
 	}
 }
