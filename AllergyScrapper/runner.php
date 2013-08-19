@@ -1,6 +1,8 @@
 <?php
 include_once('config.php');
-include_once('class/Scrapper.php');
+include_once('class/Scraper.php');
+include_once('class/Persister.php');
 
-$s = new Scrapper('http://www.kvue.com/weather/allergy-forecast');
-$s->scrap();
+$s = new Scraper('http://www.kvue.com/weather/allergy-forecast');
+$s->attach(new Persister());
+$s->scrape();
