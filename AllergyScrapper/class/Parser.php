@@ -50,7 +50,7 @@ class Parser
 	 * @test I should really unit test this function!
 	 * @param string $fragment
 	 */
-	private function extract($fragment) 
+	public function extract($fragment) 
 	{
 		// Allergy Count: Allergy Count: Ragweed Low 7 gr/m3,&nbsp;Mulberry 7 gr/m3 and Molds High.&nbsp; forecast ...
 		
@@ -69,25 +69,19 @@ class Parser
 		// Mulberry 7 gr/m3 and Molds High.&nbsp;
 		$ex = explode(',', $fragment);
 		
-		$last_key = count($ex) - 1;
-		
-		if ($last_key != 0)
+		$parts = array();
+		foreach($ex as $x)
 		{
-			// Mulberry 7 gr/m3 and Molds High.&nbsp;
-			$and = explode(' and ', $ex[$last_key], 2);
-			// Mulberry 7 gr/m3 
-			$ex[$last_key] = trim($and[0]);
+			$and = explode(' and ', $x);
+			foreach($and as $y)
+			{
+				$parts[] = trim($y);
+			}
+		}	
+		
 			
-			// Molds High.&nbsp;
-			$ex[] = trim($and[1]);
-			$last_key += 1;
-		}
-
-		// Ragweed Low 7 gr/m3
-		// Mulberry 7 gr/m3 
-		// Molds High.&nbsp;
 		$allergens = array();
-		foreach($ex as $str)
+		foreach($parts as $str)
 		{
 			$allergens[] = $this->VOfactory($str);
 		}
