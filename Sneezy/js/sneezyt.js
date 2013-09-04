@@ -198,13 +198,16 @@ var sneezySingleton = new function sneezySingleton()
 			var gaps = $('#hours-from-reaction-gap').val();
 			var scale = $('#hours-from-reaction-scale').val();
 			var type = $('#hours-from-reaction-type').val();
+            var min = $('#hours-from-reaction-min-eaten').val();
 			
 			var columns = {
 					FoodName:{key:true,title:"Food",create:false,edit:false},
 					NumOfFood:{key:false,title:"Times Eaten",create:false,edit:false}
 			};
 			
-			// @todo correct this duplication of logic in both js and php  
+			// @todo correct this duplication of logic in both js and php
+            var floor = Math.floor(100/((gaps*2)+2));
+
 			for (var i=1;i<=gaps;i++) {
 				var h;
 				if (scale == 'quadratic') {
@@ -217,7 +220,8 @@ var sneezySingleton = new function sneezySingleton()
 					h = i;
 				}
 					
-				columns["NumOf" + h +"Reactions"] = {key:false,title:"Reaction Within " + h + " Hours",create:false,edit:false};
+				columns["NumOf" + h +"Reactions"] = {key:false,title: "# " + h + " h",create:false,edit:false,width: floor + "%"};
+                columns["PercentOf" + h +"Reactions"] = {key:false,title: "% " + h + " h",create:false,edit:false,width: floor + "%"};
 			}
 			
 			console.log(columns);
@@ -240,7 +244,7 @@ var sneezySingleton = new function sneezySingleton()
 	            gotoPageArea: 'none',
 
 	            actions: {
-	                listAction:   base_url + 'index.php/result/retrieve_hours_from_reaction/' + gaps + '/' + scale + '/' + startDate + '/' + endDate + '/' + type + '/',
+	                listAction:   base_url + 'index.php/result/retrieve_hours_from_reaction/' + gaps + '/' + scale + '/' + startDate + '/' + endDate + '/' + type + '/' + min + '/',
 	                deleteAction: '',
 	                updateAction: '',
 	                createAction: ''

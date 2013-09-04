@@ -29,7 +29,7 @@ SQL;
 		return $query->result_array();
 	}
 	
-	function hours_from_reaction($index, $page_size, $num_of_gaps, $scale, $sort, $start_date, $end_date, $reaction_id)
+	function hours_from_reaction($index, $page_size, $num_of_gaps, $scale, $sort, $start_date, $end_date, $reaction_id, $min_eaten)
 	{
 		//($index, $page_size, $sort_str)
 		$hour_gaps = array();
@@ -99,7 +99,7 @@ SQL;
 				$sub .= " WHERE r.ReactionTypeId = $reaction_id ";
 				$sub .= " AND FoodDate >= '$start_date' ";
 				$sub .= " AND FoodDate <= '$end_date' ";
-				$sub .= " GROUP BY ft.FoodName ";
+                $sub .= " GROUP BY ft.FoodName ";
 				$subs[] = $sub;
 			}
 		}
@@ -111,26 +111,35 @@ SQL;
 		for($i = 1; $i <= $num_of_gaps; $i++)
 		{
 			$columns[] = "SUM(NumOf" . $hour_gaps[$i] . "Reactions) as NumOf" . $hour_gaps[$i] . "Reactions";
+            $columns[] = "SUM(NumOf" . $hour_gaps[$i] . "Reactions)/SUM(NumOfFood) as PercentOf" . $hour_gaps[$i] . "Reactions";
 		}
 		
 		$select  = "SELECT " . implode($columns, " , ") . " FROM ( ";
 		$select .= implode($subs, " UNION ALL ");
 		$select .= " ) AS FoodCounts ";
 		$select .= " GROUP BY FoodName ";
-		
-		$sort = explode(' ', $sort);
+        $select .= " HAVING SUM(NumOfFood) >= $min_eaten ";
+
+        $sort = explode(' ', $sort);
+
+
 		
 		if (trim($sort[0]) == "FoodName")
 		{
 			$select .= " ORDER BY " . trim($sort[0]). " " . trim($sort[1]);
-		} 
-		else 
+		}
+        else if (stripos($sort[0], "Percent") !== false)
+        {
+            $sort[0] = str_replace("Percent","Num", $sort[0]);
+            $select .= " ORDER BY SUM(" . trim($sort[0]). ") / SUM(NumOfFood) " . trim($sort[1]); // only works because of the naming convention
+        }
+		else
 		{
 			$select .= " ORDER BY SUM(" . trim($sort[0]). ") " . trim($sort[1]); // only works because of the naming convention
 		}
 		
 		$select .= " LIMIT $index, $page_size"; 
-		
+
 		$query = $this->db->query($select);
 		
 		return $query->result_array();

@@ -14,7 +14,7 @@ class Result extends CI_Controller {
 		$this->load->view('hours_from_reaction');
 	}
 	
-	public function retrieve_hours_from_reaction($num_of_gaps, $scale, $start_date, $end_date, $type)
+	public function retrieve_hours_from_reaction($num_of_gaps, $scale, $start_date, $end_date, $type, $min_eaten)
 	{
 		// jtStartIndex=0&jtPageSize=10&jtSorting=meal_date%20ASC
 		$index = intval($_GET['jtStartIndex']);
@@ -27,6 +27,7 @@ class Result extends CI_Controller {
 		}
 		
 		$num_of_gaps = intval($num_of_gaps);
+        $min_eaten = intval($min_eaten);
 		$scale = filter_var($scale, FILTER_SANITIZE_STRING);
 		
 		$start_date = DateTime::createFromFormat('m-d-Y', $start_date);
@@ -43,7 +44,7 @@ class Result extends CI_Controller {
 		// build json for jTables
 		$json = array();
 		$json['Result'] = "OK";
-		$json['Records'] = $this->Result_model->hours_from_reaction($index, $page_size, $num_of_gaps, $scale, $sort, $start_date->format('Y-m-d'), $end_date->format('Y-m-d'), $id);
+		$json['Records'] = $this->Result_model->hours_from_reaction($index, $page_size, $num_of_gaps, $scale, $sort, $start_date->format('Y-m-d'), $end_date->format('Y-m-d'), $id, $min_eaten);
 		
 		$data = array();
 		$data['json'] = $json;
