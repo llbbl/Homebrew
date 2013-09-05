@@ -199,29 +199,40 @@ var sneezySingleton = new function sneezySingleton()
 			var scale = $('#hours-from-reaction-scale').val();
 			var type = $('#hours-from-reaction-type').val();
             var min = $('#hours-from-reaction-min-eaten').val();
-			
-			var columns = {
+            var food = $('#hours-from-reaction-food-filter').val();
+            var initial_hour = $('#hours-from-reaction-initial-hour').val();
+
+            if (food == '')
+            {
+                food = 'no-filter';
+            }
+            food = encodeURIComponent(food);
+
+
+            var columns = {
 					FoodName:{key:true,title:"Food",create:false,edit:false},
 					NumOfFood:{key:false,title:"Times Eaten",create:false,edit:false}
 			};
 			
 			// @todo correct this duplication of logic in both js and php
             var floor = Math.floor(100/((gaps*2)+2));
-
+            var hour =  parseInt(initial_hour);
 			for (var i=1;i<=gaps;i++) {
 				var h;
 				if (scale == 'quadratic') {
-					h = Math.pow(i,2);
+					h = Math.pow(hour,2);
 				}
 				else if (scale == 'exponential') {
-					h = Math.pow(2,i);
+					h = Math.pow(2,hour);
 				}
 				else {
-					h = i;
+					h = hour;
 				}
 					
 				columns["NumOf" + h +"Reactions"] = {key:false,title: "# " + h + " h",create:false,edit:false,width: floor + "%"};
                 columns["PercentOf" + h +"Reactions"] = {key:false,title: "% " + h + " h",create:false,edit:false,width: floor + "%"};
+
+                hour = hour + 1;
 			}
 			
 			console.log(columns);
@@ -244,7 +255,7 @@ var sneezySingleton = new function sneezySingleton()
 	            gotoPageArea: 'none',
 
 	            actions: {
-	                listAction:   base_url + 'index.php/result/retrieve_hours_from_reaction/' + gaps + '/' + scale + '/' + startDate + '/' + endDate + '/' + type + '/' + min + '/',
+	                listAction:   base_url + 'index.php/result/retrieve_hours_from_reaction/' + gaps + '/' + scale + '/' + startDate + '/' + endDate + '/' + type + '/' + min + '/' + initial_hour + '/' + food + '/',
 	                deleteAction: '',
 	                updateAction: '',
 	                createAction: ''

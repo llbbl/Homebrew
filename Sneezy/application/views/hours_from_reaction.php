@@ -10,7 +10,11 @@
 				<label for="hours-from-reaction-gap">Num Of Gaps: </label>
 	  			<input id="hours-from-reaction-gap" value="2"/>
 	  		</div>
-		</div>
+            <div class="ui-widget">
+                <label for="hours-from-reaction-initial-hour">Initial Hour: </label>
+                <input id="hours-from-reaction-initial-hour" value="1"/>
+            </div>
+        </div>
         <div class="float-left">
             <div class="ui-widget">
                 <label for="hours-from-reaction-start-date">Start Date: </label>
@@ -19,6 +23,10 @@
             <div class="ui-widget">
                 <label for="hours-from-reaction-end-date">End Date: </label>
                 <input id="hours-from-reaction-end-date" value="<?php echo date("m/d/Y"); ?>"/>
+            </div>
+            <div class="ui-widget">
+                <label for="hours-from-reaction-food-filter">Filter Food: </label>
+                <input id="hours-from-reaction-food-filter" value=""/>
             </div>
         </div>
         <div class="float-left">

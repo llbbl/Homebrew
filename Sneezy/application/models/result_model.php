@@ -2,6 +2,8 @@
 
 class Result_model extends CI_Model {
 
+    const NO_FILTER = 'no-filter';
+
 	function __construct()
 	{
 		// Call the Model constructor
@@ -29,24 +31,27 @@ SQL;
 		return $query->result_array();
 	}
 	
-	function hours_from_reaction($index, $page_size, $num_of_gaps, $scale, $sort, $start_date, $end_date, $reaction_id, $min_eaten)
+	function hours_from_reaction($index, $page_size, $num_of_gaps, $scale, $sort, $start_date, $end_date, $reaction_id, $min_eaten, $initial_hour, $food_filter)
 	{
-		//($index, $page_size, $sort_str)
+        //($index, $page_size, $sort_str)
 		$hour_gaps = array();
+        $hour = $initial_hour;
 		for($i = 1; $i <= $num_of_gaps; $i++)
 		{
 			if ($scale == 'quadratic')
 			{
-				$hour_gaps[$i] = pow($i, 2);
+				$hour_gaps[$i] = pow($hour, 2);
 			}
 			else if ($scale == 'exponential')
 			{
-				$hour_gaps[$i] = pow(2, $i);
+				$hour_gaps[$i] = pow(2, $hour);
 			}
 			else //if ($scale == 'linear')
 			{
-				$hour_gaps[$i] = $i;
+				$hour_gaps[$i] = $hour;
 			}
+
+            $hour += 1;
 		}
 		
 		// build the subselects
@@ -73,7 +78,7 @@ SQL;
 				{
 					$columns[] = 'COUNT( 1 ) AS NumOf' . $hour_gaps[$j] . 'Reactions';
 				}
-				else  
+				else
 				{
 					$columns[] = 'MAX( 0 ) AS NumOf' . $hour_gaps[$j] . 'Reactions';
 				}
@@ -117,7 +122,13 @@ SQL;
 		$select  = "SELECT " . implode($columns, " , ") . " FROM ( ";
 		$select .= implode($subs, " UNION ALL ");
 		$select .= " ) AS FoodCounts ";
-		$select .= " GROUP BY FoodName ";
+
+        if ($food_filter != self::NO_FILTER)
+        {
+            $select .= " WHERE FoodName LIKE '$food_filter' ";
+        }
+
+        $select .= " GROUP BY FoodName ";
         $select .= " HAVING SUM(NumOfFood) >= $min_eaten ";
 
         $sort = explode(' ', $sort);
