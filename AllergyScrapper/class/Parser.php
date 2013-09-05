@@ -75,17 +75,23 @@ class Parser
 			$and = explode(' and ', $x);
 			foreach($and as $y)
 			{
-				$parts[] = trim($y);
+                if (trim($y) != '')
+                {
+				    $parts[] = trim($y);
+                }
 			}
 		}	
 		
 			
 		$allergens = array();
+
 		foreach($parts as $str)
 		{
 			$allergens[] = $this->VOfactory($str);
 		}
-		
+
+
+
 		return $allergens;
 	}
 	
@@ -102,17 +108,33 @@ class Parser
 	private function VOfactory($str)
 	{
 		$str = trim($str);
-		
-		$ex = explode(' ', $str, 3);
-		
-		$amount = '';
-		if (isset($ex[2]))
-		{
-			$amount = $ex[2];
-		}
-		
-		return new AllergenVO($ex[0], $ex[1], $amount);
+
+		return $this->LookForCategory($str, array('Very High', 'High', 'Medium', 'Low'));
 	}
+
+    private function LookForCategory($str, $category)
+    {
+
+        foreach($category as $cat)
+        {
+            if (stripos($str, $cat) !== false)
+            {
+                $ex = explode($cat, $str);
+
+                $amount = '';
+                if (isset($ex[1]))
+                {
+                    $amount = trim($ex[1]);
+                }
+
+                return new AllergenVO(trim($ex[0]), $cat, $amount);
+            }
+        }
+
+        echo $str . "\n";
+        $ex = explode(' ', $str, 2);
+        return new AllergenVO(trim($ex[0]), '', trim($ex[1]));
+    }
 
 	
 }

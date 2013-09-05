@@ -10,7 +10,7 @@ class AllergenVO
 	private $category;
 	private $amount;
 	
-	public function __construct($type, $category, $amount = '')
+	public function __construct($type, $category='', $amount = '')
 	{
 		$this->type = trim($type);
 		$this->category = trim($category);
