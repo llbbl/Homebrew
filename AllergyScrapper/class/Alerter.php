@@ -149,15 +149,15 @@ class Alerter implements SplObserver
 		if (count($html) > 0)
 		{
 			$today[] = "<h2>Today's Allergies</h2><ul>";
-			
+
+            $dt = new DateTime('now');
+            $today[] = "<br />Date: " . $dt->format("F j, Y, g:i a");
+
 			foreach($allergens as $allergen)
 			{
 				$today[] = "<li>" . $allergen->get_type() . " " . $allergen->get_category() . " " . $allergen->get_amount() . "</li>"; 
 			}
 			$today[] = "</ul>";
-
-            $dt = new DateTime('now');
-            $today[] = "<br />Date: " . $dt->format("F j, Y, g:i a");
 		}
 
 		return implode("\n", $today) . implode("\n", $html);
