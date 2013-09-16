@@ -155,6 +155,9 @@ class Alerter implements SplObserver
 				$today[] = "<li>" . $allergen->get_type() . " " . $allergen->get_category() . " " . $allergen->get_amount() . "</li>"; 
 			}
 			$today[] = "</ul>";
+
+            $dt = new DateTime('now');
+            $today[] = "<br />Date: " . $dt->format("F j, Y, g:i a");
 		}
 
 		return implode("\n", $today) . implode("\n", $html);
