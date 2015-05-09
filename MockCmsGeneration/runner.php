@@ -84,6 +84,7 @@ function generateRow($columns)
     return $colValues;
 }
 
+
 /**
  * Generate a random value from these inputs
  *
@@ -176,6 +177,10 @@ function generateValue($name, $type)
     {
         $value = (string) rand(0, 9); // completely arbitrary
     }
+    else if (strtoupper($type) == 'DATE')
+    {
+        $value = BASE_DATE; // may want to mix this up a bit
+    }
     else
     {
         throw new Exception("Unknown name ($name) or type ($type)");
@@ -184,9 +189,29 @@ function generateValue($name, $type)
     return $value;
 }
 
-/*
- * --== Start Implementation ==--
+
+/**
+ * Add quotes around necessary values
+ *
+ * Create an insert statement
+ * @param $tableName
+ * @param $row
  */
+function generateSqlString($tableName, $row)
+{
+    $sql = 'INSERT INTO [' . $tableName . '] (';
+    $sql .= implode(',', array_keys($row));
+    $sql .= ') VALUES (';
+    $sql .= implode(',', array_values($row));
+    $sql .= ");\n";
+
+    return $sql;
+}
+
+/*
+ * --== Start Initialization ==--
+ */
+
 
 $cms = simplexml_load_string(file_get_contents(XML_FILE));
 $list = array(
@@ -199,10 +224,26 @@ $list = array(
     'htkgrp'=>5
 );
 
+/*
+ * --== Start Implementation ==--
+ */
+
 $tableObj = buildTables($cms, array_keys($list));
 
-$name = 'htkgrp';
-$rows = generateRows($tableObj[$name], 2);
+// loop through each
+foreach($list as $name=>$cnt)
+{
+    $rows = generateRows($tableObj[$name], $cnt);
+    $fp = fopen(OUT_DIR . $name . '.sql', 'w+');
 
-echo print_r($rows, true);
+    foreach($rows as $row)
+    {
+        fwrite($fp, generateSqlString($name, $row));
+    }
+
+    fclose($fp);
+}
+
+
+
 
