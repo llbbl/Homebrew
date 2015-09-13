@@ -31,13 +31,15 @@ fc <- function(f1, f2){
   completeSmallerFile = FALSE
   
   for(i in 1:length(largerFile)) {
-    
+    # compare files
     if (i<=length(smallerFile)) {
       
+      # if they are not equal start tracking
       if (largerFile[i] != smallerFile[i]) {
        
          countDiffs <- countDiffs + 1;
         
+        # if this is the starting line of changes, add headers
         if (length(tempChanges) < 1) {
           tempChanges <-append.list (tempChanges, "************************")
           tempChanges <-append.list (tempChanges, paste("Starting Line:", i))
@@ -45,10 +47,13 @@ fc <- function(f1, f2){
           tempSecondaryChanges <-append.list (tempSecondaryChanges, paste0("****", smallerFN))
         }
     
+        # append changes
         tempChanges <-append.list (tempChanges, largerFile[i])
         tempSecondaryChanges <-append.list (tempSecondaryChanges, smallerFile[i])
       } 
       else {
+        # files have a line that is the same
+        # if we have changes already, write the sections to the diff list
         if (length(tempChanges) > 0) {
           for(j in 1:length(tempChanges)) {
             diffs <- append.list(diffs, tempChanges[j])
@@ -58,6 +63,7 @@ fc <- function(f1, f2){
           }
         }
         
+        # clear list and start tracking again
         tempChanges <- list();
         tempSecondaryChanges <- list();
         
@@ -65,8 +71,9 @@ fc <- function(f1, f2){
       }
     }
     else {
+      # check this first line in larger file that is not in smaller file 
+      # and there were changes that we were tracking
       if (length(tempChanges) > 0 && completeSmallerFile == FALSE) {
-        # first line in larger file that is not in smaller file
         for(j in 1:length(tempChanges)) {
           diffs <- append.list(diffs, tempChanges[j])
         }
@@ -74,6 +81,7 @@ fc <- function(f1, f2){
           diffs <- append.list(diffs, tempSecondaryChanges[k])
         }
         
+        # clear the list
         tempChanges <- list();
         tempSecondaryChanges <- list();
       }
@@ -81,16 +89,19 @@ fc <- function(f1, f2){
       completeSmallerFile = TRUE;
       countDiffs <- countDiffs + 1;
       
+      # if this is the first line after the smaller file ends, add a header
       if (length(tempChanges) < 1) {
         tempChanges <-append.list (tempChanges, "+++++++++++++++++++++++")
         tempChanges <-append.list (tempChanges, paste("Starting Line:", i))
         tempChanges <-append.list (tempChanges, paste0("++++", largerFN))
       }
       
+      # list change
       tempChanges <-append.list (tempChanges, largerFile[i])
       
+      # this is the last line in larger file, write to the diff list
       if (i == length(largerFile)) {
-        j <- 0
+        j <- 0 # unnecessary? 
         for(j in 1:length(tempChanges)) {
           diffs <- append.list(diffs, tempChanges[j])
         }
