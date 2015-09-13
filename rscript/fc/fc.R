@@ -26,28 +26,75 @@ fc <- function(f1, f2){
   countDiffs <- 0;
   countSame <- 0;
   
+  tempChanges <- list();
+  tempSecondaryChanges <- list();
+  completeSmallerFile = FALSE
+  
   for(i in 1:length(largerFile)) {
+    
     if (i<=length(smallerFile)) {
+      
       if (largerFile[i] != smallerFile[i]) {
-        countDiffs <- countDiffs + 1;
-        diffs <-append.list (diffs, "************************")
-        diffs <-append.list (diffs, paste("Line:", i))
-        diffs <-append.list (diffs, paste0("****", largerFN))
-        diffs <-append.list (diffs, largerFile[i])
-        diffs <-append.list (diffs, paste0("****", smallerFN))
-        diffs <-append.list (diffs, smallerFile[i])
-      }
+       
+         countDiffs <- countDiffs + 1;
+        
+        if (length(tempChanges) < 1) {
+          tempChanges <-append.list (tempChanges, "************************")
+          tempChanges <-append.list (tempChanges, paste("Starting Line:", i))
+          tempChanges <-append.list (tempChanges, paste0("****", largerFN))
+          tempSecondaryChanges <-append.list (tempSecondaryChanges, paste0("****", smallerFN))
+        }
+    
+        tempChanges <-append.list (tempChanges, largerFile[i])
+        tempSecondaryChanges <-append.list (tempSecondaryChanges, smallerFile[i])
+      } 
       else {
+        if (length(tempChanges) > 0) {
+          for(j in 1:length(tempChanges)) {
+            diffs <- append.list(diffs, tempChanges[j])
+          }
+          for(k in 1:length(tempSecondaryChanges)) {
+            diffs <- append.list(diffs, tempSecondaryChanges[k])
+          }
+        }
+        
+        tempChanges <- list();
+        tempSecondaryChanges <- list();
+        
         countSame <- countSame + 1;
       }
     }
     else {
+      if (length(tempChanges) > 0 && completeSmallerFile == FALSE) {
+        # first line in larger file that is not in smaller file
+        for(j in 1:length(tempChanges)) {
+          diffs <- append.list(diffs, tempChanges[j])
+        }
+        for(k in 1:length(tempSecondaryChanges)) {
+          diffs <- append.list(diffs, tempSecondaryChanges[k])
+        }
+        
+        tempChanges <- list();
+        tempSecondaryChanges <- list();
+      }
+      
+      completeSmallerFile = TRUE;
       countDiffs <- countDiffs + 1;
       
-      diffs <-append.list (diffs, "+++++++++++++++++++++++")
-      diffs <-append.list (diffs, paste("Line:", i))
-      diffs <-append.list (diffs, paste0("++++", largerFN))
-      diffs <-append.list (diffs, largerFile[i])
+      if (length(tempChanges) < 1) {
+        tempChanges <-append.list (tempChanges, "+++++++++++++++++++++++")
+        tempChanges <-append.list (tempChanges, paste("Starting Line:", i))
+        tempChanges <-append.list (tempChanges, paste0("++++", largerFN))
+      }
+      
+      tempChanges <-append.list (tempChanges, largerFile[i])
+      
+      if (i == length(largerFile)) {
+        j <- 0
+        for(j in 1:length(tempChanges)) {
+          diffs <- append.list(diffs, tempChanges[j])
+        }
+      }
     }
   }
   
@@ -58,8 +105,8 @@ fc <- function(f1, f2){
   return (diffs)
 }
 
-setwd("/home/cmack/Code/fc")
-d <- fc("file1.txt", "file2.txt")
+setwd("/home/cmack/Homebrew/rscript/fc")
+d <- fc("file2.txt", "file1.txt")
 d <- as.matrix(d)
 colnames(d) <- c("Differences Below")
 write.csv(d, file="diff.txt", row.names=FALSE)
