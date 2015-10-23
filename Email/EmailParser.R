@@ -4,38 +4,17 @@
 # Similarly, this should have a GPL license
 
 email.load <- function(f) {
-  singleString <- paste(readLines(f), collapse="\n")
-  raw <-strsplit(singleString, "\n|\r")
-  #print(raw)
-  
-  header <- c();
-  body <- c()
-  
-  startBody <- FALSE;
-  
-  for(i in 1:length(raw))
-  {
-    v <- raw[i]
-    print(v)
-    if (v == "" && startBody == FALSE ) {
-      startBody <- TRUE
-    } 
-    
-    if (startBody == FALSE) {
-      header <- append(header, c(v))
-    }
-    else {
-      body <- append(body, c(v)) 
-    }
-  }
-  
-  print(header)
 }
 
 
 # execute stuff
-Sys.setlocale('LC_ALL','C') 
+#Sys.setlocale('LC_ALL','C') 
 setwd('/home/cmack/Homebrew/Email')
-email.load('Example/Example.txt')
-
+f<-'Example/REExample.txt'
+singleString <- paste(readLines(f), collapse="\n")
+raw <-strsplit(singleString, "\n|\r")
+raw<-raw[[1]]
+headerEnd <- which(raw == "")[1]
+header <- raw[seq(1,headerEnd - 1)]
+body <- raw[seq(headerEnd + 1, length(raw) - 1)]
 
