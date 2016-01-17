@@ -61,21 +61,22 @@ base.client.call.sec <- 300
 base.client.total.agent <- 1000
 base.client.skill.ratio <- 3
 target.burst.message.per.sec <- 1000
+target.percent <- 0.01
 base.vars = c(base.client.call.sec, base.client.total.agent, base.client.skill.ratio)
 
 # calculate min average call length
-min.client.call.sec <- calc.edge(base.vars, target.edge=target.burst.message.per.sec, pos=1, inc=-1.0)
-max.client.total.agent <- calc.edge(base.vars, target.edge=target.burst.message.per.sec, pos=2, inc=1.0)
-max.client.skill.ratio <- calc.edge(base.vars, target.edge=target.burst.message.per.sec, pos=3, inc=1.0)
+min.client.call.sec <- calc.edge(base.vars, target.edge=target.burst.message.per.sec, pos=1, inc=-1.0, target.percent=target.percent)
+max.client.total.agent <- calc.edge(base.vars, target.edge=target.burst.message.per.sec, pos=2, inc=1.0,target.percent=target.percent)
+max.client.skill.ratio <- calc.edge(base.vars, target.edge=target.burst.message.per.sec, pos=3, inc=1.0,target.percent=target.percent)
 
 scatter.matrix <- matrix(ncol=3)
 
 # iterate the range and find all within a certain threshold within the target.burse.message.per.sec
-threshold <- 5
+threshold <- 3
 for (x in min.client.call.sec:base.client.call.sec ) { 
   for (y in base.client.total.agent:max.client.total.agent ) { 
     for (z in base.client.skill.ratio:max.client.skill.ratio ) { 
-      burst <- burst.calc(x,1.0, y,z, target.burst.message.per.sec)
+      burst <- burst.calc(x,1.0, y,z, target=target.percent)
       #print(burst)
       diff <- target.burst.message.per.sec - burst 
       if (diff <= threshold && diff >= 0) {
@@ -85,24 +86,32 @@ for (x in min.client.call.sec:base.client.call.sec ) {
   }
 }
 
-# build matrix of max plots
-#matrix.plot <- matrix(ncol=3)
-#matrix.plot <- rbind(matrix.plot, c(min.client.call.sec, base.client.total.agent, base.client.skill.ratio))
-#matrix.plot <- rbind(matrix.plot, c(base.client.call.sec, max.client.total.agent, base.client.skill.ratio))
-#matrix.plot <- rbind(matrix.plot, c(base.client.call.sec, base.client.total.agent, max.client.skill.ratio))
+colnames(scatter.matrix) <- c('average.call.length', 'concurrent.agents', 'average.skill.per.agent')
 
-#matrix.plot <- rbind(matrix.plot, matrix.skill.ratio, matrix.total.agent, matrix.call.sec )
-#matrix.plot <- matrix.plot[-1,]
-#colnames(matrix.plot) <- c('average.call.per.sec', 'concurrent.agents', 'average.skill.per.agent')
+# sample the matrix 
+set.seed(40)
+sam <- sample(nrow(scatter.matrix),size=1000,replace=FALSE)
+sample.matrix <- scatter.matrix[sam,]
 
-# plot
-#install.packages('X11')
+# append max values to sample matrix
+sample.matrix <- rbind(sample.matrix, c(min.client.call.sec, base.client.total.agent, base.client.skill.ratio))
+sample.matrix <- rbind(sample.matrix, c(base.client.call.sec, max.client.total.agent, base.client.skill.ratio))
+sample.matrix <- rbind(sample.matrix, c(base.client.call.sec, base.client.total.agent, max.client.skill.ratio))
+#head(sample.matrix)
+
 #install.packages('rgl')
-#library('rgl')
-#plot3d(matrix.plot[,'average.call.per.sec'], 
-#      matrix.plot[,'concurrent.agents'], 
-#      matrix.plot[,'average.skill.per.agent'],
-#      size=2,
-#      type="s",
-#      col='green'
-#      )
+library('rgl')
+plot3d(sample.matrix[,'average.call.length'], 
+       sample.matrix[,'concurrent.agents'], 
+       sample.matrix[,'average.skill.per.agent'],
+       xlab="Call Length",
+       ylab="Agent Count",
+       zlab="Skills / Agent",
+       size=1,
+       type="s",
+       col='red'
+)
+
+
+# testing
+burst.calc(33,1.0, 1000, 5, target.burst.message.per.sec)
