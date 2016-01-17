@@ -30,9 +30,15 @@ inverse.possion <- function(x, lambda, target.percent=0.1, possion.inc=0.1, poss
 
 #inverse.possion(4, 4, iteration=1000, target=0.99, inc=0.01)
 burst.calc <- function(client.call.sec, client.agent.occupancy, client.total.agent, client.skill.ratio, target.percent, possion.iteration=10000) {
-  matr.pbr.message.rate <- 1000   # max messages per second     
-  matr.acceptable.burst <- 0.05   # risk assessment for any second to burst
+  stats <- calculate.message.per.sec(client.call.sec, client.agent.occupancy, client.total.agent, client.skill.ratio)
   
+  out.burst.message.sec <- inverse.possion(stats['calc.message.per.sec'], stats['calc.message.per.sec'], target.percent=target.percent, possion.inc=0.1, possion.iteration=possion.iteration)
+  out.burst.calls.per.sec <- out.burst.message.sec / stats['calc.message.per.call']
+  
+  return (out.burst.message.sec)
+}
+
+calculate.message.per.sec <- function (client.call.sec, client.agent.occupancy, client.total.agent, client.skill.ratio) {
   calc.message.per.call <- 11+(7*client.skill.ratio)
   calc.calls.per.agent.hour <- (3600 / client.call.sec) * client.agent.occupancy
   calc.message.per.hour <- calc.message.per.call * calc.calls.per.agent.hour * client.total.agent
@@ -40,10 +46,14 @@ burst.calc <- function(client.call.sec, client.agent.occupancy, client.total.age
   calc.message.per.sec <- calc.message.per.hour / 3600
   calc.calls.per.sec <- calc.calls.per.hour / 3600
   
-  out.burst.message.sec <- inverse.possion(calc.message.per.sec, calc.message.per.sec, target.percent=target.percent, possion.inc=0.1, possion.iteration=possion.iteration)
-  out.burst.calls.per.sec <- out.burst.message.sec / calc.message.per.call
+  stats <- c(calc.message.per.call=calc.message.per.call,
+             calc.calls.per.agent.hour=calc.calls.per.agent.hour,
+             calc.message.per.hour=calc.message.per.hour,
+             calc.calls.per.hour=calc.calls.per.hour,
+             calc.message.per.sec=calc.message.per.sec,
+             calc.calls.per.sec=calc.calls.per.sec)
   
-  return (out.burst.message.sec)
+  return (stats)
 }
 
 
@@ -73,29 +83,26 @@ min.client.call.sec    <- calc.edge(base.vars, target.edge=target.burst.message.
 max.client.total.agent <- calc.edge(base.vars, target.edge=target.burst.message.per.sec, pos=2, value.inc=1.0,target.percent=target.percent)
 max.client.skill.ratio <- calc.edge(base.vars, target.edge=target.burst.message.per.sec, pos=3, value.inc=1.0,target.percent=target.percent)
 
-scatter.matrix <- matrix(ncol=3)
-
 # iterate the range and find all within a certain threshold within the target.burse.message.per.sec
+scatter.matrix <- matrix(ncol=3)
 threshold <- 3
 error.count <- 0
 for (x in min.client.call.sec:base.client.call.sec) { 
     for (y in base.client.total.agent:max.client.total.agent ) { 
       for (z in base.client.skill.ratio:max.client.skill.ratio ) { 
-        #print(paste(x, y, z))
-        
+        # print(paste(x, y, z))
+        # calc.message.per.sec <- calculate.message.per.sec(x, 1.0, y, z)['calc.message.per.sec']        
         # try to calculate burst but may run into memory issues        
-        res <- try ( burst <- burst.calc(x,1.0, y,z, target.percent, possion.iteration=1), silent=TRUE )
-        
+        res <- try ( calc.message.per.sec <- calculate.message.per.sec(x, 1.0, y, z)['calc.message.per.sec'] )
         if(inherits(res, "try-error")) {
           #error handling code, maybe just skip this iteration using
           error.count <- error.count + 1
-        
         } else {
-          
           # check if the burst is reasonably close to the target 
-          diff <- target.burst.message.per.sec - burst 
+          diff <- target.burst.message.per.sec -  calc.message.per.sec 
           if (diff <= threshold && diff >= 0) {
             scatter.matrix <- rbind(scatter.matrix, c(x,y,z)) 
+            print(nrow(scatter.matrix))
           }
         }         
     }
