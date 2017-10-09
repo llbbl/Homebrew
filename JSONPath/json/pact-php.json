@@ -1,0 +1,14 @@
+{
+	"prefer-stable": true,
+	"minimum-stability": "dev",
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/mattermack/TreeWalker"
+		}
+	],
+	"require":
+	{
+		"mattersight/phppact": "^1.1"
+	}
+}
