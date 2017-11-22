@@ -1,0 +1,37 @@
+pid <- c(104, 106, 154, 211, 248, 9396, 109, 497, 356)
+length(pid)
+age <- c(35, 28, 29, 47, 52, 59, 24, 61, 33)
+length(age)
+gender <- c("M", "F", "F", "M","M", "M", "F", "M", "F")
+length(gender)
+income <- c(35000, 29000, 31000, 49000, 51000, 45000, 38000, 45000, 50000)
+length(income)
+education <- c("undergrad", "high", "undergrad", "undergrad", "grad", "high", "Grad", "undergrad" , "grad")
+length(education)
+experience <- c(10, 2, 1, 20, 22, NA, 999, 15, 8)
+length(experience)
+hiredate <- c("1/8/2008", "6/9/2011", "10/1/2012", "4/6/2001", "9/24/1995", "999", NA, "12/1/1999", "1/8/2007")
+length(hiredate)
+dept <- c("Sales", "IT", "Sales", "Sales", "IT", "Sales", "Sales", "IT", "IT")
+length(dept)
+mydata <- data.frame(pid, age, gender, income, education, experience, hiredate, dept)
+
+
+mydata$hiredate <- as.Date(mydata$hiredate, format="%m/%d/%Y")
+rownames(mydata) <- pid
+
+mydata$gender = factor(mydata$gender)
+mydata$education = factor(mydata$education)
+mydata$dept= factor(mydata$dept)
+var.names <- names(mydata)
+mydata$age.income <- (mydata$age / mydata$income)
+mydata$edu.cat <- mydata$education
+mydata$edu.cat <- recode(mydata$edu.cat, "c('undergrad', 'grad', 'Grad') = 'college'; else='no college'")
+mydata$exp.cat <- recode(mydata$experience, "1:5 = '5 years or less'; 5:15 = '5-15 years'; else='more than 15 years'")
+
+testdate <-as.Date('2010-01-01')
+library(lubridate)
+l_date <- parse_date_time(testdate, "%Y-%d-%m")
+span <- interval( ymd('2011-01-01'), l_date)
+is.difftime(span)
+dweeks(span)

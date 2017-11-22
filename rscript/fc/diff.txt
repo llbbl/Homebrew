@@ -1,0 +1,30 @@
+"Differences Below"
+************************
+Starting Line: 1
+****file1.txt
+1,A
+****file2.txt
+6,A
+************************
+Starting Line: 3
+****file1.txt
+3,C
+4,D
+****file2.txt
+3,D
+4,E
+************************
+Starting Line: 6
+****file1.txt
+10,X
+****file2.txt
+7,F
++++++++++++++++++++++++
+Starting Line: 7
+++++file1.txt
+11,Y
+12,Z
+13,AA
+======================= Summary
+Num of Different Lines: 7
+Num of Same Lines: 2

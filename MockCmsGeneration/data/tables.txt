@@ -1,0 +1,13 @@
+    Look up tables
+        agroup
+        synonyms
+    Daily tables
+        dsplit
+        dvdn
+    Interval Tables (every 15 minutes)
+        hsplit
+        hvdn
+        hagent
+        haglog
+        htkgrp
+

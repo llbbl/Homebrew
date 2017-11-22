@@ -1,0 +1,168 @@
+<data 
+  wiki-url="http://mattersight.com" 
+  wiki-section="Data Timeline">
+  
+	<!-- Phone track -->
+    <event 
+       start="Feb 27 2012 09:00:00 GMT" 
+       title=""
+	   trackNum="1"
+	   image="phone.png"
+	   >This is a short call based on this agent's 13 week average
+    </event>
+	<event 
+       start="Feb 27 2012 09:15:00 GMT" 
+       title=""
+	   trackNum="1"
+	   icon="timeline_2.3.0/timeline_js/images/dark-red-circle.png"
+	   image="phone.png">This call had high distress time compared to this team's coach.  The coach has not mentored this call yet.
+    </event>
+	<event 
+       start="Feb 27 2012 09:20:00 GMT" 
+       title=""
+	   trackNum="1"
+	   description=""
+	   image="phone.png">Call Length: 2 min 30 seconds
+    </event>
+	<event 
+       start="Feb 27 2012 09:39:00 GMT" 
+       title=""
+	   trackNum="1"
+	   description=""
+	   icon="timeline_2.3.0/timeline_js/images/big-dark-red-circle.png"
+	   image="phone.png">High distress call
+    </event>
+    <event 
+       start="Feb 27 2012 09:42:00 GMT" 
+       title=""
+	   trackNum="1"
+	   icon="timeline_2.3.0/timeline_js/images/green-circle.png"
+	   image="phone.png">
+	   Coached call
+    </event>
+	<event 
+       start="Feb 27 2012 10:12:00 GMT" 
+       title=""
+	   trackNum="1"
+	   icon="timeline_2.3.0/timeline_js/images/gray-circle.png"
+	   image="phone.png">
+	   Call with lots of silence
+    </event>
+	<event 
+       start="Feb 27 2012 10:42:00 GMT" 
+       title=""
+	   trackNum="1"
+	   image="phone.png">Call length: 5 min
+    </event>
+	<event 
+       start="Feb 27 2012 11:00:00 GMT" 
+       title=""
+	   trackNum="1"
+	   icon="timeline_2.3.0/timeline_js/images/medium-gray-circle.png"
+	   image="phone.png">
+	   Call with some of silence
+    </event>
+	<event 
+       start="Feb 27 2012 11:12:00 GMT" 
+       title=""
+	   trackNum="1"
+	   image="phone.png">Call Length: 14 min
+    </event>
+	<event 
+       start="Feb 27 2012 11:12:00 GMT" 
+       title=""
+	   trackNum="1"
+	   image="phone.png">Call Length: 7 mins
+    </event>
+	<event 
+       start="Feb 27 2012 13:01:00 GMT" 
+       title=""
+	   trackNum="1"
+	   icon="timeline_2.3.0/timeline_js/images/dark-red-circle.png"
+	   image="phone.png">
+	   This call had high distress time compared to this team's coach.  The coach has not mentored this call yet.
+    </event>
+	<event 
+       start="Feb 27 2012 12:12:00 GMT" 
+       title=""
+	   trackNum="1"
+	   icon="timeline_2.3.0/timeline_js/images/green-circle.png"
+	   image="phone.png">
+	   Coached call - based on distress
+    </event>
+	
+	<!-- Desktop track -->
+	<event 
+       start="Feb 27 2012 09:00:00 GMT" 
+       end="Feb 27 2012 09:47:00 GMT" 
+       isDuration="true" 
+       title=""
+	   trackNum="2"
+	   color="blue"
+	   image="laptop.png">
+         ORS Desktop processing time
+    </event>
+	<event 
+       start="Feb 27 2012 09:47:01 GMT" 
+       end="Feb 27 2012 10:57:00 GMT" 
+       isDuration="true" 
+       title=""
+	   color="white"
+	   image="laptop.png"
+	   trackNum="2">
+         Idle processing time
+    </event>
+	<event 
+       start="Feb 27 2012 10:57:01 GMT" 
+       end="Feb 27 2012 11:50:00 GMT" 
+       isDuration="true" 
+       title=""
+	   color="blue"
+	   image="laptop.png"
+	   trackNum="2">
+         ORS Desktop processing time
+    </event>
+	<event 
+       start="Feb 27 2012 12:57:01 GMT" 
+       end="Feb 27 2012 13:36:00 GMT" 
+       isDuration="true" 
+       title=""
+	   color="red"
+	   image="laptop.png"
+	   trackNum="2">
+	   Agent should be in Aux 2 but was in Personal time
+    </event>
+	<event 
+       start="Feb 27 2012 13:36:01 GMT" 
+       end="Feb 27 2012 14:36:00 GMT" 
+       isDuration="true" 
+       title=""
+	   color="blue"
+	   image="laptop.png"
+	   trackNum="2">
+	   ORS Desktop Processing time
+    </event>
+	
+	<!-- Callless screen capture track -->
+	<event 
+       start="Feb 27 2012 10:30:01 GMT" 
+       end="Feb 27 2012 11:05:00 GMT" 
+       isDuration="true" 
+       title=""
+	   color="pink"
+	   image="screen.png"
+	   trackNum="3">
+	   Callless Screen Capture
+    </event>
+	
+	<event 
+       start="Feb 27 2012 12:00:01 GMT" 
+       end="Feb 27 2012 13:30:00 GMT" 
+       isDuration="true" 
+       title=""
+	   color="pink"
+	   image="screen.png"
+	   trackNum="3">
+	   Callless Screen Capture
+    </event>
+</data>
